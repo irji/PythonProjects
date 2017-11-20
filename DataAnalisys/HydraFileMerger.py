@@ -22,10 +22,10 @@ def main():
 #f
 
 def ProcceingFiles(dirs, result):
-    #dirs = "D:\Programs\S\SIU7@FORTS\\"
+    #dirs = "D:\Programs\D\S\SIU7@FORTS\\"
     files = os.listdir(dirs)
 
-    #resFile=open("D:\Programs\S\\result.txt", 'w')
+    #resFile=open("D:\Programs\D\S\\result.txt", 'w')
     resFile = open(result, 'w')
 
     resFile.write("Date,Time,BestAsk,BestBid\n")

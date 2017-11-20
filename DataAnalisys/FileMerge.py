@@ -24,12 +24,12 @@ def ReadAllFiles(files, dr):
             lines = f.read().splitlines()
 
             for ln in lines:
-                #s = ln.split(',')
-                #ar2[s[2]+s[3]]=ln.replace(',1,',',').replace(',5,',',').replace(',15,',',').replace(',30,',',')
+                s = ln.split(',')
+                ar2[s[2]+s[3]]=ln.replace(',1,',',').replace(',5,',',').replace(',15,',',').replace(',30,',',')
                 #ar2[s[1] + s[2]] = ln.replace(',1,', ',').replace(',5,', ',').replace(',15,', ',').replace(',30,', ',')
 
-                s = ln.split(';')
-                ar2[s[0] + s[1]] = ln
+                #s = ln.split(';')
+                #ar2[s[0] + s[1]] = ln
 
             ar1.append(ar2)
     return ar1
@@ -44,6 +44,8 @@ def CutOffArrays(ar, i):
 
     f = open('text.txt', 'w')
     ssss = ""
+
+    res = sorted(res)
 
     for arKeys in res:
         for ar2 in ar:
