@@ -1,4 +1,5 @@
 import os
+import plotly.plotly as py
 
 def ReadAllFiles(files, dr):
     ar1 = []  # создаем пустой список
