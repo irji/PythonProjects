@@ -16,7 +16,8 @@ invest=100
 
 open("log.txt", "w")
 
-
+min=1000
+max=-1000
 
 while True:
 
@@ -37,9 +38,16 @@ while True:
 
     percent=((i3Vol - invest)/invest)*100
 
-    text = str.format("ETH_USD: [{0};{1}]; {2}; ETH_LTC: [{3};{4}]; {5}; LTC_USD: [{6};{7}]; {8}; {9}%",
+    if percent > max:
+        max=percent
+
+    if percent < min:
+        min=percent
+
+    text = str.format("{10}: [{0};{1}]; {2}; {11}: [{3};{4}]; {5}; {12}: [{6};{7}]; {8}; {9}% [{13}%-{14}%]",
                       obj1[i1]['ask_top'], obj1[i1]['bid_top'], str(i1Vol), obj2[i2]['ask_top'], obj2[i2]['bid_top'],
-                      str(i2Vol), obj3[i3]['ask_top'], obj3[i3]['bid_top'], format(i3Vol, ".3f"), format(percent, ".3f"))
+                      str(i2Vol), obj3[i3]['ask_top'], obj3[i3]['bid_top'], format(i3Vol, ".3f"), format(percent, ".3f"),
+                      i1, i2, i3, format(min, ".3f"), format(max, ".3f"))
 
     print(text)
 
