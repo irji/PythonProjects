@@ -14,6 +14,10 @@ i3="LTC_USD"
 
 invest=100
 
+open("log.txt", "w")
+
+
+
 while True:
 
     r1 = requests.get('https://api.exmo.com/v1/order_book/?pair=' + i1)
@@ -31,13 +35,24 @@ while True:
 #    i3Vol=i2Vol*float(obj3[i3]['ask_top'])
     i3Vol=i2Vol*float(obj3[i3]['bid_top'])
 
-    percent=(i3Vol - invest)/invest
+    percent=((i3Vol - invest)/invest)*100
 
-    print(
-            "ETH_USD: [", obj1[i1]['ask_top'], ";", obj1[i1]['bid_top'], "] ", i1Vol,
-            "; ETH_LTC: [", obj2[i2]['ask_top'], ";", obj2[i2]['bid_top'], "] ", i2Vol,
-            "; LTC_USD: [", obj3[i3]['ask_top'], ";", obj3[i3]['bid_top'], "] ", i3Vol,
-            "; ", percent*100, "%"
-    )
+    text = str.format("ETH_USD: [{0};{1}]; {2}; ETH_LTC: [{3};{4}]; {5}; LTC_USD: [{6};{7}]; {8}; {9}%",
+                      obj1[i1]['ask_top'], obj1[i1]['bid_top'], str(i1Vol), obj2[i2]['ask_top'], obj2[i2]['bid_top'],
+                      str(i2Vol), obj3[i3]['ask_top'], obj3[i3]['bid_top'], format(i3Vol, ".3f"), format(percent, ".3f"))
 
-    time.sleep(2)
+    print(text)
+
+    #print(
+    #        "ETH_USD: [", obj1[i1]['ask_top'], ";", obj1[i1]['bid_top'], "] ", i1Vol,
+    #        "; ETH_LTC: [", obj2[i2]['ask_top'], ";", obj2[i2]['bid_top'], "] ", i2Vol,
+    #        "; LTC_USD: [", obj3[i3]['ask_top'], ";", obj3[i3]['bid_top'], "] ", i3Vol,
+    #        "; ", percent*100, "%"
+    #)
+
+    with open("log.txt", "a") as fl:
+        fl.write(text + "\n")
+
+    time.sleep(1)
+
+#fl.close()
