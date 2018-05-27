@@ -7,7 +7,7 @@ from requests import Response
 
 # obj = json.loads(r.text)
 # print(json.dumps(obj, sort_keys=True, indent=4, separators=(',',': ')))
-
+ 
 i1 = "ETH_USD"
 i2 = "ETH_LTC"
 i3 = "LTC_USD"
