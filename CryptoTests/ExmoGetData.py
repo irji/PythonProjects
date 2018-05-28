@@ -7,7 +7,7 @@ from requests import Response
 
 # obj = json.loads(r.text)
 # print(json.dumps(obj, sort_keys=True, indent=4, separators=(',',': ')))
- 
+
 i1 = "ETH_USD"
 i2 = "ETH_LTC"
 i3 = "LTC_USD"
@@ -67,14 +67,14 @@ while True:
         if percent2 < min2:
             min2 = percent2
 
-        text = str.format("{10}: [{0};{1}]; {2}; {11}: [{3};{4}]; {5}; {12}: [{6};{7}]; {8}; {9}% [{13}%-{14}%]",
+        text = str.format("{10}: [{0};{1}]; {2}; {11}: [{3};{4}]; {5}; {12}: [{6};{7}]; {8}; {9}% [{13}%|{14}%]",
                           obj1[i1]['ask_top'], obj1[i1]['bid_top'], format(i1Vol1, ".6f"), obj1[i2]['ask_top'],
                           obj1[i2]['bid_top'],
                           format(i2Vol1, ".6f"), obj1[i3]['ask_top'], obj1[i3]['bid_top'], format(i3Vol1, ".3f"),
                           format(percent1, ".3f"),
                           i1, i2, i3, format(min1, ".3f"), format(max1, ".3f"))
 
-        text2 = str.format("{10}: [{0};{1}]; {2}; {11}: [{3};{4}]; {5}; {12}: [{6};{7}]; {8}; {9}% [{13}%-{14}%]",
+        text2 = str.format("{10}: [{0};{1}]; {2}; {11}: [{3};{4}]; {5}; {12}: [{6};{7}]; {8}; {9}% [{13}%|{14}%]",
                           obj2[i4]['ask_top'], obj2[i4]['bid_top'], format(i1Vol2, ".6f"), obj2[i5]['ask_top'],
                           obj2[i5]['bid_top'],
                           format(i2Vol2, ".6f"), obj2[i6]['ask_top'], obj2[i6]['bid_top'], format(i3Vol2, ".3f"),
