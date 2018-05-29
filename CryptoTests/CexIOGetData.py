@@ -40,7 +40,7 @@ def GetAllTickers():
     # print(len(btcTikers))
     # print(len(usdTikers))
     # print(len(eurTikers))
-    print("Считано инструментов: " + str(len(allTikers)))
+    #print("Считано инструментов: " + str(len(allTikers)))
 
 
 def CreatePairs():
@@ -109,7 +109,7 @@ def CalculateRate():
                     #print(str.format("{0} Расчетная доходность [{1};{2};{3}] равна {4}",
                     #                 datetime.datetime.now(), p[0], p[1], p[2], format(percent, ".3f")))
 
-                    if percent > 1.2:
+                    if percent > 0.8:
                         print(str.format("{0} Расчетная доходность [{1};{2};{3}] равна {4}",
                                          datetime.datetime.now(), p[0], p[1], p[2], format(percent, ".3f")))
 
@@ -145,12 +145,15 @@ def main():
     open("CexIoLog.txt", "w")
 
     GetAllTickers()
+    print("Считано инструментов: " + str(len(allTikers)))
+
     CreatePairs()
 
     # print(datetime.datetime.now())
     # CalculateRate()
 
     while True:
+        GetAllTickers()
         CalculateRate()
         time.sleep(1)
 
