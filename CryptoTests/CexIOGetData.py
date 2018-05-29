@@ -136,16 +136,16 @@ def CalculateRate():
 
                             a+=1
 
-                            # try:
-                            #     txt = str.format("Date: {0}; Sec: {1}_{2}_{3}; ", datetime.datetime.now(), p[0], p[1], p[2])
-                            #     txt1 = str.format("{0}_ask: {1}; {0}_bid:{2}; ", p[0], pr1ask, pr1bid)
-                            #     txt2 = str.format("{0}_ask: {1}; {0}_bid:{2}; ", p[1], pr2ask, pr2bid)
-                            #     txt3 = str.format("{0}_ask: {1}; {0}_bid:{2}", p[2], pr3ask, pr3bid)
-                            #
-                            #     with open("CexIoLog.txt", "a") as fl:
-                            #         fl.write(txt+txt1+txt2+txt3 + "\n")
-                            # except:
-                            #     print("error print to file")
+                            try:
+                                txt = str.format("Date: {0}; Sec: {1}_{2}_{3}; ", datetime.datetime.now(), p[0], p[1], p[2])
+                                txt1 = str.format("{0}_ask: {1}; {0}_bid:{2}; ", p[0], pr1ask, pr1bid)
+                                txt2 = str.format("{0}_ask: {1}; {0}_bid:{2}; ", p[1], pr2ask, pr2bid)
+                                txt3 = str.format("{0}_ask: {1}; {0}_bid:{2}", p[2], pr3ask, pr3bid)
+
+                                with open("CexIoLog.txt", "a") as fl:
+                                    fl.write(txt+txt1+txt2+txt3 + "\n")
+                            except:
+                                print("error print to file")
 
                             pr1ask = 0
                             pr1bid = 0
