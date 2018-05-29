@@ -19,6 +19,18 @@ invest = 100
 
 
 def GetAllTickers():
+
+    global allTikers
+    global btcTikers
+    global usdTikers
+    global eurTikers
+
+    allTikers = []
+    btcTikers = []
+    usdTikers = []
+    eurTikers = []
+
+
     url = "https://cex.io/api/tickers/BTC/ETH/USD/EUR/BCH/BTG/DASH/XRP/XLM/ZEC/GHS"
     res = requests.request("GET", url)
 
@@ -44,6 +56,10 @@ def GetAllTickers():
 
 
 def CreatePairs():
+
+    global pairs
+    pairs = []
+
     for e in eurTikers:
         s1 = str(e["pair"]).split(":")
 
@@ -78,66 +94,71 @@ def CreatePairs():
 def CalculateRate():
     # print(len(allTikers))
     # print(len(eurTikers))
-    try:
 
-        for p in pairs:
+    a = 1
 
-            pr1ask = 0
-            pr1bid = 0
-            pr2ask = 0
-            pr2bid = 0
-            pr3ask = 0
-            pr3bid = 0
+    while True:
+        GetAllTickers()
 
-            #p=str(pr).split(",")
-            #print(str(p[0]))
+        try:
 
-            for t in allTikers:
-                if str(t["pair"]).__contains__(p[0]):
-                    pr1ask = float(t["ask"])
-                    pr1bid = float(t["bid"])
-                if str(t["pair"]).__contains__(p[1]):
-                    pr2ask = float(t["ask"])
-                    pr2bid = float(t["bid"])
-                if str(t["pair"]).__contains__(p[2]):
-                    pr3ask = float(t["ask"])
-                    pr3bid = float(t["bid"])
+            #a=0
 
-                if pr1ask != 0.0 and pr2ask != 0.0 and pr3bid != 0.0:
-                    percent = (((invest / pr1ask) * pr2ask * pr3bid - invest) / invest) * 100
+            for p in pairs:
 
-                    #print(str.format("{0} Расчетная доходность [{1};{2};{3}] равна {4}",
-                    #                 datetime.datetime.now(), p[0], p[1], p[2], format(percent, ".3f")))
+                pr1ask = 0
+                pr1bid = 0
+                pr2ask = 0
+                pr2bid = 0
+                pr3ask = 0
+                pr3bid = 0
 
-                    if percent > 0.8:
-                        print(str.format("{0} Расчетная доходность [{1};{2};{3}] равна {4}",
-                                         datetime.datetime.now(), p[0], p[1], p[2], format(percent, ".3f")))
+                for t in allTikers:
+                    if str(t["pair"]).__contains__(p[0]):
+                        pr1ask = float(t["ask"])
+                        pr1bid = float(t["bid"])
+                    if str(t["pair"]).__contains__(p[1]):
+                        pr2ask = float(t["ask"])
+                        pr2bid = float(t["bid"])
+                    if str(t["pair"]).__contains__(p[2]):
+                        pr3ask = float(t["ask"])
+                        pr3bid = float(t["bid"])
 
-                        try:
-                            txt = str.format("Date: {0}; Sec: {1}_{2}_{3}; ", datetime.datetime.now(), p[0], p[1], p[2])
-                            txt1 = str.format("{0}_ask: {1}; {0}_bid:{2}; ", p[0], pr1ask, pr1bid)
-                            txt2 = str.format("{0}_ask: {1}; {0}_bid:{2}; ", p[1], pr2ask, pr2bid)
-                            txt3 = str.format("{0}_ask: {1}; {0}_bid:{2}", p[2], pr3ask, pr3bid)
+                    if pr1ask > 0.0 and pr2ask > 0.0 and pr3bid > 0.0:
+                        percent = (((invest / pr1ask) * pr2ask * pr3bid - invest) / invest) * 100
 
-                            with open("CexIoLog.txt", "a") as fl:
-                                fl.write(txt+txt1+txt2+txt3 + "\n")
-                        except:
-                            print("error print to file")
+                        #print(str.format("{0} Расчетная доходность [{1};{2};{3}] равна {4}",
+                        #                 datetime.datetime.now(), p[0], p[1], p[2], format(percent, ".3f")))
 
-                        pr1ask = 0
-                        pr1bid = 0
-                        pr2ask = 0
-                        pr2bid = 0
-                        pr3ask = 0
-                        pr3bid = 0
+                        if percent > 0.8:
+                            print(str.format("{0} Расчетная доходность [{1};{2};{3}] равна {4}",
+                                             datetime.datetime.now(), p[0], p[1], p[2], format(percent, ".3f")))
 
-    except:
-        print(str.format("{0} error", datetime.datetime.now()))
+                            a+=1
+
+                            # try:
+                            #     txt = str.format("Date: {0}; Sec: {1}_{2}_{3}; ", datetime.datetime.now(), p[0], p[1], p[2])
+                            #     txt1 = str.format("{0}_ask: {1}; {0}_bid:{2}; ", p[0], pr1ask, pr1bid)
+                            #     txt2 = str.format("{0}_ask: {1}; {0}_bid:{2}; ", p[1], pr2ask, pr2bid)
+                            #     txt3 = str.format("{0}_ask: {1}; {0}_bid:{2}", p[2], pr3ask, pr3bid)
+                            #
+                            #     with open("CexIoLog.txt", "a") as fl:
+                            #         fl.write(txt+txt1+txt2+txt3 + "\n")
+                            # except:
+                            #     print("error print to file")
+
+                            pr1ask = 0
+                            pr1bid = 0
+                            pr2ask = 0
+                            pr2bid = 0
+                            pr3ask = 0
+                            pr3bid = 0
+
+        except:
+            print(str.format("{0} error", datetime.datetime.now()))
 
 
-        # res = filter(lambda x: p[0] in x, allTikers[])
-        # print(str(res))
-    # print()
+        time.sleep(1)
 
 
 def main():
@@ -150,12 +171,12 @@ def main():
     CreatePairs()
 
     # print(datetime.datetime.now())
-    # CalculateRate()
+    CalculateRate()
 
-    while True:
-        GetAllTickers()
-        CalculateRate()
-        time.sleep(1)
+    # while True:
+    #     GetAllTickers()
+    #     CalculateRate()
+    #     time.sleep(1)
 
 
 if __name__ == '__main__':
