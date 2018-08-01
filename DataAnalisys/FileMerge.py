@@ -1,19 +1,10 @@
-'''
-Created on May 30, 2015
-
-@author: GKostin
-'''
-# if __name__ == '__main__':
-#    pass
-# print("Hello world");
-# f = open('text.txt', 'r')
-
 import os
 
 
 def ReadAllFiles(files, dr):
     # lst={}  # create hash
     ar1 = []  # создаем пустой список
+    names = ""
 
     for fl in files:
 
@@ -21,41 +12,48 @@ def ReadAllFiles(files, dr):
 
         with open(dr + fl) as f:
             ar2 = {}  # создаем пустой словарь
-            lines = f.read().splitlines()
+            lines = f.read().splitlines()[1:]
 
             for ln in lines:
                 s = ln.split(',')
-                ar2[s[2]+s[3]]=ln.replace(',1,',',').replace(',5,',',').replace(',15,',',').replace(',30,',',')
-                #ar2[s[1] + s[2]] = ln.replace(',1,', ',').replace(',5,', ',').replace(',15,', ',').replace(',30,', ',')
-
-                #s = ln.split(';')
-                #ar2[s[0] + s[1]] = ln
+                #ar2[s[2]+s[3]]=ln.replace(',1,',',').replace(',5,',',').replace(',15,',',').replace(',30,',',')
+                ar2[s[2] + "," + s[3]] = s[4]
 
             ar1.append(ar2)
-    return ar1
+            names=names+","+str(s[0])
+
+    tuple1=(names,ar1)
+
+    #return ar1
+    return tuple1
 
 
 def CutOffArrays(ar, i):
-    res = set(ar[i].keys())
 
-    for ar1 in ar:
+    names=ar[0]
+    dic1=ar[1]
+
+    res = set(dic1[i].keys())
+
+    for ar1 in dic1:
         aaa = set(ar1.keys())
         res = res.intersection(aaa)
 
     f = open('text.txt', 'w')
     ssss = ""
 
+    f.write("Date,Time" + names + '\n')
+
     res = sorted(res)
 
     for arKeys in res:
-        for ar2 in ar:
-            ssss = ssss + ar2[arKeys] + ","
+        for ar2 in dic1:
+            ssss = ssss + "," + ar2[arKeys]
 
-        f.write(ssss + '\n')
+        f.write(arKeys + ssss + '\n')
         ssss = ""
 
     f.close()
-
     # return res
 
 
@@ -96,7 +94,6 @@ def main():
     CutOffArrays(lst, indx)
 
     # keyValue= lst.key()
-
     # print(str(minValue) + "  " + str(indx) + "  " + str(maxValue))
 
     print("Done!")
