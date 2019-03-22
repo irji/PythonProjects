@@ -132,10 +132,10 @@ def ReadFileForWells(fileIn, fileOut):
         c1 = i1*colDelta+1
         c2 = c1 + colDelta
 
-        pd3 = pd1.iloc[:, c1:c2]
-        well = pd3.iat[0, 2]
+        pd3 = pd1.iloc[:, c1:c2] #	Purely integer-location based indexing for selection by position.
+        well = pd3.iat[0, 2] #Access a single value for a row/column pair by integer position.
         pd3.insert(0, "Well", well)
-        pd3 = pd3.loc[1:]
+        pd3 = pd3.loc[1:] #Access a group of rows and columns by label(s) or a boolean array.
 
         pd3.insert(1, "YEARS", pd1["YEARS"])
         if i1 != 0:
