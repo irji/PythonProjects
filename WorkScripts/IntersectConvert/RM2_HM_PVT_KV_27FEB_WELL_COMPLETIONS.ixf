@@ -1,0 +1,8457 @@
+######################################
+# IXFVERSION: 2016.1 Petrel
+######################################
+
+
+START
+DATE "1-Apr-1967"
+#TIME 0.0
+
+
+Well "AF059V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AF064V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AF064V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AF065V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AF065V2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AF101H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AF105H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AF105H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AF227H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AF246V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AG059V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AG065V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AG065V2L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "AG227D1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "EF060V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "EF061H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "EF062H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "EF063H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "EF091H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "EF104H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "EF107H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "EG060V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "EG061V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "EG091D1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "EG104D1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "EG107H1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-1967"
+#TIME 30.0
+
+
+Well "PB001V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-1967"
+#TIME 183.0
+
+
+Well "PB001V1T" {
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+}
+
+
+DATE "1-Jun-1973"
+#TIME 2253.0
+
+
+Well "PB003V1T" {
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-1973"
+#TIME 2283.0
+
+
+Well "PB004V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-1973"
+#TIME 2345.0
+
+
+Well "PB005V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-1975"
+#TIME 3105.0
+
+
+Well "PC006V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-1976"
+#TIME 3197.0
+
+
+Well "PB007V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB008V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB010V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-1976"
+#TIME 3228.0
+
+
+Well "PB011V1A" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB011V1T" {
+    
+    Completion "OPENHOLE" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 5" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PC011V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-1976"
+#TIME 3257.0
+
+
+Well "PB012V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-1976"
+#TIME 3288.0
+
+
+Well "PB013V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-1977"
+#TIME 3806.0
+
+
+Well "PB013V1T" {
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+}
+
+
+DATE "1-Nov-1977"
+#TIME 3867.0
+
+
+Well "PB002V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-1979"
+#TIME 4324.0
+
+
+Well "PB014V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB014V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-1979"
+#TIME 4444.0
+
+
+Well "PB015V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB015V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-1979"
+#TIME 4536.0
+
+
+Well "PB016V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-1980"
+#TIME 4779.0
+
+
+Well "SA019101V" {
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-1981"
+#TIME 5114.0
+
+
+Well "SA020101V" {
+    
+    Completion "Open-hole 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-1981"
+#TIME 5175.0
+
+
+Well "PB021V1S" {
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Aug-1981"
+#TIME 5236.0
+
+
+Well "IB022V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB022V1S" {
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-1982"
+#TIME 5570.0
+
+
+Well "PC023V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-1982"
+#TIME 5662.0
+
+
+Well "IB024V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-1982"
+#TIME 5723.0
+
+
+Well "SA026101V" {
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-1983"
+#TIME 5785.0
+
+
+Well "PB027V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB027V1S" {
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-1984"
+#TIME 6179.0
+
+
+Well "IB029V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-1984"
+#TIME 6210.0
+
+
+Well "PB004V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB004V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB004V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB011V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB011V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB011V1T" {
+    
+    Completion "Open-hole 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 7" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+}
+
+
+DATE "1-May-1984"
+#TIME 6240.0
+
+
+Well "IC002V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB011V1A" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB011V1T" {
+    
+    Completion "Open-hole 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 7" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 5" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PC011V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "SA030101V" {
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-1984"
+#TIME 6271.0
+
+
+Well "IB031V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB031V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IC017V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB002V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jul-1984"
+#TIME 6301.0
+
+
+Well "PB003V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB003V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB003V1T" {
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB008V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB008V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Aug-1984"
+#TIME 6332.0
+
+
+Well "IC009V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IC018V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB008V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Sep-1984"
+#TIME 6363.0
+
+
+Well "IB033V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB033V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB001V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB001V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-1984"
+#TIME 6393.0
+
+
+Well "PB001V1T" {
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB013V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB013V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-1984"
+#TIME 6424.0
+
+
+Well "PB012V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB013V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "SA034101V" {
+    
+    Completion "Open-hole 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-1984"
+#TIME 6454.0
+
+
+Well "IB028V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB028V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB014V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB014V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jan-1985"
+#TIME 6485.0
+
+
+Well "IC035V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB032V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB032V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-1985"
+#TIME 6516.0
+
+
+Well "PB005V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB005V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB010V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB010V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Mar-1985"
+#TIME 6544.0
+
+
+Well "PB005V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB007V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB036V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB036V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-1985"
+#TIME 6575.0
+
+
+Well "IB037V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB037V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB007V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jun-1985"
+#TIME 6636.0
+
+
+Well "IC038V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-1985"
+#TIME 6666.0
+
+
+Well "IC039V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-1985"
+#TIME 6728.0
+
+
+Well "IB040V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB040V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-1985"
+#TIME 6758.0
+
+
+Well "PB041V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB041V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-1986"
+#TIME 6850.0
+
+
+Well "IB044V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-1986"
+#TIME 6909.0
+
+
+Well "IB046V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB046V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-1986"
+#TIME 6970.0
+
+
+Well "PB047V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-1986"
+#TIME 7001.0
+
+
+Well "PB048V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-1987"
+#TIME 7488.0
+
+
+Well "SA049101V" {
+    
+    Completion "Open-hole 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-1987"
+#TIME 7519.0
+
+
+Well "PB050V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB050V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-1988"
+#TIME 7580.0
+
+
+Well "IC051V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "OS051V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-1988"
+#TIME 7611.0
+
+
+Well "PB052V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB052V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-1989"
+#TIME 8005.0
+
+
+Well "PB053V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB053V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-1989"
+#TIME 8250.0
+
+
+Well "PB054V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-1991"
+#TIME 8857.0
+
+
+Well "PA055V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB055V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-1991"
+#TIME 8919.0
+
+
+Well "SA056101V" {
+    
+    Completion "Open-hole 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 7" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-1991"
+#TIME 8980.0
+
+
+Well "PB016H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-1991"
+#TIME 9010.0
+
+
+Well "PB016V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Feb-1994"
+#TIME 9803.0
+
+
+Well "IC051V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Apr-1994"
+#TIME 9862.0
+
+
+Well "PA064V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-1995"
+#TIME 10471.0
+
+
+Well "OS066H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PC066D1L" {
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-1996"
+#TIME 10533.0
+
+
+Well "OS051V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Mar-1996"
+#TIME 10562.0
+
+
+Well "PA067H3S" {
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PC067D2L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-1996"
+#TIME 10593.0
+
+
+Well "IB068H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB068H3L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-1996"
+#TIME 10623.0
+
+
+Well "IB069H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB069H3L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB071H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-1996"
+#TIME 10684.0
+
+
+Well "IB074H3T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB070H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "OPENHOLE" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PC006V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Aug-1996"
+#TIME 10715.0
+
+
+Well "OS073H2S" {
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 8" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 10" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 12" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 13" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 14" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 16" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 17" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 18" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 19" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 20" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB073D1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-1996"
+#TIME 10746.0
+
+
+Well "PB072H3T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-1996"
+#TIME 10776.0
+
+
+Well "PB077H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-1996"
+#TIME 10807.0
+
+
+Well "IB079H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-1996"
+#TIME 10837.0
+
+
+Well "PB080H3T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB081H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-1997"
+#TIME 10868.0
+
+
+Well "PB082H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-1997"
+#TIME 10899.0
+
+
+Well "PB083D1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB084H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PC083D1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-1997"
+#TIME 10927.0
+
+
+Well "PB086V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PC086V1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-1997"
+#TIME 10958.0
+
+
+Well "IB088H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB085H3T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-1997"
+#TIME 11111.0
+
+
+Well "IB089H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-1997"
+#TIME 11141.0
+
+
+Well "IB090H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-1997"
+#TIME 11172.0
+
+
+Well "PB050V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB050V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Dec-1997"
+#TIME 11202.0
+
+
+Well "PA023V1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-1998"
+#TIME 11353.0
+
+
+Well "SA078101V" {
+    
+    Completion "Open-hole 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-1998"
+#TIME 11384.0
+
+
+Well "SA049101V" {
+    
+    Completion "Open-hole 4" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jul-1998"
+#TIME 11414.0
+
+
+Well "IB049H4S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Aug-1998"
+#TIME 11445.0
+
+
+Well "IB049H4L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-1998"
+#TIME 11506.0
+
+
+Well "IB037H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-1998"
+#TIME 11537.0
+
+
+Well "IB037H2L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB037V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB037V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Dec-1998"
+#TIME 11567.0
+
+
+Well "IB094H1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-1999"
+#TIME 11598.0
+
+
+Well "IB094H1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-1999"
+#TIME 11629.0
+
+
+Well "IB095H1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-1999"
+#TIME 11657.0
+
+
+Well "IB095H1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-1999"
+#TIME 11688.0
+
+
+Well "IB096H1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB096H1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "OPENHOLE" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-1999"
+#TIME 11779.0
+
+
+Well "IB098H2L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB098H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-1999"
+#TIME 11841.0
+
+
+Well "IB099H2L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB099H2S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-1999"
+#TIME 11902.0
+
+
+Well "IB100H1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB100H1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-1999"
+#TIME 11932.0
+
+
+Well "SA101101D" {
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-2000"
+#TIME 11963.0
+
+
+Well "SA101101D" {
+    
+    Completion "Open-hole 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jun-2000"
+#TIME 12115.0
+
+
+Well "SA105101D" {
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-2000"
+#TIME 12145.0
+
+
+Well "SA105101D" {
+    
+    Completion "Open-hole 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Sep-2000"
+#TIME 12207.0
+
+
+Well "IB040H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-2000"
+#TIME 12237.0
+
+
+Well "IB040V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB040V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB047H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2000"
+#TIME 12268.0
+
+
+Well "PB047V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Dec-2000"
+#TIME 12298.0
+
+
+Well "IB044H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-2001"
+#TIME 12329.0
+
+
+Well "IB044V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jun-2001"
+#TIME 12480.0
+
+
+Well "IB019H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-2001"
+#TIME 12510.0
+
+
+Well "PB021H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "SA019101V" {
+    
+    Completion "Open-hole 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Aug-2001"
+#TIME 12541.0
+
+
+Well "PB021V1S" {
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB109H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-2001"
+#TIME 12572.0
+
+
+Well "PB111H3T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-2001"
+#TIME 12602.0
+
+
+Well "IB110H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2001"
+#TIME 12633.0
+
+
+Well "PB112H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-2001"
+#TIME 12663.0
+
+
+Well "PB113H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB114H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-2002"
+#TIME 12725.0
+
+
+Well "IB115H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-2002"
+#TIME 12753.0
+
+
+Well "PB048H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-2002"
+#TIME 12784.0
+
+
+Well "IB116H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB048V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-May-2002"
+#TIME 12814.0
+
+
+Well "PB118H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-2002"
+#TIME 12845.0
+
+
+Well "PB015S2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2002"
+#TIME 12998.0
+
+
+Well "IB106H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB015V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB015V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jul-2003"
+#TIME 13240.0
+
+
+Well "PB120H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-2003"
+#TIME 13302.0
+
+
+Well "IC121H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-2003"
+#TIME 13332.0
+
+
+Well "IC122H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2003"
+#TIME 13363.0
+
+
+Well "IC038H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-2003"
+#TIME 13393.0
+
+
+Well "IC017H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IC018H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IC038V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jan-2004"
+#TIME 13424.0
+
+
+Well "IC017V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IC018V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IC035H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-2004"
+#TIME 13455.0
+
+
+Well "IC035V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IC039H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-2004"
+#TIME 13484.0
+
+
+Well "IC039V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB004S2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB004V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB004V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Apr-2004"
+#TIME 13515.0
+
+
+Well "IC051H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-2005"
+#TIME 13941.0
+
+
+Well "SA123102H" {
+    
+    Completion "Open-hole 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Aug-2005"
+#TIME 14002.0
+
+
+Well "PC124H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-2005"
+#TIME 14033.0
+
+
+Well "IC125H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-2005"
+#TIME 14063.0
+
+
+Well "PC126H3T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2005"
+#TIME 14094.0
+
+
+Well "IB129H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-2005"
+#TIME 14124.0
+
+
+Well "IB128H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-2006"
+#TIME 14155.0
+
+
+Well "PC127H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-2006"
+#TIME 14186.0
+
+
+Well "PU130H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-2006"
+#TIME 14214.0
+
+
+Well "PB134H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-2006"
+#TIME 14306.0
+
+
+Well "PC133H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Aug-2006"
+#TIME 14367.0
+
+
+Well "PB131H1T" {
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-2006"
+#TIME 14398.0
+
+
+Well "IB088H2T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB132H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB136H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2006"
+#TIME 14459.0
+
+
+Well "IB135H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-2006"
+#TIME 14489.0
+
+
+Well "PB013V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB013V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jan-2007"
+#TIME 14520.0
+
+
+Well "PB083D1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PC083D1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jan-2008"
+#TIME 14885.0
+
+
+Well "IB137V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-2008"
+#TIME 14916.0
+
+
+Well "IB138H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "SA026101V" {
+    
+    Completion "Open-hole 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 5" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 6" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Apr-2008"
+#TIME 14976.0
+
+
+Well "IB139H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-2008"
+#TIME 15006.0
+
+
+Well "IA140H1T" {
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB002V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-2008"
+#TIME 15037.0
+
+
+Well "IC002V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PA141H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB144H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-2008"
+#TIME 15067.0
+
+
+Well "PB143H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-2008"
+#TIME 15129.0
+
+
+Well "PB145H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 8" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 9" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 11" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 12" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 13" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 14" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "SA030101V" {
+    
+    Completion "Open-hole 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 5" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Open-hole 6" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Oct-2008"
+#TIME 15159.0
+
+
+Well "PB142H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-2008"
+#TIME 15220.0
+
+
+Well "PB005V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB005V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB007V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB010V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PU147H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-2009"
+#TIME 15282.0
+
+
+Well "PA152H1T" {
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB148H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-2009"
+#TIME 15310.0
+
+
+Well "PA153H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB149H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-2009"
+#TIME 15341.0
+
+
+Well "IB094H1S" {
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+}
+
+
+DATE "1-May-2009"
+#TIME 15371.0
+
+
+Well "IB094H1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB096H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-2009"
+#TIME 15402.0
+
+
+Well "IB096H1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB096H1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jul-2009"
+#TIME 15432.0
+
+
+Well "IB037H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB068H2S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB068H3L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PA154H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Aug-2009"
+#TIME 15463.0
+
+
+Well "IB037H2L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB037H2S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB150H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-2009"
+#TIME 15494.0
+
+
+Well "IB031V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB031V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB155H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-2009"
+#TIME 15524.0
+
+
+Well "PB159H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2009"
+#TIME 15555.0
+
+
+Well "IB156H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB160H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-2009"
+#TIME 15585.0
+
+
+Well "IA151H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB029V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB157H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-2010"
+#TIME 15616.0
+
+
+Well "IB024V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB167H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 8" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 9" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 10" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 11" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-2010"
+#TIME 15647.0
+
+
+Well "IB022V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB022V1S" {
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB028V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB028V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB161H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA174H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-2010"
+#TIME 15675.0
+
+
+Well "PB162H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-2010"
+#TIME 15706.0
+
+
+Well "IA172H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB165H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "SA168101H" {
+    
+    Completion "Open-hole 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 7" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-2010"
+#TIME 15736.0
+
+
+Well "IB079H3T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-2010"
+#TIME 15767.0
+
+
+Well "IB046V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB046V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB079H2T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jul-2010"
+#TIME 15797.0
+
+
+Well "PA163H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 8" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 9" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 11" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA176H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Aug-2010"
+#TIME 15828.0
+
+
+Well "PA177H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PC187H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "SA169101H" {
+    
+    Completion "Open-hole 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 7" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 8" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 9" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 10" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 11" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-2010"
+#TIME 15859.0
+
+
+Well "PA178H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA180H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-2010"
+#TIME 15889.0
+
+
+Well "PB188H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2010"
+#TIME 15920.0
+
+
+Well "PA164H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA181H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PC127H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-2010"
+#TIME 15950.0
+
+
+Well "PA126H4T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA182H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB173H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PC127H1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jan-2011"
+#TIME 15981.0
+
+
+Well "PA183H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA190H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PC126H3T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Feb-2011"
+#TIME 16012.0
+
+
+Well "IB191H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA184H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-2011"
+#TIME 16040.0
+
+
+Well "IA194H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IA195H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB192H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-2011"
+#TIME 16071.0
+
+
+Well "IA199H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-2011"
+#TIME 16101.0
+
+
+Well "PA189H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-2011"
+#TIME 16132.0
+
+
+Well "IA193H3T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB158H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-2011"
+#TIME 16162.0
+
+
+Well "IA200H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IA214H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Aug-2011"
+#TIME 16193.0
+
+
+Well "IB205H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB054V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Sep-2011"
+#TIME 16224.0
+
+
+Well "IA215H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-2011"
+#TIME 16254.0
+
+
+Well "IA208H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB197H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2011"
+#TIME 16285.0
+
+
+Well "IA201H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IA210H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-2011"
+#TIME 16315.0
+
+
+Well "IA204H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-2012"
+#TIME 16346.0
+
+
+Well "IB206H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-2012"
+#TIME 16377.0
+
+
+Well "IA202H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 8" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IA209H3T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IA211H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-2012"
+#TIME 16437.0
+
+
+Well "IA203H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IA212H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 8" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 9" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 10" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 11" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IA219H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB213H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-2012"
+#TIME 16467.0
+
+
+Well "IA220H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB198H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-2012"
+#TIME 16498.0
+
+
+Well "IA216H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-2012"
+#TIME 16528.0
+
+
+Well "IA218H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA222H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Aug-2012"
+#TIME 16559.0
+
+
+Well "IA217H1T" {
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 8" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB207H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB226H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-2012"
+#TIME 16590.0
+
+
+Well "PA234H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA238H1T" {
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-2012"
+#TIME 16620.0
+
+
+Well "PA225H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA237H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB221H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PC185V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2012"
+#TIME 16651.0
+
+
+Well "PA236H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB014V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB229H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-2012"
+#TIME 16681.0
+
+
+Well "PA235H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-2013"
+#TIME 16712.0
+
+
+Well "PA223H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "SA170101H" {
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-2013"
+#TIME 16743.0
+
+
+Well "PA239H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB186H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-2013"
+#TIME 16771.0
+
+
+Well "PA224H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA242H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-2013"
+#TIME 16802.0
+
+
+Well "PB004S2T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB036V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-2013"
+#TIME 16832.0
+
+
+Well "PB008V1T" {
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB036V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB036V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jun-2013"
+#TIME 16863.0
+
+
+Well "PA232H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB008V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB008V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jul-2013"
+#TIME 16893.0
+
+
+Well "PA243H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Aug-2013"
+#TIME 16924.0
+
+
+Well "PB032H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB032V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB032V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Sep-2013"
+#TIME 16955.0
+
+
+Well "PA240H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA241H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-2013"
+#TIME 16985.0
+
+
+Well "PA244H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 7" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 8" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB245V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 6" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2013"
+#TIME 17016.0
+
+
+Well "PB009H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-2013"
+#TIME 17046.0
+
+
+Well "IC009V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB248H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-2014"
+#TIME 17077.0
+
+
+Well "IB251H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-2014"
+#TIME 17108.0
+
+
+Well "IB074H3T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "IB249H3T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-2014"
+#TIME 17136.0
+
+
+Well "IB250D1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-2014"
+#TIME 17197.0
+
+
+Well "IA258H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-2014"
+#TIME 17228.0
+
+
+Well "IB088H2T" {
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB185V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-2014"
+#TIME 17258.0
+
+
+Well "IB088H2T" {
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PC185V1T" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Aug-2014"
+#TIME 17289.0
+
+
+Well "IA257H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PA259H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-2014"
+#TIME 17350.0
+
+
+Well "IB252H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "IB256H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-2014"
+#TIME 17411.0
+
+
+Well "IB260H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-2015"
+#TIME 17442.0
+
+
+Well "PB261H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "SA263102H" {
+    
+    Completion "Open-hole 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-2015"
+#TIME 17562.0
+
+
+Well "PB052H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB052V1L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PB052V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Jun-2015"
+#TIME 17593.0
+
+
+Well "PC267V1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jul-2015"
+#TIME 17623.0
+
+
+Well "OS265D1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Aug-2015"
+#TIME 17654.0
+
+
+Well "PB264H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB266H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Oct-2015"
+#TIME 17715.0
+
+
+Well "IA268H2T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2015"
+#TIME 17746.0
+
+
+Well "PC278D1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-2016"
+#TIME 17807.0
+
+
+Well "PB279H1L" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB279H1S" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-2016"
+#TIME 17838.0
+
+
+Well "PB274H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB281H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Mar-2016"
+#TIME 17867.0
+
+
+Well "PB275H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Apr-2016"
+#TIME 17898.0
+
+
+Well "IA272H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+Well "PB280H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jun-2016"
+#TIME 17959.0
+
+
+Well "IA271H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Sep-2016"
+#TIME 18051.0
+
+
+Well "PA064V1S" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Oct-2016"
+#TIME 18081.0
+
+
+Well "IA284H1T" {
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Nov-2016"
+#TIME 18112.0
+
+
+Well "IA285H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Dec-2016"
+#TIME 18142.0
+
+
+Well "IA286H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Jan-2017"
+#TIME 18173.0
+
+
+Well "PC067H3T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-Feb-2017"
+#TIME 18204.0
+
+
+Well "PA067H3S" {
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+Well "PC067D2L" {
+    
+    Completion "Perforation 1" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 3" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 4" {
+        Status=SHUTIN
+    }
+    
+    
+    Completion "Perforation 5" {
+        Status=SHUTIN
+    }
+    
+}
+
+
+DATE "1-Apr-2017"
+#TIME 18263.0
+
+
+Well "IA287H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
+
+DATE "1-May-2017"
+#TIME 18293.0
+
+
+Well "IA288H1T" {
+    
+    Completion "Perforation 1" {
+        Status=OPEN
+    }
+    
+    
+    Completion "Perforation 2" {
+        Status=OPEN
+    }
+    
+    Status=OPEN
+}
+
