@@ -7,12 +7,15 @@ def main():
     _fileIn = "RM2_HM_PVT_KV_27FEB_WELL_CONNECTIONS.ixf"
     _buffer = open(_fileIn).read()
 
+    #_tableFile = open("PerfTable.txt", 'w')
+    _perfFile = open("Perforation.txt", 'w')
+
     #_wellPattern = re.compile('(WellDef.*{\\n(.*|\\n)*?})', re.MULTILINE) # возвращает tuple
     _wellPattern = re.compile('WellDef.*{(?:\\n(?:.*|\\n)*?})', re.MULTILINE) #в отличае от предыдущего возвращает строки
 
     #_datePattern = re.compile('DATE.*\\n(.*|\\n)*?.*(?=DATE)')
 
-    _datePattern = re.compile('(\\b\\d{1,2}-+([A-Za-z]){3}-+\\d{1,4})')
+    _datePattern = re.compile('(\\b\\d{1,2}-+([A-Za-z]){3}-+\\d{1,4})|$')
 
     _wellNamePattern = re.compile('WellDef.*"(.*?)"', re.MULTILINE)
     # _headDensityCalculationPattern = re.compile('HeadDensityCalculation=([A-Za-z"]*)', re.MULTILINE)
@@ -40,39 +43,59 @@ def main():
 
     _dates = []
     _substr = ""
+    #_cnt = 0
 
+# надо бы переделать чтение по датам, т.к. последняя дата не зачитывается из-за того что данные записываем
+# после нахождения следующего слова DATE, а надо записывать после нахождения текущего
     for ln in lines:
         if ln.__contains__("DATE"):
+            #print(str(_cnt) + " " + ln)
             _dates.append(_substr)
             _substr = ""
-
         _substr = _substr + ln
+        #_cnt+=1
+
+    _table = ""
+    _perfData = ""
 
     for t1 in _dates:
-        _date = _datePattern.findall(t1)
+        #_date = _datePattern.findall(t1)
+        _dateSearch = re.search(_datePattern, t1)
+        _date = _dateSearch.group()
+
+        print(_date)
+
+        if _date != "":
+            _perfData = _perfData + "DATES\n" + _date.replace("-", " ") + "\n/\n\n"
 
         if len(_date)>0:
             _well = _wellPattern.findall(t1)
 
             for _w in _well:
-                _undef = _undefinedPattern.findall(_w)
-                _wellname = _wellNamePattern.findall(_w)
-                _wellToCellConnections = _wellToCellConnectionsPattern.findall(_w)
+                #_undef = _undefinedPattern.findall(_w)
+                #_wellname = _wellNamePattern.findall(_w)
+                #_wellToCellConnections = _wellToCellConnectionsPattern.findall(_w)
 
-                _compl = str(_wellToCellConnections[0][0]).split("\n")
-                ConvertCompletition(_wellname, _compl)
+                _undefSearch = re.search(_undefinedPattern, _w)
+                _undef = _undefSearch.group()
 
-                print(str(_date) + " " + str(_undef)) # + " " + str(_wellToCellConnections))
+                _wellnameSearch = re.search(_wellNamePattern, _w)
+                _wellname = _wellnameSearch.group()
+
+                _wellToCellConnectionsSearch = re.search(_wellToCellConnectionsPattern, _w)
+                _wellToCellConnections = _wellToCellConnectionsSearch.group()
+
+                #_compl = str(_wellToCellConnections[0][0]).split("\n")
+                _complIn = str(_wellToCellConnections).split("\n")
+                _complOut = ConvertCompletition(_wellname, _complIn)
+
+                _perfData = _perfData + str(_complOut)
+
+                #_table = _table + CreateCompletitionTable(_date, _wellname, _complIn)
 
 
-
-
-
-
-
-
-
-
+    #_tableFile.write(_table)
+    _perfFile.write(_perfData)
 
 
 
@@ -104,33 +127,75 @@ def main():
 
         #print(_w)
 
-    # with open("models.txt") as f:
-    #     lines = f.read().splitlines()
-    #
-    #     for ln in lines:
-    #         s = ln.replace("\t", " ").split(' ', -1)
-    #         s1 = s[1].split('/',-1)
-    #         s1_upd = ""
-    #
-    #         for l1 in s1[:-1]:
-    #             s1_upd = s1_upd + "\\" +l1
-    #
-    #         fIn = "Y:\models." + s[0] + s1_upd
-    #
-    #         CopyModels(fIn, folderOut + "\\" + str(cnt) + "_" + s1[-2])
-    #
-    #         print("Model " + s1[-1])
-    #         cnt+=1
-
     print("Done.")
 
 
 def ConvertCompletition(wellname, perforation):
+    #_res = "DATES\n" + _date[0].replace("[(", "").replace("-", " ") + "\n/\n" + "COMPDAT\n"
+    _res = "COMPDAT\n"
 
     for str1 in perforation:
-        _perf = str1.strip().split()
+        #_perf = str1.strip().split()
+        _perf = re.split('\\s{2,}', str1.strip())
+
+        # 00 = {str}        '(259 120 1)'
+        # 01 = {str}        '"Perforation 1"'
+        # 02 = {str}        '1'
+        # 03 = {str}        'OPEN'
+        # 04 = {str}        '8510.5501568949'
+        # 05 = {str}        '8875.30787972732'
+        # 06 = {str}        '0.3125'
+        # 07 = {str}        '0'
+        # 08 = {str}        '1'
+        # 09 = {str}        '33.1869738095946'
+        # 10 = {str}        '12.9647897524728'
+        # 11 = {str}        '0.0196803862223565'
+
+        if len(_perf) >= 11 and _perf[0] != "Cell":
+
+            if _perf[6] != "UNCHANGED":
+                _state = "OPEN" if _perf[3] == "OPEN" else "SHUT"
+
+                _cells = _perf[0].replace("(", "").replace(")", "").split()
+                # _res = _res + "{} {} {} {} {} {} {} {} {} {} {} {} /\n".format(wellname, _perf[0].replace("(", ""), _perf[1], _perf[2].replace(")", ""),
+                #                                                         _state, "1*", _perf[14], (2 * float(_perf[9])), _perf[13], _perf[11], "3*", _perf[12])
+
+                _res = _res + "{} {} {} {} {} {} {} {} {} {} {} {} {} / {}\n".format(wellname.replace("WellDef ", ""),
+                                                                                  _cells[0], _cells[1], _cells[2], _cells[2],
+                                                                                  _state, "1*", _perf[11], (2 * float(_perf[6])),
+                                                                                  _perf[10], _perf[7], "3*", _perf[9], _perf[1])
+
+    _res = _res + "/\n\n"
+    #print(_res)
+    return _res
 
 
+def CreateCompletitionTable(date, wellname, perforation):
+    _res = ""
+
+    for str1 in perforation:
+        _perf = re.split('\\s{2,}', str1.strip())
+        # 00 = {str}        '(259 120 1)'
+        # 01 = {str}        '"Perforation 1"'
+        # 02 = {str}        '1'
+        # 03 = {str}        'OPEN'
+        # 04 = {str}        '8510.5501568949'
+        # 05 = {str}        '8875.30787972732'
+        # 06 = {str}        '0.3125'
+        # 07 = {str}        '0'
+        # 08 = {str}        '1'
+        # 09 = {str}        '33.1869738095946'
+        # 10 = {str}        '12.9647897524728'
+        # 11 = {str}        '0.0196803862223565'
+
+        if len(_perf) >= 11: # and _perf[0] != "Cell":
+             _res = _res + "{} {} {} {} {} {} {} {} {} {} {} {} {} {}\n".format(date , wellname.replace("WellDef ", ""),
+                                                                                  _perf[0].replace("(", "").replace(")", ""),
+                                                                                  _perf[1], _perf[2], _perf[3], _perf[4],
+                                                                               _perf[5], _perf[6], _perf[7], _perf[8],
+                                                                               _perf[9], _perf[10], _perf[11])
+
+    return _res
 
 if __name__ == '__main__':
     main()
