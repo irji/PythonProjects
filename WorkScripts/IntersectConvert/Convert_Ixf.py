@@ -4,56 +4,28 @@ import re
 
 def main():
     #_fileIn = "RM2_HM_PVT_KV_27FEB_WELLS.ixf"
-    _fileIn = "RM2_HM_PVT_KV_27FEB_WELL_CONNECTIONS.ixf"
+    _fileIn = "RM2_HM_PVT_KV_27FEB_WELL_CONNECTIONS.ixf"  # _perfFile
     _buffer = open(_fileIn).read()
 
     #_tableFile = open("PerfTable.txt", 'w')
     _perfFile = open("Perforation.txt", 'w')
+    #_specFile = open("Specification.txt", 'w')
 
     #_wellPattern = re.compile('(WellDef.*{\\n(.*|\\n)*?})', re.MULTILINE) # возвращает tuple
     _wellPattern = re.compile('WellDef.*{(?:\\n(?:.*|\\n)*?})', re.MULTILINE) #в отличае от предыдущего возвращает строки
 
     #_datePattern = re.compile('DATE.*\\n(.*|\\n)*?.*(?=DATE)')
-
     _datePattern = re.compile('(\\b\\d{1,2}-+([A-Za-z]){3}-+\\d{1,4})|$')
 
     _wellNamePattern = re.compile('WellDef.*"(.*?)"', re.MULTILINE)
-    # _headDensityCalculationPattern = re.compile('HeadDensityCalculation=([A-Za-z"]*)', re.MULTILINE)
-    # _allowCrossFlowPattern = re.compile('AllowCrossFlow="(.*?)"', re.MULTILINE)
-    # _pseudoPressureModelPattern = re.compile('PseudoPressureModel=([A-Za-z"]*)', re.MULTILINE)
-    # _frictionPattern = re.compile('Friction="(.*?)"', re.MULTILINE)
-    # _accelerationPattern = re.compile('Acceleration="(.*?)"', re.MULTILINE)
     _undefinedPattern = re.compile('Undefined="(.*?)"', re.MULTILINE)
 
     _wellToCellConnectionsPattern = re.compile('WellToCellConnections.*[[](\\n(.*|\\n)*?\\s*)[]]', re.MULTILINE)
 
-    # _constraintDevicePattern = re.compile('ConstraintDevice.*{(\\n(.*|\\n)*?\\s*)}', re.MULTILINE)
-    # _segmentNodesPattern = re.compile('SegmentNodes.*\[(\\n(.*|\\n)*?\\s*)\]', re.MULTILINE)
-    # _segmentPipesPattern = re.compile('SegmentPipes.*\[(\\n(.*|\\n)*?\\s*)\]', re.MULTILINE)
-    #
-    # _resVolConditionsPattern = re.compile('ResVolConditions.*{(\\n(.*|\\n)*?\\s*)}', re.MULTILINE)
-    # #_headDensityCalculationPattern = re.compile('HeadDensityCalculation=([A-Za-z]*)', re.MULTILINE)
-
-
-    #_result1 = _datePattern.match(_buffer)
-
-    #_result = _datePattern.findall(_buffer)
 
     lines = open(_fileIn, "r").readlines()
 
-    _dates = []
-    _substr = ""
-    #_cnt = 0
-
-# надо бы переделать чтение по датам, т.к. последняя дата не зачитывается из-за того что данные записываем
-# после нахождения следующего слова DATE, а надо записывать после нахождения текущего
-    for ln in lines:
-        if ln.__contains__("DATE"):
-            #print(str(_cnt) + " " + ln)
-            _dates.append(_substr)
-            _substr = ""
-        _substr = _substr + ln
-        #_cnt+=1
+    _dates = parce_to_dates(lines)
 
     _table = ""
     _perfData = ""
@@ -68,69 +40,129 @@ def main():
         if _date != "":
             _perfData = _perfData + "DATES\n" + _date.replace("-", " ") + "\n/\n\n"
 
-        if len(_date)>0:
+        if len(_date) > 0:
             _well = _wellPattern.findall(t1)
-
-            for _w in _well:
-                #_undef = _undefinedPattern.findall(_w)
-                #_wellname = _wellNamePattern.findall(_w)
-                #_wellToCellConnections = _wellToCellConnectionsPattern.findall(_w)
-
-                _undefSearch = re.search(_undefinedPattern, _w)
-                _undef = _undefSearch.group()
-
-                _wellnameSearch = re.search(_wellNamePattern, _w)
-                _wellname = _wellnameSearch.group()
-
-                _wellToCellConnectionsSearch = re.search(_wellToCellConnectionsPattern, _w)
-                _wellToCellConnections = _wellToCellConnectionsSearch.group()
-
-                #_compl = str(_wellToCellConnections[0][0]).split("\n")
-                _complIn = str(_wellToCellConnections).split("\n")
-                _complOut = ConvertCompletition(_wellname, _complIn)
-
-                _perfData = _perfData + str(_complOut)
-
-                #_table = _table + CreateCompletitionTable(_date, _wellname, _complIn)
+            _perfData = _perfData + read_well_perf(_well, _undefinedPattern, _wellNamePattern, _wellToCellConnectionsPattern)
+            #_table = _table + create_well_perf_table(_date, _well, _wellNamePattern, _wellToCellConnectionsPattern)
 
 
     #_tableFile.write(_table)
     _perfFile.write(_perfData)
+    #_specFile.write(_perfData)
 
 
 
 
     #print(_dates)
 #    print(_result.group(0))
-    #for _w in _result:
 
-        #_date = _datePattern.match(_w)
-
-        # _wellName = _wellNamePattern.findall(_w)
-        # _headDensityCalculation= _headDensityCalculationPattern.findall(_w)
-        # _allowCrossFlow = _allowCrossFlowPattern.findall(_w)
-        # _pseudoPressureModel = _pseudoPressureModelPattern.findall(_w)
-        # _friction = _frictionPattern.findall(_w)
-        # _acceleration = _accelerationPattern.findall(_w)
-        # _undefined = _undefinedPattern.findall(_w)
-        #
-        # _wellToCellConnections = _wellToCellConnectionsPattern.findall(_w)
-        #
-        # _constraintDevice = str(_constraintDevicePattern.findall(_w)).replace("\\n","")
-        # _segmentNodes = _segmentNodesPattern.findall(_w)
-        # _segmentPipes = _segmentPipesPattern.findall(_w)
-        #
-        # _resVolConditions = _resVolConditionsPattern.findall(_w)
-        #
-        # line = '{} {} {} {} {} {} {} {} {} {} {} {}'.format(_wellName, _headDensityCalculation, _allowCrossFlow, _pseudoPressureModel, _friction, _acceleration, _undefined, _wellToCellConnections,
-        #                                         _constraintDevice, _segmentNodes, _segmentPipes, _resVolConditions)
-
-        #print(_w)
 
     print("Done.")
 
 
-def ConvertCompletition(wellname, perforation):
+def read_Well_Spec_Info(_wells, _date):
+
+    line = ""
+
+    _wellNamePattern = re.compile('WellDef.*"(.*?)"', re.MULTILINE)
+
+    _headDensityCalculationPattern = re.compile('HeadDensityCalculation=([A-Za-z"]*)', re.MULTILINE)
+    _allowCrossFlowPattern = re.compile('AllowCrossFlow="(.*?)"', re.MULTILINE)
+    _pseudoPressureModelPattern = re.compile('PseudoPressureModel=([A-Za-z"]*)', re.MULTILINE)
+    _frictionPattern = re.compile('Friction="(.*?)"', re.MULTILINE)
+    _accelerationPattern = re.compile('Acceleration="(.*?)"', re.MULTILINE)
+
+    _undefinedPattern = re.compile('Undefined="(.*?)"', re.MULTILINE)
+
+    _wellToCellConnectionsPattern = re.compile('WellToCellConnections.*[[](\\n(.*|\\n)*?\\s*)[]]', re.MULTILINE)
+
+    _constraintDevicePattern = re.compile('ConstraintDevice.*{(\\n(.*|\\n)*?\\s*)}', re.MULTILINE)
+    _segmentNodesPattern = re.compile('SegmentNodes.*\[(\\n(.*|\\n)*?\\s*)\]', re.MULTILINE)
+    _segmentPipesPattern = re.compile('SegmentPipes.*\[(\\n(.*|\\n)*?\\s*)\]', re.MULTILINE)
+
+    _resVolConditionsPattern = re.compile('ResVolConditions.*{(\\n(.*|\\n)*?\\s*)}', re.MULTILINE)
+
+    for _w in _wells:
+        _wellName = _wellNamePattern.findall(_w)
+        _headDensityCalculation= _headDensityCalculationPattern.findall(_w)
+        _allowCrossFlow = _allowCrossFlowPattern.findall(_w)
+        _pseudoPressureModel = _pseudoPressureModelPattern.findall(_w)
+        _friction = _frictionPattern.findall(_w)
+        _acceleration = _accelerationPattern.findall(_w)
+        _undefined = _undefinedPattern.findall(_w)
+
+        _wellToCellConnections = _wellToCellConnectionsPattern.findall(_w)
+
+        _constraintDevice = str(_constraintDevicePattern.findall(_w)).replace("\\n","")
+        _segmentNodes = _segmentNodesPattern.findall(_w)
+        _segmentPipes = _segmentPipesPattern.findall(_w)
+
+        _resVolConditions = _resVolConditionsPattern.findall(_w)
+
+        line = line + '{} {} {} {} {} {} {} {} {} {} {} {} {}\n'.format(_date, _wellName, _headDensityCalculation, _allowCrossFlow, _pseudoPressureModel, _friction, _acceleration, _undefined, _wellToCellConnections,
+                                                _constraintDevice, _segmentNodes, _segmentPipes, _resVolConditions)
+
+
+    return line
+
+
+def read_well_perf(_wells, _undefinedPattern, _wellNamePattern, _wellToCellConnectionsPattern):
+
+    _perfData = ""
+
+    for _w in _wells:
+        _undefSearch = re.search(_undefinedPattern, _w)
+        _undef = _undefSearch.group()
+
+        _wellnameSearch = re.search(_wellNamePattern, _w)
+        _wellname = _wellnameSearch.group()
+
+        _wellToCellConnectionsSearch = re.search(_wellToCellConnectionsPattern, _w)
+        _wellToCellConnections = _wellToCellConnectionsSearch.group()
+
+        _complIn = str(_wellToCellConnections).split("\n")
+        _complOut = convert_completition(_wellname, _complIn)
+
+        _perfData = _perfData + str(_complOut)
+
+    return _perfData
+
+
+def create_well_perf_table(_date, _wells, _wellNamePattern, _wellToCellConnectionsPattern):
+
+    _perfTable = ""
+
+    for _w in _wells:
+        _wellnameSearch = re.search(_wellNamePattern, _w)
+        _wellname = _wellnameSearch.group()
+
+        _wellToCellConnectionsSearch = re.search(_wellToCellConnectionsPattern, _w)
+        _wellToCellConnections = _wellToCellConnectionsSearch.group()
+
+        _complIn = str(_wellToCellConnections).split("\n")
+        _complOut = convert_completition(_wellname, _complIn)
+
+        _perfTable = _perfTable + CreateCompletitionTable(_date, _wellname, _complIn)
+
+    return _perfTable
+
+
+def parce_to_dates(lines):
+    _dates = []
+    _substr = ""
+
+    for ln in lines[:-1]: #бегаем до предпоследнего элемента
+        if ln.__contains__("DATE"):
+            _dates.append(_substr)
+            _substr = ""
+        _substr = _substr + ln
+    else: #если последний
+        _dates.append(_substr)
+
+    return _dates
+
+
+def convert_completition(wellname, perforation):
     #_res = "DATES\n" + _date[0].replace("[(", "").replace("-", " ") + "\n/\n" + "COMPDAT\n"
     _res = "COMPDAT\n"
 
@@ -168,7 +200,6 @@ def ConvertCompletition(wellname, perforation):
     _res = _res + "/\n\n"
     #print(_res)
     return _res
-
 
 def CreateCompletitionTable(date, wellname, perforation):
     _res = ""
