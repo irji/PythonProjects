@@ -22,14 +22,19 @@ def GetKeywordLines(fileIn, keywordOpen, linecount):
                     keywordArray = []
 
                     for i in range(0, linecount+1):
-                        ar1 = lines[indx + i].replace(keywordOpen, "").strip().replace("  ", " ", 1000).split()
+                        ar1 = lines[indx + i].replace(keywordOpen, "").strip().replace("  ", " ", 1000).replace("\t", " ", 1000).split()
+                        if i > 0:
+                            if keywordOpen == "WLIMIT" or keywordOpen == "GLIMIT":
+                                x1=["0"]
+                                ar1 = x1 + ar1
                         keywordArray.append(ar1)
 
                     res = res + "\n" + create_keyword_table(date1, keywordArray, keywordOpen)
 
-    _resFile = open(keywordOpen + ".txt", 'w')
-    _resFile.write(res)
-    _resFile.close()
+    if count > 0:
+        _resFile = open(keywordOpen + ".txt", 'w')
+        _resFile.write(res)
+        _resFile.close()
 
 
     # with open(fileIn, "r") as fl:
@@ -62,27 +67,60 @@ def create_keyword_table(date, keywordArray, keyword):
     phase = ""
     cond = ""
 
+    condDic = {
+        'STD': 'STD',
+        'RES': 'RES',
+        'FSTD': 'FSTD',
+        'FRES': 'FRES',
+    }
+
     if keyword == "YINJ":
         pd1 = pd.DataFrame(keywordArray[0])
         pd1.insert(0, "date", date)
 
-        for indx, comp in enumerate( keywordArray[1]):
+        for indx, comp in enumerate(keywordArray[1]):
             pd1["comp" + str(indx)] = comp
     else:
-        if keyword == "PROD" or keyword == "INJ":
-            #ln = str(keywordArray[0]).split()
+        if keyword == "PROD" or keyword == "INJ" or keyword == "ECOLIM" or keyword == "WLIMIT" or keyword == "GLIMIT":
             phase = keywordArray[0][0]
-            cond = keywordArray[0][1]
+
+            if keywordArray[0][1] in condDic:
+                cond = keywordArray[0][1]
+            else:
+                cond = ""
 
         pd1 = pd.DataFrame(keywordArray)
         pd1 = pd1.transpose()
         pd1.insert(0, "date", date)
 
-        if keyword == "PROD" or keyword == "INJ":
+        if keyword == "PROD" or keyword == "INJ" or keyword == "ECOLIM" or keyword == "WLIMIT" or keyword == "GLIMIT":
             pd1.insert(1, "type", keyword)
             pd1.insert(2, "phase", phase)
             pd1.insert(3, "cond", cond)
-            pd1 = pd1.drop(pd1.index[0:2])
+
+#            if keyword == "WLIMIT":
+#                pd1[-1] = keywordArray[1][0]
+
+            if keywordArray[0][1] in condDic:
+                pd1 = pd1.drop(pd1.index[0:2])
+            else:
+                pd1 = pd1.drop(pd1.index[0:1])
+
+#        if keyword == "ECOLIM" or keyword == "WLIMIT":
+#            pd1.insert(1, "phase", keywordArray[0][0])
+
+            ## Get names of indexes for which column Age has value 30
+            #indexNames = dfObj[dfObj['Age'] == 30].index
+            ## Delete these row indexes from dataFrame
+            #dfObj.drop(indexNames, inplace=True)
+
+            #indexNames = pd1[pd1[0] != phase].index
+
+            #indexNames = pd1.index[pd1["0"] == phase].tolist()
+
+            #pd1.drop(indexNames, inplace=True)
+            #print()
+
 
     res = pd1.to_string(index=False, header=False)
 
@@ -91,10 +129,34 @@ def create_keyword_table(date, keywordArray, keyword):
 
 
 def main():
-    fileIn = "NFN008IIr.dat"
+    fileIn = "PWF19COr.dat"
+    #fileIn = "BFN_existing_wells_constraints_COMP_V2.inc"
+
+    keywords = [
+        ("PROD", 0),
+        ("INJ", 0),
+        ("QMAX", 1),
+        ("QMIN", 1),
+        ("QMULT", 3),
+        ("YINJ", 1),
+        ("BHP", 1),
+        ("THP", 1),
+        ("ITUBE", 2),
+        ("TUBE", 3),
+        ("ECOLIM", 0),
+        ("WLIMIT", 1),
+        ("GLIMIT", 1),
+        ("DIAM", 2),
+        ("WKHMULT", 1)]
+
+    for k in keywords:
+        #print(k[0])
 
 #входной файл, кл. слово, количество доп. строк для зачитывания
-    GetKeywordLines(fileIn, "DIAM", 2)
+        #GetKeywordLines(fileIn, "PROD", 0)
+        GetKeywordLines(fileIn, str(k[0]), int(k[1]))
+
+    #GetKeywordLines(fileIn, "WLIMIT", 1)
 
 
 if __name__ == '__main__':
