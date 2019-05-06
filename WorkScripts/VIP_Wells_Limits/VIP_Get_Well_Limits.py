@@ -60,6 +60,74 @@ def GetKeywordLines(fileIn, keywordOpen, linecount):
 
     print("Done. Num of " + keywordOpen + " keywords: " + str(count))
 
+def GetKeywordLinesByLineLength(fileIn, keywordOpen, lineLength):
+    count = 0
+    res = ""
+    date1 = "01.01.1960"
+
+    flag = False
+    #keywordArray = []
+
+    lines = open(fileIn, "r").readlines()
+    #maxLine = len(lines)
+
+    for indx, line in enumerate(lines):
+        ln = line.strip().split()
+
+        if len(ln) > 0:
+            if ln[0] == "DATE":
+
+                month = ""
+                if ln[2] == "01": month = "JAN"
+                if ln[2] == "02": month = "FEB"
+                if ln[2] == "03": month = "MAR"
+                if ln[2] == "04": month = "APR"
+                if ln[2] == "05": month = "MAY"
+                if ln[2] == "06": month = "JUN"
+                if ln[2] == "07": month = "JUL"
+                if ln[2] == "08": month = "AUG"
+                if ln[2] == "09": month = "SEP"
+                if ln[2] == "10": month = "OCT"
+                if ln[2] == "11": month = "NOV"
+                if ln[2] == "12": month = "DEC"
+
+                #date1 = ln[1] + "." + ln[2] + "." + ln[3]
+                date1 = ln[1] + " " + month + " " + ln[3]
+
+
+            if flag == True:
+                ar1 = lines[indx].replace(keywordOpen, "").strip().replace("  ", " ", 1000).replace("\t", " ", 1000).split()
+                if len(ar1) == lineLength:
+                    if str(ar1[0]) != "WELL":
+
+                        #res = res + date1 + " " + lines[indx]
+
+                        ev1 = "OPEN"
+                        grd = str(ar1[5])
+
+                        if ar1[4] == "OFF":
+                            ev1 = "SHUT"
+
+                        if ar1[5] == "ROOT":
+                            grd = "GLOBAL"
+
+                        res = res + "'{}' '{}' {} {} {} {} '{}' /\n".format(ar1[0], grd, ar1[2], ar1[3], ar1[1], ar1[1], ev1)
+                else:
+                    flag = False
+
+            if line.find(keywordOpen) == 0:
+                count += 1
+                flag = True
+                res = res + "/\nDATES\n" + date1 + " /\n/\nCOMPDATL\n"
+                #keywordArray = []
+
+    if count > 0:
+        _resFile = open(keywordOpen + ".txt", 'w')
+        _resFile.write(res)
+        _resFile.close()
+
+    print("Done. Num of " + keywordOpen + " keywords: " + str(count))
+
 
 
 def create_keyword_table(date, keywordArray, keyword):
@@ -129,7 +197,8 @@ def create_keyword_table(date, keywordArray, keyword):
 
 
 def main():
-    fileIn = "PWF19COr.dat"
+    #fileIn = "PWF19COr.dat"
+    fileIn ="NFN008IIr.dat"
     #fileIn = "BFN_existing_wells_constraints_COMP_V2.inc"
 
     keywords = [
@@ -149,12 +218,16 @@ def main():
         ("DIAM", 2),
         ("WKHMULT", 1)]
 
-    for k in keywords:
-        #print(k[0])
+    keywordsByLength = [
+        ("FPERF", 10)] #на момент написания скрпта читается только такой формат: WELL   L   IW   JW  STAT   GRID  LENGTH    PWDEP   ANGLV    ANGLA
 
-#входной файл, кл. слово, количество доп. строк для зачитывания
-        #GetKeywordLines(fileIn, "PROD", 0)
-        GetKeywordLines(fileIn, str(k[0]), int(k[1]))
+    # for k in keywords:
+    #     #входной файл, кл. слово, количество доп. строк для зачитывания
+    #     GetKeywordLines(fileIn, str(k[0]), int(k[1]))
+
+
+    for k in keywordsByLength:
+        GetKeywordLinesByLineLength(fileIn, str(k[0]), int(k[1]))
 
     #GetKeywordLines(fileIn, "WLIMIT", 1)
 
