@@ -63,7 +63,8 @@ def GetKeywordLines(fileIn, keywordOpen, linecount):
 def GetKeywordLinesByLineLength(fileIn, keywordOpen, lineLength):
     count = 0
     res = ""
-    date1 = "01.01.1960"
+    #date1 = "01.01.1960"
+    date1 = "01 JAN 1960"
 
     flag = False
     #keywordArray = []
@@ -97,7 +98,7 @@ def GetKeywordLinesByLineLength(fileIn, keywordOpen, lineLength):
 
             if flag == True:
                 ar1 = lines[indx].replace(keywordOpen, "").strip().replace("  ", " ", 1000).replace("\t", " ", 1000).split()
-                if len(ar1) == lineLength:
+                if len(ar1) >= lineLength:
                     if str(ar1[0]) != "WELL":
 
                         #res = res + date1 + " " + lines[indx]
@@ -122,6 +123,7 @@ def GetKeywordLinesByLineLength(fileIn, keywordOpen, lineLength):
                 #keywordArray = []
 
     if count > 0:
+        res = res + "/"
         _resFile = open(keywordOpen + ".txt", 'w')
         _resFile.write(res)
         _resFile.close()
