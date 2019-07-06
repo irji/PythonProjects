@@ -192,10 +192,15 @@ def convert_completition(wellname, perforation):
                 # _res = _res + "{} {} {} {} {} {} {} {} {} {} {} {} /\n".format(wellname, _perf[0].replace("(", ""), _perf[1], _perf[2].replace(")", ""),
                 #                                                         _state, "1*", _perf[14], (2 * float(_perf[9])), _perf[13], _perf[11], "3*", _perf[12])
 
-                _res = _res + "{} {} {} {} {} {} {} {} {} {} {} {} {} / {}\n".format(wellname.replace("WellDef ", ""),
+                # _res = _res + "{} {} {} {} {} {} {} {} {} {} {} {} {} / {}\n".format(wellname.replace("WellDef ", ""),
+                #                                                                   _cells[0], _cells[1], _cells[2], _cells[2],
+                #                                                                   _state, "1*", _perf[11], (2 * float(_perf[6])),
+                #                                                                   _perf[10], _perf[7], "2*", _perf[9], _perf[1])
+
+                _res = _res + "{} {} {} {} {} {} {} {} {} {} {} {} / {}\n".format(wellname.replace("WellDef ", ""),
                                                                                   _cells[0], _cells[1], _cells[2], _cells[2],
-                                                                                  _state, "1*", _perf[11], (2 * float(_perf[6])),
-                                                                                  _perf[10], _perf[7], "3*", _perf[9], _perf[1])
+                                                                                  _state, "2*", (2 * float(_perf[6])),
+                                                                                  "1*", _perf[7], "2*", _perf[9], _perf[1])
 
     _res = _res + "/\n\n"
     #print(_res)
