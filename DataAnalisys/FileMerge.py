@@ -16,8 +16,8 @@ def ReadAllFiles(files, dr):
 
             for ln in lines:
                 s = ln.split(',')
-                #ar2[s[2]+s[3]]=ln.replace(',1,',',').replace(',5,',',').replace(',15,',',').replace(',30,',',')
-                ar2[s[2] + "," + s[3]] = s[4]
+                ar2[s[2] + "," + s[3]]=ln.replace(',1,',',').replace(',5,',',').replace(',15,',',').replace(',30,',',')
+                #ar2[s[2] + "," + s[3]] = s[4]
 
             ar1.append(ar2)
             names=names+","+str(s[0])
@@ -42,15 +42,19 @@ def CutOffArrays(ar, i):
     f = open('text.txt', 'w')
     ssss = ""
 
-    f.write("Date,Time" + names + '\n')
+    #f.write(names + '\n')
 
     res = sorted(res)
 
     for arKeys in res:
         for ar2 in dic1:
-            ssss = ssss + "," + ar2[arKeys]
+            if ssss == "":
+                ssss = ar2[arKeys]
+            else:
+                ssss = ssss + "," + ar2[arKeys]
 
-        f.write(arKeys + ssss + '\n')
+        #f.write(arKeys + ssss + '\n')
+        f.write(ssss + '\n')
         ssss = ""
 
     f.close()
