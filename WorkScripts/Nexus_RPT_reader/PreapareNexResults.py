@@ -116,6 +116,7 @@ def ReadFileForWells(fileIn, fileOut):
 
     pd1=pd.read_csv(fileIn,"\t")
     pd1=pd1.drop(columns=["TIME"])
+    #pd.DataFrame.
 #
     # pd2 = pd1.iloc[:, 0:94]
     # well = pd2.iat[0, 2]

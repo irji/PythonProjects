@@ -224,7 +224,7 @@ def main():
     #GetPressLimits(fileIn)
 
     #GetKeywordLines(fileIn, "TARGET", "ENDTARGET")
-    GetKeywordLines(fileIn, "ACTIVATE", "ENDACTIVATE")
+    GetKeywordLines(fileIn, "DEACTIVATE CONNECTION", "ENDDEACTIVATE")
 
     #GetElevationDH(fileIn)
 
