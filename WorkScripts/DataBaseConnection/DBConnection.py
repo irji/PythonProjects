@@ -1,4 +1,6 @@
 import pyodbc
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 connection_string = 'DRIVER={SQLite3 ODBC Driver};SERVER=localhost;Trusted_connection=yes;DATABASE=D:\DataBase\Test.db'
 
@@ -6,17 +8,16 @@ def get_wells():
     conn = pyodbc.connect(connection_string)
     cursor = conn.cursor()
 
-    executing_string = 'SELECT WELLNAME FROM WELLS'
+    executing_string = 'SELECT WELL_NAME FROM WELLS'
 
     rows = cursor.execute(executing_string).fetchall()
     return [str(row[0]) for row in rows]
-
 
 def get_trajectory_arrays(well):
     conn = pyodbc.connect(connection_string)
     cursor = conn.cursor()
 
-    executing_string = 'SELECT WELLNAME, ELEVATION, WELL_HEAD_X, WELL_HEAD_Y, TRACK FROM WELLS WHERE WELLNAME = ?'
+    executing_string = 'SELECT WELL_NAME, ELEVATION, WELL_HEAD_X, WELL_HEAD_Y, TRACK FROM WELLS WHERE WELL_NAME = ?'
 
     row = cursor.execute(executing_string, well).fetchone()
     well_id, wh_elevation, wh_x, wh_y, well_track = row
@@ -42,5 +43,5 @@ def get_trajectory_arrays(well):
 res1 = get_wells()
 
 for r in res1:
-    #print(r)
-    print(get_trajectory_arrays(str(r)))
+    print(r)
+    #print(get_trajectory_arrays(str(r)))
