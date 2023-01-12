@@ -126,3 +126,104 @@ for well in first_event_well_names:
 # np.savetxt("Prop1.txt", (x3), newline="\n", header="Prop1", footer="/")
 #
 # # print(x3)
+
+
+
+
+
+
+
+
+
+
+def __init_script__ ():
+  create_graph (name = 'gas_flare', type = 'field', default_value = 0, export = True, units = 'metric')
+
+def eos_rein():
+ add_keyword(
+ """
+ WTAKEGAS SFR /
+ /
+ """
+ )
+
+ if fgpr<=30000:
+   if is_report_step():
+    C2H6_separation=0.983
+    C3H8_separation=0.998
+    C4H10_separation=0.999
+    C5H12_separation=0.999
+    C10H22_separation=1
+    print (str(C2H6_separation))
+    print (str(C3H8_separation))
+    print (str(C4H10_separation))
+    print (str(C5H12_separation))
+    print (str(C10H22_separation))
+    add_keyword(
+    """
+    GRUPSALE
+    FIELD 0 1  1 1 1 0 0 0 """+str(C2H6_separation)+""" """+str(C3H8_separation)+""" """+str(C4H10_separation)+""" """+str(C5H12_separation)+""" """+str(C10H22_separation)+""" /
+    /
+    """
+    )
+    add_keyword(
+    """
+    GINJGAS FIELD GV /
+    /
+    """
+    )
+    add_keyword(
+    """
+    GCONINJE FIELD GAS REIN /
+    /
+    """
+    )
+   if fgpr>30000:
+    if is_report_step():
+     C2H6_separation=0.983*(30000/fgpr)
+     C3H8_separation=0.998*(30000/fgpr)
+     C4H10_separation=0.999*(30000/fgpr)
+     C5H12_separation=0.999*(30000/fgpr)
+     C10H22_separation=1*(30000/fgpr)
+     print (str(C2H6_separation))
+     print (str(C3H8_separation))
+     print (str(C4H10_separation))
+     print (str(C5H12_separation))
+     print (str(C10H22_separation))
+     add_keyword(
+     """
+     GRUPSALE
+     FIELD 0 1  1 1 1 0 0 0 """+str(C2H6_separation)+""" """+str(C3H8_separation)+""" """+str(C4H10_separation)+""" """+str(C5H12_separation)+""" """+str(C10H22_separation)+""" /
+     /
+     """
+     )
+     add_keyword(
+     """
+     WELLSTRE 'STREAM_1' 0 0 0 1 1 1 """+str(1-C2H6_separation)+""""""+str(1-C3H8_separation)+""" """+str(1-C4H10_separation)+""" """+str(1-C5H12_separation)+""" """+str(1-C10H22_separation)+""" /
+     /
+     """
+     )
+     add_keyword(
+     """
+     GINJGAS FIELD GV FIELD 'STREAM_1' /
+     /
+     """
+     )
+     a = (fgpr-ggsr) + (fgpr-30000)
+     if a <= 50000:
+      add_keyword(
+      """
+      GCONINJE FIELD GAS RATE """+str(a)+""" /
+      /
+      """
+      )
+      else:
+      add_keyword(
+      """
+      GCONINJE FIELD GAS RATE 50000 /
+      /
+      """
+      )
+ if b > fgir:
+   gas_flare = b-fgir
+   export(gas_flare, name = 'gas_flare')

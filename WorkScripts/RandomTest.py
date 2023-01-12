@@ -1,21 +1,13 @@
-import numpy.random as np
-import numpy as np1
-import os
+#from dateutil.relativedelta import relativedelta as reldate
 
-# for i in range(0, 10000000001):
+import dateutil.relativedelta as reldate
+import datetime
 
-num=10000000
+base_date = datetime.date.today()
+three_mon_rel = reldate.relativedelta(months=3)
 
-with open("Log.txt", "w") as fl:
-    fl.write("PORO\n")
+base_date = base_date + three_mon_rel
 
-res = np1.ndarray.tolist(np.uniform(0.1, 0.3, num))
-
-for i in range(0,num):
-    s = str(format(res[i], ".3f")) # + " " + str(res[i + 1]) + " " + str(res[i+2]) + " " + str(res[i+3])
-
-#    if i+4<num:
-#        i=i+4
-
-    with open("Log.txt", "a") as fl:
-        fl.write(s + "\n")
+new_day = base_date.day
+new_month = base_date.month
+new_year = base_date.year

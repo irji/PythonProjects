@@ -144,7 +144,7 @@ def create_keyword_table(date, keywordArray, keyword):
         'FRES': 'FRES',
     }
 
-    if keyword == "YINJ":
+    if keyword == "YINJ" or keyword == "YREINJ":
         pd1 = pd.DataFrame(keywordArray[0])
         pd1.insert(0, "date", date)
 
@@ -160,7 +160,10 @@ def create_keyword_table(date, keywordArray, keyword):
                 cond = ""
 
         pd1 = pd.DataFrame(keywordArray)
-        pd1 = pd1.transpose()
+
+        if keyword != "PTARG" and keyword != "GASSLS" and keyword != "INCLUDE":
+            pd1 = pd1.transpose()
+
         pd1.insert(0, "date", date)
 
         if keyword == "PROD" or keyword == "INJ" or keyword == "ECOLIM" or keyword == "WLIMIT" or keyword == "GLIMIT":
@@ -176,21 +179,11 @@ def create_keyword_table(date, keywordArray, keyword):
             else:
                 pd1 = pd1.drop(pd1.index[0:1])
 
-#        if keyword == "ECOLIM" or keyword == "WLIMIT":
-#            pd1.insert(1, "phase", keywordArray[0][0])
-
-            ## Get names of indexes for which column Age has value 30
-            #indexNames = dfObj[dfObj['Age'] == 30].index
-            ## Delete these row indexes from dataFrame
-            #dfObj.drop(indexNames, inplace=True)
-
-            #indexNames = pd1[pd1[0] != phase].index
-
-            #indexNames = pd1.index[pd1["0"] == phase].tolist()
-
-            #pd1.drop(indexNames, inplace=True)
-            #print()
-
+        # if keyword == "GASSLS":
+        #     if keywordArray[0][1] in condDic:
+        #         pd1 = pd1.drop(pd1.index[0:2])
+        #     else:
+        #         pd1 = pd1.drop(pd1.index[0:1])
 
     res = pd1.to_string(index=False, header=False)
 
@@ -200,7 +193,7 @@ def create_keyword_table(date, keywordArray, keyword):
 
 def main():
     #fileIn = "PWF19COr.dat"
-    fileIn ="NFN008IIr.dat"
+    fileIn ="7_Sh1_Post22BP_FDP_TS_80x20_FWI_INF_IGC01_FST_WC04c_Qmx1k5_NoPTARG_9iRg_LGR3_CO2_SWr.dat"
     #fileIn = "BFN_existing_wells_constraints_COMP_V2.inc"
 
     keywords = [
@@ -210,26 +203,31 @@ def main():
         ("QMIN", 1),
         ("QMULT", 3),
         ("YINJ", 1),
+        ("YREINJ", 1),
         ("BHP", 1),
         ("THP", 1),
         ("ITUBE", 2),
         ("TUBE", 3),
-        ("ECOLIM", 0),
+        ("ECOLIM", 2),
         ("WLIMIT", 1),
         ("GLIMIT", 1),
         ("DIAM", 2),
-        ("WKHMULT", 1)]
+        ("ONTIME", 1),
+        ("PTARG", 0),
+        ("INCLUDE", 0),
+        ("GASSLS", 0),
+        ("WKHMULT", 1)] # количество строк после слова
 
     keywordsByLength = [
         ("FPERF", 10)] #на момент написания скрпта читается только такой формат: WELL   L   IW   JW  STAT   GRID  LENGTH    PWDEP   ANGLV    ANGLA
 
-    # for k in keywords:
-    #     #входной файл, кл. слово, количество доп. строк для зачитывания
-    #     GetKeywordLines(fileIn, str(k[0]), int(k[1]))
+    for k in keywords:
+         #входной файл, кл. слово, количество доп. строк для зачитывания
+         GetKeywordLines(fileIn, str(k[0]), int(k[1]))
 
 
-    for k in keywordsByLength:
-        GetKeywordLinesByLineLength(fileIn, str(k[0]), int(k[1]))
+#    for k in keywordsByLength:
+#        GetKeywordLinesByLineLength(fileIn, str(k[0]), int(k[1]))
 
     #GetKeywordLines(fileIn, "WLIMIT", 1)
 
