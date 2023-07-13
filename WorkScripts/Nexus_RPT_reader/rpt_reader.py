@@ -1,3 +1,4 @@
+from datetime import datetime
 
 def GetProdLimits(fileIn):
     count = 0
@@ -102,7 +103,10 @@ def GetKeywordLines(fileIn, keywordOpen, keywordClose):
     count = 0
     newLine = ""
     flag = False
-    date1 = ""
+    date1 = "01.01.1900"
+    param = ""
+
+    res_file = open(keywordOpen + ".txt", 'w')
 
     with open(fileIn, "r") as fl:
         for line in fl:
@@ -111,10 +115,17 @@ def GetKeywordLines(fileIn, keywordOpen, keywordClose):
                 dt = line.replace("\t", " ").split()#.split(" ")
                 date1 = dt[1].rstrip()
                 date1 = ConvertDate(date1)
+            #else:
+            #    date1 = "01.01.1900"
 
 # ищем кл. слово с учетом регистра
-            if keywordOpen in line:
+            #if keywordOpen in line:
+            if line.strip().startswith(keywordOpen):
                 flag = True
+                params = line.replace("\t", " ").split()
+
+                if len(params)>=2:
+                  param = params[1]
                 #count += 1
 
             if keywordClose in line:
@@ -124,8 +135,11 @@ def GetKeywordLines(fileIn, keywordOpen, keywordClose):
             if flag is True and len(line) > 1:
                 #if "NAME" not in line and keywordOpen not in line:
                 if keywordOpen not in line:
-                    print(date1 + "  " + line, end='')
+                    #print(date1 + "  " + line, end='')
+                    #res_file.write(date1 + "  " + line)
+                    res_file.write(date1 + "  " + param + "  " + line)
 
+    res_file.close()
     print("Done. Num of keywords: " + str(count))
 
 
@@ -191,32 +205,35 @@ def GetElevationDH(fileIn):
 
 def ConvertDate(strIn):
 
-    strout=""
+    #strout = datetime.strptime(strIn, "%m/%d/%Y").date()
+    strout = datetime.strptime(strIn, "%d/%m/%Y").date()
 
-    dt2 = strIn.split("/")
-    m1 = ""
-    d1 = ""
+    # dt2 = strIn.split("/")
+    # m1 = ""
+    # d1 = ""
+    #
+    # if int(float(dt2[1])) < 10:
+    #     m1 = "0" + str(dt2[1]).replace("0", "")
+    # else:
+    #     m1 = str(dt2[1])
+    #
+    # if int(float(dt2[0])) < 10:
+    #     d1 = "0" + str(dt2[0]).replace("0", "")
+    # else:
+    #     d1 = str(dt2[0])
+    #
+    #
+    # strout = m1 + "." + d1 + "." + str(dt2[2])
 
-    if int(float(dt2[1])) < 10:
-        m1 = "0" + str(dt2[1]).replace("0", "")
-    else:
-        m1 = str(dt2[1])
+    strout2 = strout.strftime("%d.%m.%Y")
 
-    if int(float(dt2[0])) < 10:
-        d1 = "0" + str(dt2[0]).replace("0", "")
-    else:
-        d1 = str(dt2[0])
-
-
-    strout = m1 + "." + d1 + "." + str(dt2[2])
-
-    return strout
+    return strout2
 
 
 
 def main():
     #fileIn = "UL_Nexus_model.rpt"
-    fileIn = "UL_Surface_Nexus_Model.dat"
+    fileIn = "Bal8_BC23_surface_01.dat"
     #fileIn = "UL_wells_ELEVPR_UPD_2018.dat"
 
     #GetProdLimits(fileIn)
@@ -224,7 +241,7 @@ def main():
     #GetPressLimits(fileIn)
 
     #GetKeywordLines(fileIn, "TARGET", "ENDTARGET")
-    GetKeywordLines(fileIn, "DEACTIVATE CONNECTION", "ENDDEACTIVATE")
+    GetKeywordLines(fileIn, "CONSTRAINTS", "ENDCONSTRAINTS")
 
     #GetElevationDH(fileIn)
 
