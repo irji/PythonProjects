@@ -1,12 +1,12 @@
-# Создание WD проектов на основе excel файла
 #from SupportClasses import UnitConverter
+
+# Создание WD проектов на основе excel файла
 import pandas as pd
 import numpy as np
 
-#units = UnitConverter
-
 # Путь до excel фала, названия листов с которых данные читаем
-fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+#fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
 well_names_list = "WellList"
 equipment_data_list = "EquipmentData"
 
@@ -48,35 +48,42 @@ for well_name in df_well_basic_data["Well"]:
 
     # Вычисление траектории по MD, TVD
     well_md = row_value["MD, feet"].values[0][:-1].split("|")
-    well_md = np.array(well_md, dtype="float")
+    well_md = np.array(well_md, dtype="float") * 0.3048  # Конвертируем feet в метры
     well_dmd = np.diff(well_md, prepend=0)
 
     well_tvd = row_value["TVD, feet"].values[0][:-1].split("|")
-    well_tvd = np.array(well_tvd, dtype="float")
+    well_tvd = np.array(well_tvd, dtype="float") * 0.3048  # Конвертируем feet в метры
     well_dtvd = np.diff(well_tvd, prepend=0)
-    #well_dtvd[0] = 0
+    well_dtvd[0] = 0
 
-    new_x_coord = np.sqrt(abs(well_dmd * well_dmd - well_dtvd * well_dtvd)) * 0.3048  # Конвертируем feet в метры
+    new_x_coord = np.sqrt(abs(well_dmd * well_dmd - well_dtvd * well_dtvd)) #* 0.3048  # Конвертируем feet в метры
 
     # Формируем массивы с данными по траектории и форматируем в виде пригодным для передачи в функцию в
-    track_data = {"md": well_md, "x": np.cumsum(new_x_coord), "y": 0 , "z": well_tvd }
+    #track_data = {"md": well_md, "x": np.cumsum(new_x_coord), "y": 0 , "z": well_tvd }
+    track_data = {"md": well_md, "x": 0, "y": 0, "z": well_tvd}
     df_well_track = pd.DataFrame(track_data)
     df_well_track = df_well_track.to_dict('records')
 
-    # wells_create(well_name=well_name,
-    #              remove_existing_main_branch=False,
-    #              branch_num=0,
-    #              trajectory_table=df_well_track,
-    #              date=datetime(year=2023,
-    #                            month=1,
-    #                            day=1,
-    #                            hour=0,
-    #                            minute=0,
-    #                            second=0),
-    #              table=None,
-    #              perforations_table=[])
-    #
-    # create_well_project_by_well(wells=[{"well": well_name}])
+    wells_create(well_name=well_name,
+                 remove_existing_main_branch=False,
+                 branch_num=0,
+                 trajectory_table=df_well_track,
+                 date=datetime(year=2023,
+                               month=1,
+                               day=1,
+                               hour=0,
+                               minute=0,
+                               second=0),
+                 table=None,
+                 perforations_table=[])
 
+    create_well_project_by_well(wells=[{"well": well_name}])
 
-    #print(well_name)
+    import_workflow(params_table=[
+        {"project_type": "vfp_project", "project_name": well_name, "file_name": "WF/Workflow1.py", "workflow": "wf1"}],
+                    replace_existing=True)
+
+    run_project_workflow (project_type = "vfp_project", project_name = well_name, workflow = "wf1",
+                          variable_types = {}, variables_object = {})
+
+    print(well_name)
