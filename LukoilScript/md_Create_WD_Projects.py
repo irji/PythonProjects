@@ -1,5 +1,3 @@
-#from SupportClasses import UnitConverter
-
 # Создание WD проектов на основе excel файла
 import pandas as pd
 import numpy as np
@@ -86,7 +84,7 @@ for well_name in df_well_basic_data["Well"]:
                     replace_existing=True)
 
     run_project_workflow (project_type = "vfp_project", project_name = well_name, workflow = "RFD_workflow",
-                          variable_types = {"TVD_VAR" : "real", "VAR_X" : "real", "VAR_Y" : "real"},
-                          variables_object = {"TVD_VAR" : well_1tvd, "VAR_X" : well_1x, "VAR_Y" : well_1y})
+                          variable_types = {"EXCEL_FILE" : "string", "TVD_VAR" : "real", "VAR_X" : "real", "VAR_Y" : "real"},
+                          variables_object = {"EXCEL_FILE" : fileIn, "TVD_VAR" : well_1tvd, "VAR_X" : well_1x, "VAR_Y" : well_1y})
 
     #print(well_name)

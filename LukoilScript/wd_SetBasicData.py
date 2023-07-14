@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 
-def excel_list_reader(well_name: str, list_name: str, srip_rows: int):
+# Чтение данных с указанного листа из excel
+def excel_row_reader(well_name: str, list_name: str, srip_rows: int):
     # Чтение из excel листов / убираем пустые строки
     try:
         data_from_list = pd.read_excel(fileIn, sheet_name=list_name, header=0, skiprows=srip_rows)
@@ -16,7 +17,6 @@ def excel_list_reader(well_name: str, list_name: str, srip_rows: int):
         raise SystemExit("There is no data for well with name '{}' in excel file!".format(well_name))
 
     return row_value
-
 
 # Читаем данные из dataframe и конвертируем в числа.
 # Возвращаем массив чисел в метрической системе или как есть в зависимости от значения units.
@@ -42,11 +42,11 @@ def set_well_basic_data(name: str, well_row: pd.DataFrame):
 
     # Поддержано только два типа (PRODUCTION/WATERINJECTION).
     # TODO: добавить остальные возможные типы
-    if wlist_row_value["SystemType"].values[0] == "WATERINJECTION":
+    if well_row["SystemType"].values[0] == "WATERINJECTION":
         well_type = "injector"
         phase = "WATER"
 
-    # if wlist_row_value["SystemType"].values[0] == "GASINJECTION":
+    # if well_row["SystemType"].values[0] == "GASINJECTION":
     #      well_type = "injector"
     #      phase = "GAS"
 
@@ -67,8 +67,8 @@ def set_well_basic_data(name: str, well_row: pd.DataFrame):
                                     use_segment_params=False,
                                     min_segment_length=0,
                                     max_segment_length=1000,
-                                    well_head_x=0,
-                                    well_head_y=0,
+                                    well_head_x=VAR_X,
+                                    well_head_y=VAR_Y,
                                     well_head_z=TVD_VAR)
 
 def add_casing(casing_data: pd.DataFrame):
@@ -105,48 +105,29 @@ def add_tubing(tubing_data: pd.DataFrame):
                  "annulus_material_thermal_conductivity": 0}])
 
 
-########################################################################################################################
+###########################################################
 
 
 # Путь до excel фала, названия листов с которых данные читаем
 fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
 #fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+#fileIn = EXCEL_FILE
+
+###########################################################
+
 well_names_list = "WellList"
 equipment_data_list = "EquipmentData"
 
 current_well_name = "W_SHR_64_BB"
 #current_well_name = get_project_name ()
 
+equip_row_value = excel_row_reader(current_well_name, equipment_data_list, 5)
+wlist_row_value = excel_row_reader(current_well_name, well_names_list, 5)
 
-# # Чтение из excel листов / убираем пустые строки
-# try:
-#     well_basic_data = pd.read_excel(fileIn, sheet_name=well_names_list, header=0, skiprows=5)
-#     well_basic_data.dropna(subset=["Well"], inplace=True)
-#
-#     equipment_data = pd.read_excel(fileIn, sheet_name=equipment_data_list, header=0, skiprows=5)
-#     equipment_data.dropna(subset=["Well"], inplace=True)
-#
-#     ############################################
-#     equip_row_value = equipment_data.loc[equipment_data["Well"] == current_well_name]
-#     wlist_row_value = well_basic_data.loc[well_basic_data["Well"] == current_well_name]
-#     ############################################
-# except:
-#     raise SystemExit("Unable to get data from excel file!")
-#
-# # Проверяем на ошибки
-# if len(wlist_row_value) == 0:
-#     raise SystemExit("There is no well with name '{}' in excel file!".format(current_well_name))
-#
-# if len(equip_row_value) == 0:
-#     raise SystemExit("There is no data for well with name '{}' in excel file!".format(current_well_name))
+####### Задаем basic data ####################################################
+set_well_basic_data(current_well_name, wlist_row_value)
 
-equip_row_value = excel_list_reader(current_well_name, equipment_data_list, 5)
-wlist_row_value = excel_list_reader(current_well_name, well_names_list, 5)
-
-# Задаем basic data
-#set_well_basic_data(current_well_name, wlist_row_value)
-
-# Читаем конструкцию
+####### Читаем конструкцию ###################################################
 # Берем данные из колонок с 19 по 27 с листа 'equipment_data_list'
 label_value = equip_row_value["Label.1"].values[0][:-1].split("|")
 type_value = equip_row_value["Type.1"].values[0][:-1].split("|")
@@ -180,4 +161,5 @@ df_casing = df_downhole_equipment_data[df_downhole_equipment_data['Type'] == "4"
 add_casing(df_casing)
 add_tubing(df_tubing)
 
+###########################################################
 print("END_well_type")
