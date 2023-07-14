@@ -5,7 +5,7 @@ current_well_name = get_project_name ()
 equip_row_value = excel_row_reader(current_well_name, equipment_data_list, 5)
 
 # Читаем Average Heat Capacities
-# Берем данные из колонок с 33 по 35 с листа 'equipment_data_list'
+# Берем данные из колонок с 29 по 35 с листа 'equipment_data_list'
 cp_oil = float(equip_row_value["Cp Oil, BTU/lb/F"].values[0]) * 4.1863 # Перевод единиц
 cp_gas = float(equip_row_value["Cp Gas, BTU/lb/F"].values[0]) * 4.1863 # Перевод единиц
 cp_water = float(equip_row_value["Cp Water, BTU/lb/F"].values[0]) * 4.1863 # Перевод единиц
@@ -20,7 +20,7 @@ wd_heat_transfer_adjust_specific_heat_capacity (enabled=True,
       specific_heat_oil=cp_oil)
 
 tvd_value = data_reader("Formation TVD, feet", "feet", equip_row_value)
-temp_value = data_reader("Formation Temperature, deg F", "", equip_row_value)
+temp_value = data_reader("Formation Temperature, deg F", "F", equip_row_value)
 
 heat_transfer_value = float(equip_row_value["HTC.1"].values[0])
 

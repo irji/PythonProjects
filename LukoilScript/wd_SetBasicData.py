@@ -30,6 +30,8 @@ def data_reader(name: str, units: str, df: pd.DataFrame):
         df_out = np.array(df_out, dtype="float") * conv_feet_metric  # Конвертируем feet в метры
     if units == "inches":
         df_out = np.array(df_out, dtype="float") * conv_inches_metric  # Конвертируем inches в метры
+    if units == "F":
+        df_out = (np.array(df_out, dtype="float") - 32)/1.8 # Конвертируем F в C
     if units == "":
         df_out = np.array(df_out, dtype="float")
 
