@@ -1,0 +1,111 @@
+import pandas as pd
+import numpy as np
+
+###########################################################
+
+# Чтение данных с указанного листа из excel
+def excel_row_reader(well_name: str, list_name: str, srip_rows: int):
+    # Чтение из excel листов / убираем пустые строки
+    try:
+        data_from_list = pd.read_excel(fileIn, sheet_name=list_name, header=0, skiprows=srip_rows)
+        data_from_list.dropna(subset=["Well"], inplace=True)
+
+        row_value = data_from_list.loc[data_from_list["Well"] == well_name]
+    except:
+        raise SystemExit("Unable to get data from excel file!")
+
+    # Проверяем на ошибки
+    if len(row_value) == 0:
+        raise SystemError("There is no data for well with name '{}' in excel file!".format(well_name))
+
+    return row_value
+
+# Читаем данные из dataframe и конвертируем в числа.
+# Возвращаем массив чисел в метрической системе или как есть в зависимости от значения units.
+def data_reader(name: str, units: str, df: pd.DataFrame):
+    df_out = np.array([])
+
+    try:
+        df_out = df[name].values[0][:-1].split("|")
+    except:
+        try:
+            if np.isnan(df[name].values[0]) != True:
+                df_out = df[name].values[0]
+            else:
+                df_out = np.array([])
+        except:
+            df_out = np.array([])
+
+    #if np.isnan(df_out) != True:
+    if units == "feet":
+        df_out = np.array(df_out, dtype="float") * 0.3048  # Конвертируем feet в метры
+    if units == "inches":
+        df_out = np.array(df_out, dtype="float") * 0.0254  # Конвертируем inches в метры
+    if units == "F":
+        df_out = (np.array(df_out, dtype="float") - 32)/1.8 # Конвертируем F в C
+    if units == "psig":
+        df_out = np.array(df_out, dtype="float") * 0.0689475728 # Конвертируем psig в bar
+    if units == "%":
+        df_out = np.array(df_out, dtype="float") * 0.01 # Конвертируем % в д.е.
+    if units == "STB/day":
+        df_out = np.array(df_out, dtype="float") * 0.158987  # Конвертируем STB/day в sm3/day.
+    if units == "scf/STB":
+        df_out = np.array(df_out, dtype="float") * 0.1781076  # Конвертируем scf/STB в sm3/sm3.
+    if units == "date":
+        df_out = pd.to_datetime(df_out, format="%d/%m/%Y")   # Конвертируем строки в даты.
+    if units == "btu":
+        df_out = np.array(df_out, dtype="float") * 4.1863  # Конвертируем BTU/lb/F в kJ/kg∙K.
+    if units == "":
+        df_out = np.array(df_out, dtype="float") * 1
+        # except:
+        #     df_out = np.array([])
+
+    return df_out
+
+
+###########################################################
+
+# Путь до excel фала, названия листов с которых данные читаем
+fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+
+vlp_data_list ="VLPIPRData"
+summary_data_list = "SummaryData"
+
+current_well_name = "W_SHR_64_BB"
+well_type = "producer"  # md_Create_WD_Projects
+
+###########################################################
+
+
+
+
+vlp_row_value = excel_row_reader(current_well_name, vlp_data_list, 5)
+summary_row_value = excel_row_reader(current_well_name, summary_data_list, 5)
+
+if summary_row_value["Well Type"].values[0] == 2:
+      well_type = "injector"
+
+dates_value = vlp_row_value["Test Point Date"].values[0][:-1].split("|")
+comment_value = vlp_row_value["Test Point Comment"].values[0][:-1].split("|")
+
+dates_value = np.char.add(dates_value, "; ")
+comment_value = np.char.add(dates_value, comment_value)
+
+thp_value = data_reader("Tubing Head Pressure, psig", "psig", vlp_row_value)
+temp_value = data_reader("Tubing Head Temperature, deg F", "F", vlp_row_value)
+wct_value = data_reader("Water Cut, %", "%", vlp_row_value)
+rate_value = data_reader("Liquid Rate, STB/day", "STB/day", vlp_row_value)
+gauge_depth__value = data_reader("Gauge Depth (Measured), feet", "feet", vlp_row_value)
+gauge_press_value = data_reader("Gauge Pressure, psig", "psig", vlp_row_value)
+gor_value = data_reader("GOR, scf/STB", "scf/STB", vlp_row_value)
+
+# Формируем массив с данными по измерениям
+sample_data = {"thp" : thp_value, "flo" : rate_value, "wfr" : wct_value, "gfr" : gor_value, "alq" : 0,
+               "gauge" : gauge_depth__value, "bhp" : gauge_press_value, "temperature" : temp_value, "comment" : comment_value}
+df_sample_data = pd.DataFrame(sample_data)
+df_sample_data = df_sample_data.to_dict('records')
+
+well_project_adjust_well_test_data (well_type=well_type,
+      sample_name="Test1",
+      table=df_sample_data,
+      flo_type="LIQ", wfr_type="WCT", gfr_type="GOR", alq_type="GRAT", tqb_type="BHP")

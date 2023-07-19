@@ -5,8 +5,15 @@ import numpy as np
 # Путь до excel фала, названия листов с которых данные читаем
 #fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
 fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+
 well_names_list = "WellList"
 equipment_data_list = "EquipmentData"
+summary_data_list = "SummaryData"
+vlp_data_list ="VLPIPRData"
+ipr_data_list ="IPRData"
+
+ipr_phase = "liquid"
+well_type = "producer"
 
 # Чтение из excel листов / убираем пустые строки
 df_well_basic_data = pd.read_excel(fileIn, sheet_name=well_names_list, header=0, skiprows=5)
@@ -86,5 +93,3 @@ for well_name in df_well_basic_data["Well"]:
     run_project_workflow (project_type = "vfp_project", project_name = well_name, workflow = "RFD_workflow",
                           variable_types = {"EXCEL_FILE" : "string", "TVD_VAR" : "real", "VAR_X" : "real", "VAR_Y" : "real"},
                           variables_object = {"EXCEL_FILE" : fileIn, "TVD_VAR" : well_1tvd, "VAR_X" : well_1x, "VAR_Y" : well_1y})
-
-    #print(well_name)

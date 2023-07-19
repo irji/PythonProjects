@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 
+###########################################################
+
 # Чтение данных с указанного листа из excel
 def excel_row_reader(well_name: str, list_name: str, srip_rows: int):
     # Чтение из excel листов / убираем пустые строки
@@ -12,63 +14,95 @@ def excel_row_reader(well_name: str, list_name: str, srip_rows: int):
     except:
         raise SystemExit("Unable to get data from excel file!")
 
-    # # Проверяем на ошибки
+    # Проверяем на ошибки
     if len(row_value) == 0:
-        raise SystemExit("There is no data for well with name '{}' in excel file!".format(well_name))
+        raise SystemError("There is no data for well with name '{}' in excel file!".format(well_name))
 
     return row_value
 
 # Читаем данные из dataframe и конвертируем в числа.
 # Возвращаем массив чисел в метрической системе или как есть в зависимости от значения units.
 def data_reader(name: str, units: str, df: pd.DataFrame):
-    conv_inches_metric = 0.0254
-    conv_feet_metric = 0.3048
+    df_out = np.array([])
 
-    df_out = df[name].values[0][:-1].split("|")
+    try:
+        df_out = df[name].values[0][:-1].split("|")
+    except:
+        try:
+            if np.isnan(df[name].values[0]) != True:
+                df_out = df[name].values[0]
+            else:
+                df_out = np.array([])
+        except:
+            df_out = np.array([])
 
+    #if np.isnan(df_out) != True:
     if units == "feet":
-        df_out = np.array(df_out, dtype="float") * conv_feet_metric  # Конвертируем feet в метры
+        df_out = np.array(df_out, dtype="float") * 0.3048  # Конвертируем feet в метры
     if units == "inches":
-        df_out = np.array(df_out, dtype="float") * conv_inches_metric  # Конвертируем inches в метры
+        df_out = np.array(df_out, dtype="float") * 0.0254  # Конвертируем inches в метры
     if units == "F":
         df_out = (np.array(df_out, dtype="float") - 32)/1.8 # Конвертируем F в C
+    if units == "psig":
+        df_out = np.array(df_out, dtype="float") * 0.0689475728 # Конвертируем psig в bar
+    if units == "%":
+        df_out = np.array(df_out, dtype="float") * 0.01 # Конвертируем % в д.е.
+    if units == "STB/day":
+        df_out = np.array(df_out, dtype="float") * 0.158987  # Конвертируем STB/day в sm3/day.
+    if units == "scf/STB":
+        df_out = np.array(df_out, dtype="float") * 0.1781076  # Конвертируем scf/STB в sm3/sm3.
+    if units == "date":
+        df_out = pd.to_datetime(df_out, format="%d/%m/%Y")   # Конвертируем строки в даты.
+    if units == "btu":
+        df_out = np.array(df_out, dtype="float") * 4.1863  # Конвертируем BTU/lb/F в kJ/kg∙K.
     if units == "":
-        df_out = np.array(df_out, dtype="float")
+        df_out = np.array(df_out, dtype="float") * 1
+        # except:
+        #     df_out = np.array([])
 
     return df_out
+
+
+###########################################################
+
+
+# Путь до excel фала, названия листов с которых данные читаем
+fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+#fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+#fileIn = EXCEL_FILE
+
+well_names_list = "WellList"
+equipment_data_list = "EquipmentData"
+summary_data_list = "SummaryData"
+
+current_well_name = "W_SHR_69_BB_I"
+
+###########################################################
+
+
+
 
 # Выставляем для выбранной скважины ее тип и предпочитаемый тип флюида
 def set_well_basic_data(name: str, well_row: pd.DataFrame):
     well_type = "producer"
     phase = "LIQ"
 
-    # Поддержано только два типа (PRODUCTION/WATERINJECTION).
-    # TODO: добавить остальные возможные типы
-    if well_row["SystemType"].values[0] == "WATERINJECTION":
+    # Поддержано типы PRODUCTION/WATERINJECTION
+    if well_row["Well Type"].values[0] == 2: #"WATERINJECTION":
         well_type = "injector"
         phase = "WATER"
 
-    # if well_row["SystemType"].values[0] == "GASINJECTION":
+    # if well_row["Well Type"].values[0] == "2": #"GASINJECTION":
     #      well_type = "injector"
     #      phase = "GAS"
+    #      ipr_phase = "gas"
 
     well_designer_adjust_basic_data(name=name,
-                                    group_name="",
-                                    object="well",
-                                    well_type=well_type,
-                                    current_vfp="",
-                                    preferred_phase=phase,
-                                    inflow_equation="STD",
-                                    instructions="SHUT",
-                                    density_type="SEG",
-                                    drainage_radius=0,
-                                    crossflow_ability=True,
-                                    max_deviation_angle=5,
-                                    use_segment_model=False,
-                                    flow_model=False,
-                                    use_segment_params=False,
-                                    min_segment_length=0,
-                                    max_segment_length=1000,
+                                    group_name="", object="well", well_type=well_type,
+                                    current_vfp="", preferred_phase=phase,
+                                    inflow_equation="STD", instructions="SHUT", density_type="SEG", drainage_radius=0,
+                                    crossflow_ability=True, max_deviation_angle=5, use_segment_model=False,
+                                    flow_model=False, use_segment_params=False, min_segment_length=0, max_segment_length=1000,
                                     well_head_x=VAR_X,
                                     well_head_y=VAR_Y,
                                     well_head_z=TVD_VAR)
@@ -107,27 +141,15 @@ def add_tubing(tubing_data: pd.DataFrame):
                  "annulus_material_thermal_conductivity": 0}])
 
 
-###########################################################
 
-
-# Путь до excel фала, названия листов с которых данные читаем
-fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
-#fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
-#fileIn = EXCEL_FILE
-
-###########################################################
-
-well_names_list = "WellList"
-equipment_data_list = "EquipmentData"
-
-current_well_name = "W_SHR_64_BB"
 #current_well_name = get_project_name ()
 
 equip_row_value = excel_row_reader(current_well_name, equipment_data_list, 5)
 wlist_row_value = excel_row_reader(current_well_name, well_names_list, 5)
+summary_row_value = excel_row_reader(current_well_name, summary_data_list, 5)
 
 ####### Задаем basic data ####################################################
-set_well_basic_data(current_well_name, wlist_row_value)
+set_well_basic_data(current_well_name, summary_row_value)
 
 ####### Читаем конструкцию ###################################################
 # Берем данные из колонок с 19 по 27 с листа 'equipment_data_list'
@@ -162,6 +184,3 @@ df_casing = df_downhole_equipment_data[df_downhole_equipment_data['Type'] == "4"
 # Создаем casing и tubing
 add_casing(df_casing)
 add_tubing(df_tubing)
-
-###########################################################
-print("END_well_type")
