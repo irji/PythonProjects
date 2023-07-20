@@ -22,43 +22,48 @@ def excel_row_reader(well_name: str, list_name: str, srip_rows: int):
 
 # Читаем данные из dataframe и конвертируем в числа.
 # Возвращаем массив чисел в метрической системе или как есть в зависимости от значения units.
-def data_reader(name: str, units: str, df: pd.DataFrame):
+def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
     df_out = np.array([])
 
     try:
-        df_out = df[name].values[0][:-1].split("|")
-    except:
-        try:
-            if np.isnan(df[name].values[0]) != True:
-                df_out = df[name].values[0]
-            else:
-                df_out = np.array([])
-        except:
-            df_out = np.array([])
+        value = str(df[column_name].values[0]).strip().rstrip("|")
 
-    #if np.isnan(df_out) != True:
-    if units == "feet":
-        df_out = np.array(df_out, dtype="float") * 0.3048  # Конвертируем feet в метры
-    if units == "inches":
-        df_out = np.array(df_out, dtype="float") * 0.0254  # Конвертируем inches в метры
-    if units == "F":
-        df_out = (np.array(df_out, dtype="float") - 32)/1.8 # Конвертируем F в C
-    if units == "psig":
-        df_out = np.array(df_out, dtype="float") * 0.0689475728 # Конвертируем psig в bar
-    if units == "%":
-        df_out = np.array(df_out, dtype="float") * 0.01 # Конвертируем % в д.е.
-    if units == "STB/day":
-        df_out = np.array(df_out, dtype="float") * 0.158987  # Конвертируем STB/day в sm3/day.
-    if units == "scf/STB":
-        df_out = np.array(df_out, dtype="float") * 0.1781076  # Конвертируем scf/STB в sm3/sm3.
-    if units == "date":
-        df_out = pd.to_datetime(df_out, format="%d/%m/%Y")   # Конвертируем строки в даты.
-    if units == "btu":
-        df_out = np.array(df_out, dtype="float") * 4.1863  # Конвертируем BTU/lb/F в kJ/kg∙K.
-    if units == "":
-        df_out = np.array(df_out, dtype="float") * 1
-        # except:
-        #     df_out = np.array([])
+        if pd.isna(df[column_name].values[0]) != True:
+            if len(value.split("|")) > 1:
+                df_out = value.split("|")
+            else:
+                df_out = value
+        else:
+            df_out = np.array([])
+    except:
+        df_out = np.array([])
+
+    try:
+        if units == "feet":
+            df_out = np.array(df_out, dtype="float") * 0.3048  # Конвертируем feet в метры
+        if units == "inches":
+            df_out = np.array(df_out, dtype="float") * 0.0254  # Конвертируем inches в метры
+        if units == "F":
+            df_out = (np.array(df_out, dtype="float") - 32)/1.8 # Конвертируем F в C
+        if units == "psig":
+            df_out = np.array(df_out, dtype="float") * 0.0689475728 # Конвертируем psig в bar
+        if units == "%":
+            df_out = np.array(df_out, dtype="float") * 0.01 # Конвертируем % в д.е.
+        if units == "STB/day":
+            df_out = np.array(df_out, dtype="float") * 0.158987  # Конвертируем STB/day в sm3/day.
+        if units == "scf/STB":
+            df_out = np.array(df_out, dtype="float") * 0.1781076  # Конвертируем scf/STB в sm3/sm3.
+        if units == "date":
+            df_out = np.array(pd.to_datetime(df_out, format="%d/%m/%Y"))   # Конвертируем строки в даты.
+        if units == "btu":
+            df_out = np.array(df_out, dtype="float") * 4.1863  # Конвертируем BTU/lb/F в kJ/kg∙K.
+        if units == "number":
+            df_out = np.array(df_out, dtype="float") * 1
+        if units == "":
+            #df_out = np.array(df_out, dtype="float") * 1
+            df_out = df_out
+    except Exception:
+        print("Error with well {}".format(well_name))
 
     return df_out
 
@@ -156,19 +161,16 @@ set_well_basic_data(current_well_name, summary_row_value)
 label_value = equip_row_value["Label.1"].values[0][:-1].split("|")
 type_value = equip_row_value["Type.1"].values[0][:-1].split("|")
 
-md_value = data_reader("Measured Depth, feet", "feet", equip_row_value)
-tub_in_d_value = data_reader("Tubing Inside Diameter, inches", "inches", equip_row_value)
-tub_out_d_value = data_reader("Tubing Outside Diameter, inches", "inches", equip_row_value)
-casing_in_d_value = data_reader("Casing Inside Diameter, inches", "inches", equip_row_value)
-tub_in_roughness_value = data_reader("Tubing Inside Roughness, inches", "inches", equip_row_value)
-tub_out_roughness_value = data_reader("Tubing Outside Roughness, inches", "inches", equip_row_value)
-casing_in_roughness_value = data_reader("Casing Inside Roughness, inches", "inches", equip_row_value)
+md_value = data_reader("Measured Depth, feet", "feet", equip_row_value, current_well_name)
+tub_in_d_value = data_reader("Tubing Inside Diameter, inches", "inches", equip_row_value, current_well_name)
+tub_out_d_value = data_reader("Tubing Outside Diameter, inches", "inches", equip_row_value, current_well_name)
+casing_in_d_value = data_reader("Casing Inside Diameter, inches", "inches", equip_row_value, current_well_name)
+tub_in_roughness_value = data_reader("Tubing Inside Roughness, inches", "inches", equip_row_value, current_well_name)
+tub_out_roughness_value = data_reader("Tubing Outside Roughness, inches", "inches", equip_row_value, current_well_name)
+casing_in_roughness_value = data_reader("Casing Inside Roughness, inches", "inches", equip_row_value, current_well_name)
 
 # type:
-# 1 - Tubing
-# 2 - SSSV
-# 3 - Restriction
-# 4 - Casing
+# 1 - Tubing; # 2 - SSSV; # 3 - Restriction; # 4 - Casing
 
 downhole_equipment_data = {"Lable": label_value, "Type": type_value, "MD": md_value, "Tub_in_D": tub_in_d_value,
                            "Tub_in_rough": tub_in_roughness_value,
@@ -180,6 +182,8 @@ df_downhole_equipment_data = pd.DataFrame(downhole_equipment_data)
 df_tubing = df_downhole_equipment_data[df_downhole_equipment_data['Type'] == "1"]
 # Данные для Casing
 df_casing = df_downhole_equipment_data[df_downhole_equipment_data['Type'] == "4"]
+
+# TODO: добавить глубину насоса
 
 # Создаем casing и tubing
 add_casing(df_casing)

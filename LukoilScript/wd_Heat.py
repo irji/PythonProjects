@@ -1,6 +1,93 @@
 #1 BTU/lb∙°F = 4186.8 J/kg∙K
 
-current_well_name = get_project_name ()
+import pandas as pd
+import numpy as np
+
+###########################################################
+
+# Чтение данных с указанного листа из excel
+def excel_row_reader(well_name: str, list_name: str, srip_rows: int):
+    # Чтение из excel листов / убираем пустые строки
+    try:
+        data_from_list = pd.read_excel(fileIn, sheet_name=list_name, header=0, skiprows=srip_rows)
+        data_from_list.dropna(subset=["Well"], inplace=True)
+
+        row_value = data_from_list.loc[data_from_list["Well"] == well_name]
+    except:
+        raise SystemExit("Unable to get data from excel file!")
+
+    # Проверяем на ошибки
+    if len(row_value) == 0:
+        raise SystemError("There is no data for well with name '{}' in excel file!".format(well_name))
+
+    return row_value
+
+# Читаем данные из dataframe и конвертируем в числа.
+# Возвращаем массив чисел в метрической системе или как есть в зависимости от значения units.
+def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
+    df_out = np.array([])
+
+    try:
+        value = str(df[column_name].values[0]).strip().rstrip("|")
+
+        if pd.isna(df[column_name].values[0]) != True:
+            if len(value.split("|")) > 1:
+                df_out = value.split("|")
+            else:
+                df_out = value
+        else:
+            df_out = np.array([])
+    except:
+        df_out = np.array([])
+
+    try:
+        if units == "feet":
+            df_out = np.array(df_out, dtype="float") * 0.3048  # Конвертируем feet в метры
+        if units == "inches":
+            df_out = np.array(df_out, dtype="float") * 0.0254  # Конвертируем inches в метры
+        if units == "F":
+            df_out = (np.array(df_out, dtype="float") - 32)/1.8 # Конвертируем F в C
+        if units == "psig":
+            df_out = np.array(df_out, dtype="float") * 0.0689475728 # Конвертируем psig в bar
+        if units == "%":
+            df_out = np.array(df_out, dtype="float") * 0.01 # Конвертируем % в д.е.
+        if units == "STB/day":
+            df_out = np.array(df_out, dtype="float") * 0.158987  # Конвертируем STB/day в sm3/day.
+        if units == "scf/STB":
+            df_out = np.array(df_out, dtype="float") * 0.1781076  # Конвертируем scf/STB в sm3/sm3.
+        if units == "date":
+            df_out = np.array(pd.to_datetime(df_out, format="%d/%m/%Y"))   # Конвертируем строки в даты.
+        if units == "btu":
+            df_out = np.array(df_out, dtype="float") * 4.1863  # Конвертируем BTU/lb/F в kJ/kg∙K.
+        if units == "number":
+            df_out = np.array(df_out, dtype="float") * 1
+        if units == "":
+            #df_out = np.array(df_out, dtype="float") * 1
+            df_out = df_out
+    except Exception:
+        print("Error with well {}".format(well_name))
+
+    return df_out
+
+
+###########################################################
+
+# Путь до excel фала, названия листов с которых данные читаем
+#fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+#fileIn = EXCEL_FILE
+
+well_names_list = "WellList"
+equipment_data_list = "EquipmentData"
+summary_data_list = "SummaryData"
+vlp_data_list ="VLPIPRData"
+ipr_data_list ="IPRData"
+
+current_well_name = "W_SHR_404_TFM"
+
+###########################################################
+
+#current_well_name = get_project_name ()
 
 equip_row_value = excel_row_reader(current_well_name, equipment_data_list, 5)
 
@@ -11,13 +98,13 @@ equip_row_value = excel_row_reader(current_well_name, equipment_data_list, 5)
 # cp_gas = float(equip_row_value["Cp Gas, BTU/lb/F"].values[0]) * 4.1863 # Перевод единиц
 # cp_water = float(equip_row_value["Cp Water, BTU/lb/F"].values[0]) * 4.1863 # Перевод единиц
 
-cp_oil = data_reader("Cp Oil, BTU/lb/F", "btu", equip_row_value)
-cp_gas = data_reader("Cp Gas, BTU/lb/F", "btu", equip_row_value)
-cp_water = data_reader("Cp Water, BTU/lb/F", "btu", equip_row_value)
+cp_oil = data_reader("Cp Oil, BTU/lb/F", "btu", equip_row_value, current_well_name)
+cp_gas = data_reader("Cp Gas, BTU/lb/F", "btu", equip_row_value, current_well_name)
+cp_water = data_reader("Cp Water, BTU/lb/F", "btu", equip_row_value, current_well_name)
 
 # Читаем Average Heat Capacities
 # Берем данные из колонок с 33 по 35 с листа 'equipment_data_list'
-wd_heat_transfer_use_parameters (enabled=False)
+wd_heat_transfer_use_parameters (enabled=True)
 
 wd_heat_transfer_adjust_specific_heat_capacity (enabled=True,
       specific_heat_gas=cp_gas,
@@ -25,8 +112,8 @@ wd_heat_transfer_adjust_specific_heat_capacity (enabled=True,
       specific_heat_oil=cp_oil)
 
 #md_value = data_reader("Formation MD, feet", "feet", equip_row_value)
-tvd_value = data_reader("Formation TVD, feet", "feet", equip_row_value)
-temp_value = data_reader("Formation Temperature, deg F", "F", equip_row_value)
+tvd_value = data_reader("Formation TVD, feet", "feet", equip_row_value, current_well_name)
+temp_value = data_reader("Formation Temperature, deg F", "F", equip_row_value, current_well_name)
 
 #TODO: проверить единцы измерения
 heat_transfer_value = float(equip_row_value["HTC.1"].values[0])
