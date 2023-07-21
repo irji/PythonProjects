@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-###########################################################
+##################  FOR DEBUG  #########################################
 
 # Чтение данных с указанного листа из excel
 def excel_row_reader(well_name: str, list_name: str, srip_rows: int):
@@ -12,11 +12,11 @@ def excel_row_reader(well_name: str, list_name: str, srip_rows: int):
 
         row_value = data_from_list.loc[data_from_list["Well"] == well_name]
     except:
-        raise SystemExit("Unable to get data from excel file!")
+        raise SystemExit("Ошибка чтения данных из excel файла!")
 
     # Проверяем на ошибки
     if len(row_value) == 0:
-        raise SystemError("There is no data for well with name '{}' in excel file!".format(well_name))
+        raise SystemError("Нет данных для скважины '{}' в excel файле!".format(well_name))
 
     return row_value
 
@@ -57,32 +57,36 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
             df_out = np.array(pd.to_datetime(df_out, format="%d/%m/%Y"))   # Конвертируем строки в даты.
         if units == "btu":
             df_out = np.array(df_out, dtype="float") * 4.1863  # Конвертируем BTU/lb/F в kJ/kg∙K.
+        if units == "STB/day/psi":
+            df_out = np.array(df_out, dtype="float") * 0.433667  # Конвертируем STB/day/psi в sm3/day/bar.
         if units == "number":
             df_out = np.array(df_out, dtype="float") * 1
         if units == "":
             #df_out = np.array(df_out, dtype="float") * 1
             df_out = df_out
     except Exception:
-        print("Error with well {}".format(well_name))
+        print("Ошибка чтения данных для скважины {}".format(well_name))
 
     return df_out
 
 
-###########################################################
+##################  FOR DEBUG  #########################################
 
-
-# Путь до excel фала, названия листов с которых данные читаем
 fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
 #fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
-#fileIn = EXCEL_FILE
 
 well_names_list = "WellList"
 equipment_data_list = "EquipmentData"
 summary_data_list = "SummaryData"
+vlp_data_list ="VLPIPRData"
+ipr_data_list ="IPRData"
 
-current_well_name = "W_SHR_69_BB_I"
+ipr_phase = "liquid"
+well_type = "producer"
 
-###########################################################
+current_well_name = "W_SHR_220_BB"
+
+##################  FOR DEBUG  #########################################
 
 
 
@@ -146,6 +150,8 @@ def add_tubing(tubing_data: pd.DataFrame):
                  "annulus_material_thermal_conductivity": 0}])
 
 
+def add_esp(esp_data: pd.DataFrame):
+    indx = 0
 
 #current_well_name = get_project_name ()
 
@@ -160,6 +166,8 @@ set_well_basic_data(current_well_name, summary_row_value)
 # Берем данные из колонок с 19 по 27 с листа 'equipment_data_list'
 label_value = equip_row_value["Label.1"].values[0][:-1].split("|")
 type_value = equip_row_value["Type.1"].values[0][:-1].split("|")
+# label_value = data_reader("Label.1", "", equip_row_value, current_well_name)
+# type_value = data_reader("Type.1", "", equip_row_value, current_well_name)
 
 md_value = data_reader("Measured Depth, feet", "feet", equip_row_value, current_well_name)
 tub_in_d_value = data_reader("Tubing Inside Diameter, inches", "inches", equip_row_value, current_well_name)
@@ -188,3 +196,4 @@ df_casing = df_downhole_equipment_data[df_downhole_equipment_data['Type'] == "4"
 # Создаем casing и tubing
 add_casing(df_casing)
 add_tubing(df_tubing)
+add_esp(df_casing)

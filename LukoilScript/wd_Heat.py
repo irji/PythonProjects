@@ -3,7 +3,7 @@
 import pandas as pd
 import numpy as np
 
-###########################################################
+##################  FOR DEBUG  #########################################
 
 # Чтение данных с указанного листа из excel
 def excel_row_reader(well_name: str, list_name: str, srip_rows: int):
@@ -59,6 +59,8 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
             df_out = np.array(pd.to_datetime(df_out, format="%d/%m/%Y"))   # Конвертируем строки в даты.
         if units == "btu":
             df_out = np.array(df_out, dtype="float") * 4.1863  # Конвертируем BTU/lb/F в kJ/kg∙K.
+        if units == "STB/day/psi":
+            df_out = np.array(df_out, dtype="float") * 0.433667  # Конвертируем STB/day/psi в sm3/day/bar.
         if units == "number":
             df_out = np.array(df_out, dtype="float") * 1
         if units == "":
@@ -70,12 +72,10 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
     return df_out
 
 
-###########################################################
+##################  FOR DEBUG  #########################################
 
-# Путь до excel фала, названия листов с которых данные читаем
-#fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
-fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
-#fileIn = EXCEL_FILE
+fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+#fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
 
 well_names_list = "WellList"
 equipment_data_list = "EquipmentData"
@@ -83,9 +83,13 @@ summary_data_list = "SummaryData"
 vlp_data_list ="VLPIPRData"
 ipr_data_list ="IPRData"
 
-current_well_name = "W_SHR_404_TFM"
+ipr_phase = "liquid"
+well_type = "producer"
 
-###########################################################
+current_well_name = "W_SHR_220_BB"
+
+##################  FOR DEBUG  #########################################
+
 
 #current_well_name = get_project_name ()
 
@@ -93,11 +97,6 @@ equip_row_value = excel_row_reader(current_well_name, equipment_data_list, 5)
 
 # Читаем Average Heat Capacities
 # Берем данные из колонок с 29 по 35 с листа 'equipment_data_list'
-
-# cp_oil = float(equip_row_value["Cp Oil, BTU/lb/F"].values[0]) * 4.1863 # Перевод единиц
-# cp_gas = float(equip_row_value["Cp Gas, BTU/lb/F"].values[0]) * 4.1863 # Перевод единиц
-# cp_water = float(equip_row_value["Cp Water, BTU/lb/F"].values[0]) * 4.1863 # Перевод единиц
-
 cp_oil = data_reader("Cp Oil, BTU/lb/F", "btu", equip_row_value, current_well_name)
 cp_gas = data_reader("Cp Gas, BTU/lb/F", "btu", equip_row_value, current_well_name)
 cp_water = data_reader("Cp Water, BTU/lb/F", "btu", equip_row_value, current_well_name)
