@@ -4,21 +4,24 @@ import numpy as np
 ##################  FOR DEBUG  #########################################
 
 # Чтение данных с указанного листа из excel
-def excel_row_reader(well_name: str, list_name: str, srip_rows: int):
+def excel_row_reader(well_name: str, column_name: str, list_name: str, srip_rows: int):
     # Чтение из excel листов / убираем пустые строки
     try:
         data_from_list = pd.read_excel(fileIn, sheet_name=list_name, header=0, skiprows=srip_rows)
-        data_from_list.dropna(subset=["Well"], inplace=True)
+        data_from_list.dropna(subset=[column_name], inplace=True)
 
-        row_value = data_from_list.loc[data_from_list["Well"] == well_name]
+        data_from_list["Well"] = data_from_list["Well"].fillna(method='ffill')
+        row_values = data_from_list.loc[data_from_list["Well"] == well_name]
     except:
-        raise SystemExit("Ошибка чтения данных из excel файла!")
+        raise SystemError("Невозможно получить данные из excel файла!")
+        #print_log(text="Невозможно получить данные из excel файла!", severity="error")
 
     # Проверяем на ошибки
-    if len(row_value) == 0:
+    if len(row_values) == 0:
         raise SystemError("Нет данных для скважины '{}' в excel файле!".format(well_name))
+        #print_log(text="Нет данных для скважины '{}' в excel файле!".format(well_name), severity="error")
 
-    return row_value
+    return row_values
 
 # Читаем данные из dataframe и конвертируем в числа.
 # Возвращаем массив чисел в метрической системе или как есть в зависимости от значения units.
@@ -59,13 +62,17 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
             df_out = np.array(df_out, dtype="float") * 4.1863  # Конвертируем BTU/lb/F в kJ/kg∙K.
         if units == "STB/day/psi":
             df_out = np.array(df_out, dtype="float") * 0.433667  # Конвертируем STB/day/psi в sm3/day/bar.
+        if units == "btu/h/ft2/F":
+            df_out = np.array(df_out, dtype="float") * 5.67826334  # Конвертируем btu/h/ft2/F в J/sec/C/m2.
+        if units == "RB/day":
+            df_out = np.array(df_out, dtype="float") * 0.15898729  # Конвертируем RB/day в m3/day.
         if units == "number":
-            df_out = np.array(df_out, dtype="float") * 1
+            df_out = np.array(df_out, dtype="float") * 1 # Возвращаем числа или массив чисел без конвертации
         if units == "":
-            #df_out = np.array(df_out, dtype="float") * 1
-            df_out = df_out
+            df_out = df_out # Возвращаем значения как есть
     except Exception:
-        print("Ошибка чтения данных для скважины {}".format(well_name))
+        print("Ошибка при работе с скважиной {}".format(well_name))
+        # print_log(text="Ошибка при работе с скважиной {}".format(well_name), severity="warning")
 
     return df_out
 
@@ -78,21 +85,22 @@ fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm
 well_names_list = "WellList"
 equipment_data_list = "EquipmentData"
 summary_data_list = "SummaryData"
-vlp_data_list ="VLPIPRData"
-ipr_data_list ="IPRData"
+vlp_data_list = "VLPIPRData"
+ipr_data_list = "IPRData"
+esp_data_list = "DataBase"
 
 ipr_phase = "liquid"
 well_type = "producer"
 
-current_well_name = "W_SHR_220_BB"
+current_well_name = "W_SHR_69_BB_I"
 
 ##################  FOR DEBUG  #########################################
 
 
+print("Чтение данных по VLP для скважины {}.".format(current_well_name))
 
-
-vlp_row_value = excel_row_reader(current_well_name, vlp_data_list, 5)
-summary_row_value = excel_row_reader(current_well_name, summary_data_list, 5)
+vlp_row_value = excel_row_reader(current_well_name, "Well", vlp_data_list, 5)
+summary_row_value = excel_row_reader(current_well_name, "Well", summary_data_list, 5)
 
 if summary_row_value["Well Type"].values[0] == 2:
       well_type = "injector"
@@ -111,6 +119,9 @@ gauge_depth__value = data_reader("Gauge Depth (Measured), feet", "feet", vlp_row
 gauge_press_value = data_reader("Gauge Pressure, psig", "psig", vlp_row_value, current_well_name)
 gor_value = data_reader("GOR, scf/STB", "scf/STB", vlp_row_value, current_well_name)
 pump_value = data_reader("Operating Frequency, Herz", "number", vlp_row_value, current_well_name)
+
+if pump_value.size == 0:
+    pump_value = 0
 
 # Формируем массив с данными по измерениям
 sample_data = {"thp" : thp_value, "flo" : rate_value, "wfr" : wct_value, "gfr" : gor_value, "alq" : pump_value,
