@@ -76,6 +76,35 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
 
     return df_out
 
+# Убираем все значения из массивов после того как значения перестали уменьшаться
+def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
+    min_val = np.min(y_axis)
+
+    if min_val < 0:
+        for index, elem in np.ndenumerate(y_axis):
+            if elem < 0:
+                x_axis = x_axis[:index[0]]
+                y_axis = y_axis[:index[0]]
+                break
+    else:
+        fliped_HeadY_value = np.flip(y_axis)
+
+        ref_value = fliped_HeadY_value[0]
+
+        for index, elem in np.ndenumerate(fliped_HeadY_value):
+            if elem > ref_value:
+                y_axis = np.flip(fliped_HeadY_value[index[0] - 1:])
+                x_axis = x_axis[:len(y_axis)]
+                break
+            else:
+                ref_value = elem
+
+    # Формируем массив с данными по измерениям
+    sample_data = {"rate": x_axis, "head": y_axis, "efficiency": 1, "power": 1}
+    df_sample_data = pd.DataFrame(sample_data)
+    df_sample_data = df_sample_data.to_dict('records')
+
+    return  df_sample_data
 
 ##################  FOR DEBUG  #########################################
 
@@ -92,12 +121,12 @@ esp_data_list = "DataBase"
 ipr_phase = "liquid"
 well_type = "producer"
 
-current_well_name = "W_SHR_69_BB_I"
+current_well_name = "W_SHR_220_BB"
 
 ##################  FOR DEBUG  #########################################
 
 
-#current_well_name = get_project_name ()
+#current_well_name = well_name_in_excel
 
 # Выставляем для выбранной скважины ее тип и предпочитаемый тип флюида
 def set_well_basic_data(name: str, well_row: pd.DataFrame):
@@ -131,12 +160,19 @@ def add_casing(casing_data: pd.DataFrame):
 
     for index, line in casing_data.iterrows():
         indx += 1
+        bot_depth = line["MD"]
+
+        if indx == casing_data.shape[0]:
+            well_designer_object_bottom_hole(branch_num=0, objects_table=[
+                {"name": "BH_" + str(indx), "depth": bot_depth, "status": "active", "tvd": None, "ref_tvd": None}])
+
+            bot_depth = LAST_MD
 
         if line["Casing_in_D"] == 0:
             line["Casing_in_D"] = 0.1158
 
         well_designer_object_casing(branch_num=0, objects_table=[
-            {"name": "Casing_" + str(indx), "top_depth": 0, "bottom_depth": line["MD"], "diameter_in": line["Casing_in_D"],
+            {"name": "Casing_" + str(indx), "top_depth": 0, "bottom_depth": bot_depth, "diameter_in": line["Casing_in_D"],
              "diameter_out": line["Casing_in_D"] + 0.1, "roughness_in": line["Casing_in_rough"], "openhole": False, "liner": False,
              "wall_thermal_capacity": 0, "wall_thermal_conductivity": 0,
              "wellbore_diameter": line["Casing_in_D"] + 0.1, "cement_thermal_conductivity": 0}])

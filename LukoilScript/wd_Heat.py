@@ -78,6 +78,35 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
 
     return df_out
 
+# Убираем все значения из массивов после того как значения перестали уменьшаться
+def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
+    min_val = np.min(y_axis)
+
+    if min_val < 0:
+        for index, elem in np.ndenumerate(y_axis):
+            if elem < 0:
+                x_axis = x_axis[:index[0]]
+                y_axis = y_axis[:index[0]]
+                break
+    else:
+        fliped_HeadY_value = np.flip(y_axis)
+
+        ref_value = fliped_HeadY_value[0]
+
+        for index, elem in np.ndenumerate(fliped_HeadY_value):
+            if elem > ref_value:
+                y_axis = np.flip(fliped_HeadY_value[index[0] - 1:])
+                x_axis = x_axis[:len(y_axis)]
+                break
+            else:
+                ref_value = elem
+
+    # Формируем массив с данными по измерениям
+    sample_data = {"rate": x_axis, "head": y_axis, "efficiency": 1, "power": 1}
+    df_sample_data = pd.DataFrame(sample_data)
+    df_sample_data = df_sample_data.to_dict('records')
+
+    return  df_sample_data
 
 ##################  FOR DEBUG  #########################################
 
@@ -99,7 +128,7 @@ current_well_name = "W_SHR_69_BB_I"
 ##################  FOR DEBUG  #########################################
 
 
-#current_well_name = get_project_name ()
+#current_well_name = well_name_in_excel
 
 print("Чтение данных по Heat Capacities для скважины {}.".format(current_well_name))
 

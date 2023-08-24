@@ -17,10 +17,10 @@ ipr_phase = "liquid"
 well_type = "producer"
 
 # Чтение из excel листов / убираем пустые строки
-df_well_basic_data = pd.read_excel(fileIn, sheet_name=well_names_list, header=0, skiprows=5)
+df_well_basic_data = pd.read_excel(EXCEL_FILE, sheet_name=well_names_list, header=0, skiprows=5)
 df_well_basic_data.dropna(subset=["Well"], inplace=True)
 
-df_equipment_data = pd.read_excel(fileIn, sheet_name=equipment_data_list, header=0, skiprows=5)
+df_equipment_data = pd.read_excel(EXCEL_FILE, sheet_name=equipment_data_list, header=0, skiprows=5)
 df_equipment_data.dropna(subset=["Well"], inplace=True)
 
 ############################################
@@ -57,7 +57,6 @@ for well_name in df_well_basic_data["Well"]:
     row_value = df_equipment_data.loc[df_equipment_data["Well"] == well_name]
     well_1x = 0
     well_1y = 0
-    #well_1tvd = 0
 
 # # Если траекторий нет, то созадем новые траектории по по MD, TVD
 #     well_md = row_value["MD, feet"].values[0][:-1].split("|")
@@ -83,6 +82,11 @@ for well_name in df_well_basic_data["Well"]:
 
 # Если скважины уже есть в проекте, то берем данные с траекторий
     try:
+        # table_name = get_table_by_name(name="Wells_dictionary")
+        #
+        # for row_num in range(1, table_name.get_non_empty_row_count(column=1) + 1):
+        #     print(table_name.get_data(row=row_num, column=1))
+
         name_param = str(well_name).split("_")
 
         excel_well_name = new_dict.get(name_param[2])
@@ -93,16 +97,20 @@ for well_name in df_well_basic_data["Well"]:
         well_1y = existing_well_track[0][2]
         well_1tvd = existing_well_track[0][3]
 
+        well_last_md = existing_well.get_length()
+
         create_well_project_by_well(wells=[{"well": name_param[2]}])
-        #project_manager_create_project(projects_table=[{"project_type": "vfp_project", "project_name": well_name}])
+        # project_manager_create_project(projects_table=[{"project_type": "vfp_project", "project_name": well_name}])
+
+        #connect_geology_and_well_designer_projects(geometry_change_behaviour="use_gt_geometry",
+        #                                           connections_table=[{"gt_well": "ddd", "wd_well": "erferf"}])
 
         import_workflow(params_table=[
-            {"project_type": "vfp_project", "project_name": name_param[2], "file_name": "WF/RFD_workflow.py", "workflow": "RFD_workflow"}],
-                        replace_existing=True)
+            {"project_type": "vfp_project", "project_name": name_param[2], "file_name": "WF/RFD_workflow.py", "workflow": "RFD_workflow"}], replace_existing=True)
 
         run_project_workflow(project_type="vfp_project", project_name=name_param[2], workflow="RFD_workflow",
-                            variable_types={"EXCEL_FILE_WELL_NAME": "string", "EXCEL_FILE": "string", "TVD_VAR": "real", "VAR_X": "real", "VAR_Y": "real"},
-                            variables_object = {"EXCEL_FILE_WELL_NAME": excel_well_name, "EXCEL_FILE": fileIn, "TVD_VAR": well_1tvd, "VAR_X": well_1x, "VAR_Y": well_1y})
+                             variable_types={"EXCEL_FILE_WELL_NAME": "string", "EXCEL_FILE": "string", "TVD_VAR": "real", "VAR_X": "real", "VAR_Y": "real", "LAST_MD": "real"},
+                             variables_object={"EXCEL_FILE_WELL_NAME": excel_well_name, "EXCEL_FILE": EXCEL_FILE, "TVD_VAR": well_1tvd, "VAR_X": well_1x, "VAR_Y": well_1y, "LAST_MD": well_last_md})
     except Exception as e:
         print_log(text="Невозможно создать проект для скважины {}. Возможно такой скважины нет в проекте!".format(well_name),
                   severity="warning")
