@@ -63,7 +63,7 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
         if units == "btu":
             df_out = np.array(df_out, dtype="float") * 4.1863  # Конвертируем BTU/lb/F в kJ/kg∙K.
         if units == "STB/day/psi":
-            df_out = np.array(df_out, dtype="float") * 0.433667  # Конвертируем STB/day/psi в sm3/day/bar.
+            df_out = np.array(df_out, dtype="float") * 2.305911485  # Конвертируем STB/day/psi в sm3/day/bar.
         if units == "btu/h/ft2/F":
             df_out = np.array(df_out, dtype="float") * 5.67826334  # Конвертируем btu/h/ft2/F в J/sec/C/m2.
         if units == "RB/day":
