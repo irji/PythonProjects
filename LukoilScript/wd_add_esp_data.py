@@ -171,31 +171,8 @@ try:
             # расчет суммарной характеристики
             esp_HeadY_value_sum = esp_HeadY_value_sum + esp_HeadY_value * mult
 
-            # # Убираем все значения из массивов после того как значения перестали уменьшаться
-            # min_val = np.min(esp_HeadY_value)
-            #
-            # if min_val < 0:
-            #     for index, elem in np.ndenumerate(esp_HeadY_value):
-            #         if elem < 0:
-            #             esp_HeadX_value = esp_HeadX_value[:index[0]]
-            #             esp_HeadY_value = esp_HeadY_value[:index[0]]
-            #             break
-            # else:
-            #     fliped_HeadY_value = np.flip(esp_HeadY_value)
-            #
-            #     ref_value = fliped_HeadY_value[0]
-            #
-            #     for index, elem in np.ndenumerate(fliped_HeadY_value):
-            #         if elem > ref_value:
-            #             esp_HeadY_value = np.flip(fliped_HeadY_value[index[0]-1:])
-            #             esp_HeadX_value = esp_HeadX_value[:len(esp_HeadY_value)]
-            #             break
-            #         else:
-            #             ref_value = elem
-            #
-            # # Формируем массив с данными по измерениям
-            # sample_data = {"rate" : esp_HeadX_value, "head" : esp_HeadY_value, "efficiency" : 1, "power" : 1}
-            # df_sample_data = pd.DataFrame(sample_data)
+            # Убираем все значения из массивов после того как значения перестали уменьшаться
+            # Формируем массив с данными по измерениям
             df_sample_data = esp_cut_relation(esp_HeadX_value, esp_HeadY_value)
 
             if first_well_esp_name == "":
@@ -208,40 +185,13 @@ try:
                   base_stage_number=eps_stage_value,
                   objects_table=df_sample_data)
         else:
-            #print("Для скважины {} не найдены коэффициенты для расчета РНХ для насоса.".format(current_well_name))
+            # print("Для скважины {} не найдены коэффициенты для расчета РНХ для насоса.".format(current_well_name))
             print_log(text="Для скважины {} не найдены коэффициенты для расчета РНХ для насоса {}.".format(current_well_name, well_esp_name),
                        severity="warning")
 
-
-
-    # # Убираем все значения из массивов после того как значения перестали уменьшаться для суммарной характеристики
-    # min_val = np.min(esp_HeadY_value_sum)
-    #
-    # if min_val < 0:
-    #     for index, elem in np.ndenumerate(esp_HeadY_value_sum):
-    #         if elem < 0:
-    #             esp_HeadX_value_sum = esp_HeadX_value_sum[:index[0]]
-    #             esp_HeadY_value_sum = esp_HeadY_value_sum[:index[0]]
-    #             break
-    # else:
-    #     fliped_HeadY_value = np.flip(esp_HeadY_value_sum)
-    #
-    #     ref_value = fliped_HeadY_value[0]
-    #
-    #     for index, elem in np.ndenumerate(fliped_HeadY_value):
-    #         if elem > ref_value:
-    #             esp_HeadY_value_sum = np.flip(fliped_HeadY_value[index[0] - 1:])
-    #             esp_HeadX_value_sum = esp_HeadX_value_sum[:len(esp_HeadY_value_sum)]
-    #             break
-    #         else:
-    #             ref_value = elem
-    #
     esp_HeadX_value_sum = esp_HeadX_value_sum * 0.15898729  # Конвертируем RB/day в m3/day.
-    #
-    # # Формируем массив с данными по измерениям с суммарной характеристикой
-    # sample_data_sum = {"rate": esp_HeadX_value_sum, "head": esp_HeadY_value_sum, "efficiency": 1, "power": 1}
-    # df_sample_data_sum = pd.DataFrame(sample_data_sum)
-    # df_sample_data_sum = df_sample_data_sum.to_dict('records')
+
+    # Формируем массив с данными по измерениям с суммарной характеристикой
     df_sample_data_sum = esp_cut_relation(esp_HeadX_value_sum, esp_HeadY_value_sum)
 
     # Добавляем насос с суммарной характеристикой в библиотеку
@@ -255,11 +205,12 @@ try:
     eps_depth_value = data_reader("Pump Depth (Measured), feet", "feet", esp_row_value, current_well_name)
     eps_oper_freq_value = data_reader("Operating Frequency, Herz", "number", esp_row_value, current_well_name)
     eps_stage_value = data_reader("Pump Stages", "number", esp_row_value, current_well_name)
+    esp_pump_wear_factor = 1.0 - data_reader("Pump Wear Factor, fraction", "number", esp_row_value, current_well_name)
 
     well_designer_object_esp (branch_num=0,
           objects_table=[{"name" : "ESP_1", "depth" : eps_depth_value, "status" : "active", "max_gas_vol_fraction" : 1,
                           "operating_frequency" : eps_oper_freq_value, "slippage_factor" : 1, "esp_stage_num" : 1,
-                          "head_derating_factor" : 1, "rate_derating_factor" : 1, "esp_catalog" : sum_well_esp_name}])
+                          "head_derating_factor" : esp_pump_wear_factor, "rate_derating_factor" : 1, "esp_catalog" : sum_well_esp_name}])
 except Exception as e:
     print_log(text="Для скважины {} нет данных для насоса или данные содержат ошибку!".format(current_well_name),
               severity="warning")

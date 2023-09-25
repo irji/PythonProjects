@@ -159,9 +159,10 @@ if ipr_rate_value.size != 0 and ipr_pressure_value.size != 0:
     df_sample_data = pd.DataFrame(sample_data)
     df_sample_data = df_sample_data.to_dict('records')
 
-    wd_create_ipr_curve(ipr= current_well_name + "_IPR", ignore_if_exists=True)
+    wd_create_ipr_curve(ipr = current_well_name + "_IPR_Table", ignore_if_exists=True)
+    wd_create_ipr_curve(ipr = current_well_name + "_IPR", ignore_if_exists=True)
 
-    wd_adjust_ipr_well_test_data (ipr=current_well_name + "_IPR",
+    wd_adjust_ipr_well_test_data (ipr=current_well_name + "_IPR_Table",
           use_date=False,
           date=datetime (year=2023, month=1, day=1, hour=0, minute=0, second=0),
           change_ipr_base=False,
@@ -171,50 +172,16 @@ if ipr_rate_value.size != 0 and ipr_pressure_value.size != 0:
           well_test_data_type="multipoint",
           well_test_data=df_sample_data)
 
-    # Если вдруг для Well PI понадобиться матчинг
-    # if res_model == 0:
-    #     wd_ipr_matching(ipr=current_well_name + "_IPR",
-    #                     ipr_base=ipr_phase,
-    #                     result_name=current_well_name + "_IPR_Matched",
-    #                     overwrite_result=False,
-    #                     algorithm="Particle Swarm Optimization",
-    #                     max_iterations=10000,
-    #                     stop_on_slow_improvement=True,
-    #                     improvement_iterations=1000,
-    #                     improvement_value=2,
-    #                     correlation_types=[{"corr_type": "well_pi"}],
-    #                     correlation_table=[{"variable": "wellpi_reservoir_pressure_liquid", "use_for_matching": True,
-    #                                         "min": 0.000001, "base_value": 250, "max": 500},
-    #                                        {"variable": "wellpi_productivity_index_liquid", "use_for_matching": False,
-    #                                         "min": 0.000001, "base_value": 50, "max": 100}])
-
-    if res_model == 0:
-        wd_adjust_ipr_parameters(ipr=current_well_name + "_IPR",
-             use_date=False,
-             date=datetime (year=2023, month=1, day=1, hour=0, minute=0, second=0),
-             ipr_base=ipr_phase,
-             ipr_model="well_pi",
-             wellpi_reservoir_pressure=res_pressure_value,
-             wellpi_productivity_index=pi_entry_value)
-
-    if res_model == 1:
-        wd_ipr_matching(ipr=current_well_name + "_IPR",
-            ipr_base=ipr_phase,
-            result_name=current_well_name + "_IPR_Matched",
-            overwrite_result=False,
-            algorithm="Particle Swarm Optimization",
-            max_iterations=10000,
-            stop_on_slow_improvement=True,
-            improvement_iterations=1000,
-            improvement_value=2,
-            correlation_types=[{"corr_type": "vogel"}],
-            correlation_table=[
-                {"variable": "vogel_reservoir_pressure", "use_for_matching": False, "min": 0.000001,
-                 "base_value": res_pressure_value, "max": res_pressure_value * 3},
-                {"variable": "vogel_coefficient", "use_for_matching": True, "min": 0, "base_value": 0.5,
-                 "max": 1},
-                {"variable": "vogel_max_rate", "use_for_matching": True, "min": 0, "base_value": 2500,
-                 "max": 5000}])
+    wd_adjust_ipr_parameters(ipr=current_well_name + "_IPR",
+                             use_date=False,
+                             date=datetime(year=2023, month=7, day=17, hour=0, minute=0, second=0),
+                             ipr_base=ipr_phase,
+                             ipr_model="pi_entry",
+                             pi_entry_reservoir_pressure=res_pressure_value,
+                             pi_entry_productivity_index=pi_entry_value,
+                             pi_entry_vogel_coefficient=0.2,
+                             pi_entry_use_calculated_bubble_point_pressure=False,
+                             pi_entry_bubble_point_pressure=120)
 
     if res_model > 1:
         print("Значение \"Reservoir Model\" = {} не поддержано.".format(res_model))
