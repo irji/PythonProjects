@@ -77,7 +77,7 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
     return df_out
 
 # Убираем все значения из массивов после того как значения перестали уменьшаться
-def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
+def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame, efficiency_axis: pd.DataFrame, power_axis: pd.DataFrame):
     min_val = np.min(y_axis)
 
     if min_val < 0:
@@ -85,6 +85,8 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
             if elem < 0:
                 x_axis = x_axis[:index[0]]
                 y_axis = y_axis[:index[0]]
+                efficiency_axis = efficiency_axis[:index[0]]
+                power_axis = power_axis[:index[0]]
                 break
     else:
         fliped_HeadY_value = np.flip(y_axis)
@@ -95,12 +97,14 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
             if elem > ref_value:
                 y_axis = np.flip(fliped_HeadY_value[index[0] - 1:])
                 x_axis = x_axis[:len(y_axis)]
+                efficiency_axis = efficiency_axis[:index[0]]
+                power_axis = power_axis[:index[0]]
                 break
             else:
                 ref_value = elem
 
     # Формируем массив с данными по измерениям
-    sample_data = {"rate": x_axis, "head": y_axis, "efficiency": 1, "power": 1}
+    sample_data = {"rate": x_axis, "head": y_axis, "efficiency": efficiency_axis, "power": power_axis}
     df_sample_data = pd.DataFrame(sample_data)
     df_sample_data = df_sample_data.to_dict('records')
 
@@ -149,9 +153,13 @@ try:
         esp_pump_index = data_reader("Index Pump", "", row_value, current_well_name)
         #esp_freq_index = data_reader("Pump Frequency, Herz", "number", row_value, current_well_name)
         esp_head_coeff = data_reader("Pump Head.Coeff", "number", row_value, current_well_name)
+        esp_pow_coeff = data_reader("Pump HP.Coeff", "number", row_value, current_well_name)
         esp_HeadX_value = np.arange(1, 1000, 25, dtype='float')  # Дебит для расчета напора по зависимости
         esp_HeadX_value[1:] = esp_HeadX_value[1:] - 1
         esp_HeadX_value_sum = esp_HeadX_value
+
+        esp_EffY_value = esp_pow_coeff
+        esp_PowY_value = esp_pow_coeff
         #eps_HeadX_value = data_reader("Head.X, RB/day", "number", row_value, current_well_name)
         well_esp_name = "{}_{}_{}".format(int(float(esp_pump_index)), eps_manufacturer, esp_name)
 
@@ -166,14 +174,20 @@ try:
                               pow(esp_HeadX_value, 3) * esp_head_coeff[2] + pow(esp_HeadX_value, 2) * esp_head_coeff[3] + \
                               esp_HeadX_value * esp_head_coeff[4] + esp_head_coeff[5]) * 0.3048 # Конвертируем feet в метры
 
+            esp_PowY_value = (pow(esp_HeadX_value, 5) * esp_pow_coeff[0] + pow(esp_HeadX_value, 4) * esp_pow_coeff[1] + \
+                              pow(esp_HeadX_value, 3) * esp_pow_coeff[2] + pow(esp_HeadX_value, 2) * esp_pow_coeff[3] + \
+                              esp_HeadX_value * esp_pow_coeff[4] + esp_pow_coeff[5]) * 0.7354985  # Конвертируем ЛС в кВт
+
             esp_HeadX_value = esp_HeadX_value * 0.15898729  # Конвертируем RB/day в m3/day.
+
+            esp_EffY_value = (0.00011343 * esp_HeadX_value * esp_HeadY_value) / esp_PowY_value
 
             # расчет суммарной характеристики
             esp_HeadY_value_sum = esp_HeadY_value_sum + esp_HeadY_value * mult
 
             # Убираем все значения из массивов после того как значения перестали уменьшаться
             # Формируем массив с данными по измерениям
-            df_sample_data = esp_cut_relation(esp_HeadX_value, esp_HeadY_value)
+            df_sample_data = esp_cut_relation(esp_HeadX_value, esp_HeadY_value, esp_EffY_value, esp_PowY_value)
 
             if first_well_esp_name == "":
                 first_well_esp_name = well_esp_name
@@ -192,7 +206,7 @@ try:
     esp_HeadX_value_sum = esp_HeadX_value_sum * 0.15898729  # Конвертируем RB/day в m3/day.
 
     # Формируем массив с данными по измерениям с суммарной характеристикой
-    df_sample_data_sum = esp_cut_relation(esp_HeadX_value_sum, esp_HeadY_value_sum)
+    df_sample_data_sum = esp_cut_relation(esp_HeadX_value_sum, esp_HeadY_value_sum, esp_EffY_value, esp_PowY_value)
 
     # Добавляем насос с суммарной характеристикой в библиотеку
     well_designer_esp_catalog_add_esp(name=sum_well_esp_name,
