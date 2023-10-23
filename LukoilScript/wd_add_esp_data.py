@@ -97,8 +97,8 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame, efficiency_axis
             if elem > ref_value:
                 y_axis = np.flip(fliped_HeadY_value[index[0] - 1:])
                 x_axis = x_axis[:len(y_axis)]
-                efficiency_axis = efficiency_axis[:index[0]]
-                power_axis = power_axis[:index[0]]
+                efficiency_axis = efficiency_axis[:len(y_axis)]
+                power_axis = power_axis[:len(y_axis)]
                 break
             else:
                 ref_value = elem
