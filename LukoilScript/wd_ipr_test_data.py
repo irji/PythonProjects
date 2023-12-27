@@ -159,10 +159,10 @@ if ipr_rate_value.size != 0 and ipr_pressure_value.size != 0:
     df_sample_data = pd.DataFrame(sample_data)
     df_sample_data = df_sample_data.to_dict('records')
 
-    wd_create_ipr_curve(ipr = current_well_name + "_IPR_Table", ignore_if_exists=True)
-    wd_create_ipr_curve(ipr = current_well_name + "_IPR", ignore_if_exists=True)
+    wd_create_ipr_curve(ipr = "IPR_Table", ignore_if_exists=True)
+    wd_create_ipr_curve(ipr = "IPR", ignore_if_exists=True)
 
-    wd_adjust_ipr_well_test_data (ipr=current_well_name + "_IPR_Table",
+    wd_adjust_ipr_well_test_data (ipr = "IPR_Table",
           use_date=False,
           date=datetime (year=2023, month=1, day=1, hour=0, minute=0, second=0),
           change_ipr_base=False,
@@ -172,7 +172,7 @@ if ipr_rate_value.size != 0 and ipr_pressure_value.size != 0:
           well_test_data_type="multipoint",
           well_test_data=df_sample_data)
 
-    wd_adjust_ipr_parameters(ipr=current_well_name + "_IPR",
+    wd_adjust_ipr_parameters(ipr="IPR_Table",
                              use_date=False,
                              date=datetime(year=2023, month=7, day=17, hour=0, minute=0, second=0),
                              ipr_base=ipr_phase,
