@@ -106,6 +106,15 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
 
     return  df_sample_data
 
+def get_well_name(input_well_name_string: str, split_by: str, position: int ):
+    well_name = input_well_name_string
+
+    if split_by != "" and position != 0:
+        well_name_elements = well_name.split(split_by)
+        well_name = well_name_elements[position]
+
+    return well_name
+
 ##################  FOR DEBUG  #########################################
 
 fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
@@ -129,6 +138,7 @@ current_well_name = "W_SHR_69_BB_I"
 print("Чтение данных по IPR для скважины {}.".format(current_well_name))
 
 #current_well_name = well_name_in_excel
+current_well_name = get_well_name(name, "_", 2)
 
 ipr_row_value = excel_row_reader(current_well_name, "Well", ipr_data_list, 5)
 

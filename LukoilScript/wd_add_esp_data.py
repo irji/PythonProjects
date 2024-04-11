@@ -77,7 +77,7 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
     return df_out
 
 # Убираем все значения из массивов после того как значения перестали уменьшаться
-def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame, efficiency_axis: pd.DataFrame, power_axis: pd.DataFrame):
+def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
     min_val = np.min(y_axis)
 
     if min_val < 0:
@@ -85,8 +85,6 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame, efficiency_axis
             if elem < 0:
                 x_axis = x_axis[:index[0]]
                 y_axis = y_axis[:index[0]]
-                efficiency_axis = efficiency_axis[:index[0]]
-                power_axis = power_axis[:index[0]]
                 break
     else:
         fliped_HeadY_value = np.flip(y_axis)
@@ -97,18 +95,25 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame, efficiency_axis
             if elem > ref_value:
                 y_axis = np.flip(fliped_HeadY_value[index[0] - 1:])
                 x_axis = x_axis[:len(y_axis)]
-                efficiency_axis = efficiency_axis[:len(y_axis)]
-                power_axis = power_axis[:len(y_axis)]
                 break
             else:
                 ref_value = elem
 
     # Формируем массив с данными по измерениям
-    sample_data = {"rate": x_axis, "head": y_axis, "efficiency": efficiency_axis, "power": power_axis}
+    sample_data = {"rate": x_axis, "head": y_axis, "efficiency": 1, "power": 1}
     df_sample_data = pd.DataFrame(sample_data)
     df_sample_data = df_sample_data.to_dict('records')
 
     return  df_sample_data
+
+def get_well_name(input_well_name_string: str, split_by: str, position: int ):
+    well_name = input_well_name_string
+
+    if split_by != "" and position != 0:
+        well_name_elements = well_name.split(split_by)
+        well_name = well_name_elements[position]
+
+    return well_name
 
 ##################  FOR DEBUG  #########################################
 

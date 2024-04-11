@@ -106,6 +106,15 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
 
     return  df_sample_data
 
+def get_well_name(input_well_name_string: str, split_by: str, position: int ):
+    well_name = input_well_name_string
+
+    if split_by != "" and position != 0:
+        well_name_elements = well_name.split(split_by)
+        well_name = well_name_elements[position]
+
+    return well_name
+
 ##################  FOR DEBUG  #########################################
 
 fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
