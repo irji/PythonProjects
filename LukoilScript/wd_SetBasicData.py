@@ -106,12 +106,20 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
 
     return  df_sample_data
 
-def get_well_name(input_well_name_string: str, split_by: str, position: int, sufix:str=""):
+def get_well_name_by_split(input_well_name_string: str, split_by: str, position: int):
     well_name = input_well_name_string
 
     if split_by != "" and position != 0:
         well_name_elements = well_name.split(split_by)
         well_name = well_name_elements[position]
+
+    return well_name
+
+def get_well_name_by_remove_sufix(input_well_name_string: str, suffix: str, prefix: str):
+    well_name = input_well_name_string
+
+    well_name = well_name.removeprefix(prefix).removesuffix(suffix)
+
 
     return well_name
 
@@ -143,7 +151,7 @@ def set_well_basic_data(name: str, well_row: pd.DataFrame):
     phase = "LIQ"
 
     #name_param = str(name).split("_")
-    current_well_name = get_well_name(name, "_", 2)
+    current_well_name = get_well_name_by_split(name, "_", 2)
 
     # Поддержано типы PRODUCTION/WATERINJECTION
     if well_row["Well Type"].values[0] == 2: #"WATERINJECTION":
