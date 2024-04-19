@@ -79,7 +79,7 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
     return df_out
 
 # Убираем все значения из массивов после того как значения перестали уменьшаться
-def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
+def esp_cut_relation(x_axis: np.ndarray, y_axis: np.ndarray, efficiency_axis: pd.DataFrame, power_axis: pd.DataFrame):
     min_val = np.min(y_axis)
 
     if min_val < 0:
@@ -87,6 +87,8 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
             if elem < 0:
                 x_axis = x_axis[:index[0]]
                 y_axis = y_axis[:index[0]]
+                efficiency_axis = efficiency_axis[:index[0]]
+                power_axis = power_axis[:index[0]]
                 break
     else:
         fliped_HeadY_value = np.flip(y_axis)
@@ -97,30 +99,23 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
             if elem > ref_value:
                 y_axis = np.flip(fliped_HeadY_value[index[0] - 1:])
                 x_axis = x_axis[:len(y_axis)]
+                efficiency_axis = efficiency_axis[:len(y_axis)]
+                power_axis = power_axis[:len(y_axis)]
                 break
             else:
                 ref_value = elem
 
     # Формируем массив с данными по измерениям
-    sample_data = {"rate": x_axis, "head": y_axis, "efficiency": 1, "power": 1}
+    sample_data = {"rate": x_axis, "head": y_axis, "efficiency": efficiency_axis, "power": power_axis}
     df_sample_data = pd.DataFrame(sample_data)
     df_sample_data = df_sample_data.to_dict('records')
 
-    return  df_sample_data
-
-def get_well_name(input_well_name_string: str, split_by: str, position: int ):
-    well_name = input_well_name_string
-
-    if split_by != "" and position != 0:
-        well_name_elements = well_name.split(split_by)
-        well_name = well_name_elements[position]
-
-    return well_name
+    return df_sample_data
 
 ##################  FOR DEBUG  #########################################
 
-fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
-#fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+#fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
 
 well_names_list = "WellList"
 equipment_data_list = "EquipmentData"
@@ -132,22 +127,21 @@ esp_data_list = "DataBase"
 ipr_phase = "liquid"
 well_type = "producer"
 
-current_well_name = "W_SHR_69_BB_I"
+well_name_in_excel = "W_SHR_64_BB"
+#well_name_in_excel = "W_SHR_220_BB"
+well_name = "64_BB"
 
 ##################  FOR DEBUG  #########################################
 
+print("Чтение данных по Heat Capacities для скважины {}.".format(well_name))
 
-#current_well_name = well_name_in_excel
-
-print("Чтение данных по Heat Capacities для скважины {}.".format(current_well_name))
-
-equip_row_value = excel_row_reader(current_well_name, "Well", equipment_data_list, 5)
+equip_row_value = excel_row_reader(well_name_in_excel, "Well", equipment_data_list, 5)
 
 # Читаем Average Heat Capacities
 # Берем данные из колонок с 29 по 35 с листа 'equipment_data_list'
-cp_oil = data_reader("Cp Oil, BTU/lb/F", "btu", equip_row_value, current_well_name)
-cp_gas = data_reader("Cp Gas, BTU/lb/F", "btu", equip_row_value, current_well_name)
-cp_water = data_reader("Cp Water, BTU/lb/F", "btu", equip_row_value, current_well_name)
+cp_oil = data_reader("Cp Oil, BTU/lb/F", "btu", equip_row_value, well_name_in_excel)
+cp_gas = data_reader("Cp Gas, BTU/lb/F", "btu", equip_row_value, well_name_in_excel)
+cp_water = data_reader("Cp Water, BTU/lb/F", "btu", equip_row_value, well_name_in_excel)
 
 # Читаем Average Heat Capacities
 # Берем данные из колонок с 33 по 35 с листа 'equipment_data_list'
@@ -159,11 +153,11 @@ wd_heat_transfer_adjust_specific_heat_capacity (enabled=True,
       specific_heat_oil=cp_oil)
 
 #md_value = data_reader("Formation MD, feet", "feet", equip_row_value)
-tvd_value = data_reader("Formation TVD, feet", "feet", equip_row_value, current_well_name)
-temp_value = data_reader("Formation Temperature, deg F", "F", equip_row_value, current_well_name)
+tvd_value = data_reader("Formation TVD, feet", "feet", equip_row_value, well_name_in_excel)
+temp_value = data_reader("Formation Temperature, deg F", "F", equip_row_value, well_name_in_excel)
 
 #TODO: проверить единцы измерения. Пока предполагаю, что btu/h/ft2/F (5.67826334)
-heat_transfer_value = data_reader("HTC.1", "btu/h/ft2/F", equip_row_value, current_well_name)
+heat_transfer_value = data_reader("HTC.1", "btu/h/ft2/F", equip_row_value, well_name_in_excel)
 
 # Формируем массивы с данными по траектории и форматируем в виде пригодным для передачи в функцию в
 tempvd_data = {"depth": tvd_value, "temperature": temp_value}

@@ -77,7 +77,7 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
     return df_out
 
 # Убираем все значения из массивов после того как значения перестали уменьшаться
-def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
+def esp_cut_relation(x_axis: np.ndarray, y_axis: np.ndarray, efficiency_axis: pd.DataFrame, power_axis: pd.DataFrame):
     min_val = np.min(y_axis)
 
     if min_val < 0:
@@ -85,6 +85,8 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
             if elem < 0:
                 x_axis = x_axis[:index[0]]
                 y_axis = y_axis[:index[0]]
+                efficiency_axis = efficiency_axis[:index[0]]
+                power_axis = power_axis[:index[0]]
                 break
     else:
         fliped_HeadY_value = np.flip(y_axis)
@@ -95,30 +97,24 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
             if elem > ref_value:
                 y_axis = np.flip(fliped_HeadY_value[index[0] - 1:])
                 x_axis = x_axis[:len(y_axis)]
+                efficiency_axis = efficiency_axis[:len(y_axis)]
+                power_axis = power_axis[:len(y_axis)]
                 break
             else:
                 ref_value = elem
 
     # Формируем массив с данными по измерениям
-    sample_data = {"rate": x_axis, "head": y_axis, "efficiency": 1, "power": 1}
+    sample_data = {"rate": x_axis, "head": y_axis, "efficiency": efficiency_axis, "power": power_axis}
     df_sample_data = pd.DataFrame(sample_data)
     df_sample_data = df_sample_data.to_dict('records')
 
-    return  df_sample_data
+    return df_sample_data
 
-def get_well_name(input_well_name_string: str, split_by: str, position: int ):
-    well_name = input_well_name_string
-
-    if split_by != "" and position != 0:
-        well_name_elements = well_name.split(split_by)
-        well_name = well_name_elements[position]
-
-    return well_name
 
 ##################  FOR DEBUG  #########################################
 
-fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
-#fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+#fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
 
 well_names_list = "WellList"
 equipment_data_list = "EquipmentData"
@@ -130,7 +126,9 @@ esp_data_list = "DataBase"
 ipr_phase = "liquid"
 well_type = "producer"
 
-current_well_name = "W_SHR_69_BB_I"
+well_name_in_excel = "W_SHR_64_BB"
+#well_name_in_excel = "W_SHR_220_BB"
+well_name = "64_BB"
 
 ##################  FOR DEBUG  #########################################
 
@@ -138,7 +136,7 @@ current_well_name = "W_SHR_69_BB_I"
 print("Чтение данных по IPR для скважины {}.".format(current_well_name))
 
 #current_well_name = well_name_in_excel
-current_well_name = get_well_name(name, "_", 2)
+#current_well_name = get_well_name(name, "_", 2)
 
 ipr_row_value = excel_row_reader(current_well_name, "Well", ipr_data_list, 5)
 

@@ -77,7 +77,7 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
     return df_out
 
 # Убираем все значения из массивов после того как значения перестали уменьшаться
-def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
+def esp_cut_relation(x_axis: np.ndarray, y_axis: np.ndarray, efficiency_axis: pd.DataFrame, power_axis: pd.DataFrame):
     min_val = np.min(y_axis)
 
     if min_val < 0:
@@ -85,6 +85,8 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
             if elem < 0:
                 x_axis = x_axis[:index[0]]
                 y_axis = y_axis[:index[0]]
+                efficiency_axis = efficiency_axis[:index[0]]
+                power_axis = power_axis[:index[0]]
                 break
     else:
         fliped_HeadY_value = np.flip(y_axis)
@@ -95,38 +97,23 @@ def esp_cut_relation(x_axis: pd.DataFrame, y_axis: pd.DataFrame):
             if elem > ref_value:
                 y_axis = np.flip(fliped_HeadY_value[index[0] - 1:])
                 x_axis = x_axis[:len(y_axis)]
+                efficiency_axis = efficiency_axis[:len(y_axis)]
+                power_axis = power_axis[:len(y_axis)]
                 break
             else:
                 ref_value = elem
 
     # Формируем массив с данными по измерениям
-    sample_data = {"rate": x_axis, "head": y_axis, "efficiency": 1, "power": 1}
+    sample_data = {"rate": x_axis, "head": y_axis, "efficiency": efficiency_axis, "power": power_axis}
     df_sample_data = pd.DataFrame(sample_data)
     df_sample_data = df_sample_data.to_dict('records')
 
-    return  df_sample_data
-
-def get_well_name_by_split(input_well_name_string: str, split_by: str, position: int):
-    well_name = input_well_name_string
-
-    if split_by != "" and position != 0:
-        well_name_elements = well_name.split(split_by)
-        well_name = well_name_elements[position]
-
-    return well_name
-
-def get_well_name_by_remove_sufix(input_well_name_string: str, suffix: str, prefix: str):
-    well_name = input_well_name_string
-
-    well_name = well_name.removeprefix(prefix).removesuffix(suffix)
-
-
-    return well_name
+    return df_sample_data
 
 ##################  FOR DEBUG  #########################################
 
-fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
-#fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+#fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
 
 well_names_list = "WellList"
 equipment_data_list = "EquipmentData"
@@ -138,20 +125,15 @@ esp_data_list = "DataBase"
 ipr_phase = "liquid"
 well_type = "producer"
 
-current_well_name = "W_SHR_220_BB"
+well_name_in_excel = "W_SHR_220_BB"
+well_name = "220_BB"
 
 ##################  FOR DEBUG  #########################################
-
-
-#current_well_name = well_name_in_excel
 
 # Выставляем для выбранной скважины ее тип и предпочитаемый тип флюида
 def set_well_basic_data(name: str, well_row: pd.DataFrame):
     well_type = "producer"
     phase = "LIQ"
-
-    #name_param = str(name).split("_")
-    current_well_name = get_well_name_by_split(name, "_", 2)
 
     # Поддержано типы PRODUCTION/WATERINJECTION
     if well_row["Well Type"].values[0] == 2: #"WATERINJECTION":
@@ -163,7 +145,7 @@ def set_well_basic_data(name: str, well_row: pd.DataFrame):
     #      phase = "GAS"
     #      ipr_phase = "gas"
 
-    well_designer_adjust_basic_data(name=current_well_name,
+    well_designer_adjust_basic_data(name=name,
                                     group_name="", object="well", well_type=well_type,
                                     current_vfp="", preferred_phase=phase,
                                     inflow_equation="STD", instructions="SHUT", density_type="SEG", drainage_radius=0,
@@ -213,29 +195,29 @@ def add_tubing(tubing_data: pd.DataFrame):
                  "wall_thermal_capacity": 0, "wall_thermal_conductivity": 0,
                  "annulus_material_thermal_conductivity": 0}])
 
-print("Чтение основных данных для скважины {}.".format(current_well_name))
+print("Чтение основных данных для скважины {}.".format(well_name))
 
-equip_row_value = excel_row_reader(current_well_name, "Well", equipment_data_list, 5)
-wlist_row_value = excel_row_reader(current_well_name, "Well", well_names_list, 5)
-summary_row_value = excel_row_reader(current_well_name, "Well", summary_data_list, 5)
+equip_row_value = excel_row_reader(well_name_in_excel, "Well", equipment_data_list, 5)
+wlist_row_value = excel_row_reader(well_name_in_excel, "Well", well_names_list, 5)
+summary_row_value = excel_row_reader(well_name_in_excel, "Well", summary_data_list, 5)
 
 ####### Задаем basic data ####################################################
-set_well_basic_data(current_well_name, summary_row_value)
+set_well_basic_data(well_name, summary_row_value)
 
 ####### Читаем конструкцию ###################################################
 # Берем данные из колонок с 19 по 27 с листа 'equipment_data_list'
 label_value = equip_row_value["Label.1"].values[0][:-1].split("|")
 type_value = equip_row_value["Type.1"].values[0][:-1].split("|")
-# label_value = data_reader("Label.1", "", equip_row_value, current_well_name)
-# type_value = data_reader("Type.1", "", equip_row_value, current_well_name)
+# label_value = data_reader("Label.1", "", equip_row_value, well_name_in_excel)
+# type_value = data_reader("Type.1", "", equip_row_value, well_name_in_excel)
 
-md_value = data_reader("Measured Depth, feet", "feet", equip_row_value, current_well_name)
-tub_in_d_value = data_reader("Tubing Inside Diameter, inches", "inches", equip_row_value, current_well_name)
-tub_out_d_value = data_reader("Tubing Outside Diameter, inches", "inches", equip_row_value, current_well_name)
-casing_in_d_value = data_reader("Casing Inside Diameter, inches", "inches", equip_row_value, current_well_name)
-tub_in_roughness_value = data_reader("Tubing Inside Roughness, inches", "inches", equip_row_value, current_well_name)
-tub_out_roughness_value = data_reader("Tubing Outside Roughness, inches", "inches", equip_row_value, current_well_name)
-casing_in_roughness_value = data_reader("Casing Inside Roughness, inches", "inches", equip_row_value, current_well_name)
+md_value = data_reader("Measured Depth, feet", "feet", equip_row_value, well_name_in_excel)
+tub_in_d_value = data_reader("Tubing Inside Diameter, inches", "inches", equip_row_value, well_name_in_excel)
+tub_out_d_value = data_reader("Tubing Outside Diameter, inches", "inches", equip_row_value, well_name_in_excel)
+casing_in_d_value = data_reader("Casing Inside Diameter, inches", "inches", equip_row_value, well_name_in_excel)
+tub_in_roughness_value = data_reader("Tubing Inside Roughness, inches", "inches", equip_row_value, well_name_in_excel)
+tub_out_roughness_value = data_reader("Tubing Outside Roughness, inches", "inches", equip_row_value, well_name_in_excel)
+casing_in_roughness_value = data_reader("Casing Inside Roughness, inches", "inches", equip_row_value, well_name_in_excel)
 
 # type:
 # 1 - Tubing; # 2 - SSSV; # 3 - Restriction; # 4 - Casing
