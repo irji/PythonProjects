@@ -48,17 +48,33 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
             df_out = np.array(df_out, dtype="float") * 0.0254  # Конвертируем inches в метры
         if units == "F":
             df_out = (np.array(df_out, dtype="float") - 32)/1.8 # Конвертируем F в C
+            # Значения меньше 1 заменяем на 1
+            df_out = np.clip(df_out, 1, None)
         if units == "psig":
             df_out = np.array(df_out, dtype="float") * 0.0689475728 # Конвертируем psig в bar
-            # in_array, min, max, out_array
+            # in_array, min, max
             # Значения меньше 1,01 заменяем на 1,01
-            #np.clip(df_out, 1.01325, None, out=df_out)
+            df_out = np.clip(df_out, 1.01325, None)
+
+            # Заменяем значения больше 1e20 на 0
+            #if not hasattr(df_out, "__len__"): # число или массив
+            if df_out.size == 1:
+                if df_out > 1e20:
+                    df_out = 0.0
+            else:
+                df_out[df_out > 1e20] = 0
         if units == "%":
             df_out = np.array(df_out, dtype="float") * 0.01 # Конвертируем % в д.е.
         if units == "STB/day":
             df_out = np.array(df_out, dtype="float") * 0.158987  # Конвертируем STB/day в sm3/day.
         if units == "scf/STB":
             df_out = np.array(df_out, dtype="float") * 0.1781076  # Конвертируем scf/STB в sm3/sm3.
+            # Заменяем значения больше 1e20 на 0
+            if df_out.size == 1: # число или массив
+                if df_out > 1e20:
+                    df_out = 0.0
+            else:
+                df_out[df_out > 1e20] = 0
         if units == "date":
             df_out = np.array(pd.to_datetime(df_out, format="%d/%m/%Y"))   # Конвертируем строки в даты.
         if units == "btu":
@@ -76,9 +92,6 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
     except Exception:
         print("Ошибка при работе с скважиной {}".format(well_name))
         # print_log(text="Ошибка при работе с скважиной {}".format(well_name), severity="warning")
-
-        # Заменяем значения больше 1e20 на 0
-        df_out[df_out > 1e20] = 0
 
     return df_out
 
@@ -120,7 +133,7 @@ def esp_cut_relation(x_axis: np.ndarray, y_axis: np.ndarray, efficiency_axis: pd
 
 #fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
 #fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
-fileIn = "D:\Work\Models\Lukoil\WellBackup9 1403 NVN.xlsm"
+fileIn = "D:\Work\Models\Lukoil\WellBackup9_1403_NVN.xlsm"
 
 well_names_list = "WellList"
 equipment_data_list = "EquipmentData"
@@ -132,9 +145,9 @@ esp_data_list = "DataBase"
 ipr_phase = "liquid"
 well_type = "producer"
 
-well_name_in_excel = "W_F_LSP2_9"
+well_name_in_excel = "W_K_LSP_114"
 #well_name_in_excel = "W_SHR_220_BB"
-well_name = "F_LSP2_9"
+well_name = "K_LSP_114"
 
 ##################  FOR DEBUG  #########################################
 
@@ -163,12 +176,13 @@ gor_value = data_reader("GOR, scf/STB", "scf/STB", vlp_row_value, well_name_in_e
 pump_value = data_reader("Operating Frequency, Herz", "number", vlp_row_value, well_name_in_excel)
 
 if thp_value.size == 1:
-    use_column = np.full_like(thp_value, "True")
+    #use_column = np.full(thp_value.shape, True, dtype=bool)
+    use_column = True
+    weight_column = [1]
 else:
-    use_column = np.full_like(thp_value, "False")
-    use_column[-1] = "True"
-
-weight_column = np.full_like(thp_value, 1)
+    use_column = np.full(thp_value.shape, False, dtype=bool)
+    use_column[-1] = True
+    weight_column = np.full_like(thp_value, 1)
 
 if pump_value.size == 0:
     pump_value = 0

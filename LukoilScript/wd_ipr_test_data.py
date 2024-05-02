@@ -50,12 +50,29 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
             df_out = (np.array(df_out, dtype="float") - 32)/1.8 # Конвертируем F в C
         if units == "psig":
             df_out = np.array(df_out, dtype="float") * 0.0689475728 # Конвертируем psig в bar
+            # in_array, min, max
+            # Значения меньше 1,01 заменяем на 1,01
+            df_out = np.clip(df_out, 1.01325, None)
+
+            # Заменяем значения больше 1e20 на 0
+            #if not hasattr(df_out, "__len__"): # число или массив
+            if df_out.size == 1:
+                if df_out > 1e20:
+                    df_out = 0.0
+            else:
+                df_out[df_out > 1e20] = 0
         if units == "%":
             df_out = np.array(df_out, dtype="float") * 0.01 # Конвертируем % в д.е.
         if units == "STB/day":
             df_out = np.array(df_out, dtype="float") * 0.158987  # Конвертируем STB/day в sm3/day.
         if units == "scf/STB":
             df_out = np.array(df_out, dtype="float") * 0.1781076  # Конвертируем scf/STB в sm3/sm3.
+            # Заменяем значения больше 1e20 на 0
+            if df_out.size == 1: # число или массив
+                if df_out > 1e20:
+                    df_out = 0.0
+            else:
+                df_out[df_out > 1e20] = 0
         if units == "date":
             df_out = np.array(pd.to_datetime(df_out, format="%d/%m/%Y"))   # Конвертируем строки в даты.
         if units == "btu":
@@ -110,11 +127,11 @@ def esp_cut_relation(x_axis: np.ndarray, y_axis: np.ndarray, efficiency_axis: pd
 
     return df_sample_data
 
-
 ##################  FOR DEBUG  #########################################
 
 #fileIn = "D:\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
-fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+#fileIn = "D:\Work\Models\Lukoil\WellBackup6 Шершневское мест-ие.xlsm"
+fileIn = "D:\Work\Models\Lukoil\WellBackup9_1403_NVN.xlsm"
 
 well_names_list = "WellList"
 equipment_data_list = "EquipmentData"
@@ -126,38 +143,36 @@ esp_data_list = "DataBase"
 ipr_phase = "liquid"
 well_type = "producer"
 
-well_name_in_excel = "W_SHR_64_BB"
+well_name_in_excel = "W_F_LSP2_9"
 #well_name_in_excel = "W_SHR_220_BB"
-well_name = "64_BB"
+well_name = "F_LSP2_9"
 
 ##################  FOR DEBUG  #########################################
 
 
-print("Чтение данных по IPR для скважины {}.".format(current_well_name))
+print("Чтение данных по IPR для скважины {}.".format(well_name))
 
 #current_well_name = well_name_in_excel
 #current_well_name = get_well_name(name, "_", 2)
 
-ipr_row_value = excel_row_reader(current_well_name, "Well", ipr_data_list, 5)
-
-#dates_value = data_reader("Date", "date", ipr_row_value, current_well_name)
-ipr_rate_value = data_reader("Rate, STB/day", "STB/day", ipr_row_value, current_well_name)
+ipr_row_value = excel_row_reader(well_name_in_excel, "Well", ipr_data_list, 5)
+ipr_rate_value = data_reader("Rate, STB/day", "STB/day", ipr_row_value, well_name_in_excel)
 
 if ipr_rate_value.size == 1: # Если в ячейке только одно значение, а не массив
     rate_value = np.array([ipr_rate_value])
 
-ipr_pressure_value = data_reader("Pressure, psig.1", "psig", ipr_row_value, current_well_name)
+ipr_pressure_value = data_reader("Pressure, psig.1", "psig", ipr_row_value, well_name_in_excel)
 ipr_pressure_value[ipr_pressure_value < 0] = 0.01 # убирает отрицательные значения
 
 if ipr_pressure_value.size == 1:  # Если в ячейке только одно значение, а не массив
     pressure_value = np.array([ipr_pressure_value])
 
-res_temp_value = data_reader("Reservoir Temperature, deg F", "F", ipr_row_value, current_well_name) # Понадобится в 23.3 когда поле для температуры появится
-res_pressure_value = data_reader("Reservoir Pressure, psig", "psig", ipr_row_value, current_well_name)
+res_temp_value = data_reader("Reservoir Temperature, deg F", "F", ipr_row_value, well_name_in_excel) # Понадобится в 23.3 когда поле для температуры появится
+res_pressure_value = data_reader("Reservoir Pressure, psig", "psig", ipr_row_value, well_name_in_excel)
 
-pi_entry_value = data_reader("Productivity Index, STB/day/psi", "STB/day/psi", ipr_row_value, current_well_name)
+pi_entry_value = data_reader("Productivity Index, STB/day/psi", "STB/day/psi", ipr_row_value, well_name_in_excel)
 
-res_model = int(data_reader("Reservoir Model", "number", ipr_row_value, current_well_name))
+res_model = int(data_reader("Reservoir Model", "number", ipr_row_value, well_name_in_excel))
 
 
 if ipr_rate_value.size != 0 and ipr_pressure_value.size != 0:
@@ -180,20 +195,20 @@ if ipr_rate_value.size != 0 and ipr_pressure_value.size != 0:
           well_test_data_type="multipoint",
           well_test_data=df_sample_data)
 
-    wd_adjust_ipr_parameters(ipr="IPR_Table",
-                             use_date=False,
-                             date=datetime(year=2023, month=7, day=17, hour=0, minute=0, second=0),
-                             ipr_base=ipr_phase,
-                             ipr_model="pi_entry",
-                             pi_entry_reservoir_pressure=res_pressure_value,
-                             pi_entry_productivity_index=pi_entry_value,
-                             pi_entry_vogel_coefficient=0.2,
-                             pi_entry_use_calculated_bubble_point_pressure=False,
-                             pi_entry_bubble_point_pressure=120)
-
     if res_model > 1:
         print("Значение \"Reservoir Model\" = {} не поддержано.".format(res_model))
+    else:
+        wd_adjust_ipr_parameters(ipr="IPR",
+                                 use_date=False,
+                                 date=datetime(year=2023, month=1, day=1, hour=0, minute=0, second=0),
+                                 ipr_base=ipr_phase,
+                                 ipr_model="pi_entry",
+                                 pi_entry_reservoir_pressure=res_pressure_value,
+                                 pi_entry_productivity_index=pi_entry_value,
+                                 pi_entry_vogel_coefficient=0.2,
+                                 pi_entry_use_calculated_bubble_point_pressure=False,
+                                 pi_entry_bubble_point_pressure=120)
 
 else:
     #print("Немогу получить данные по IPR для скважины '{}'!".format(current_well_name))
-    print_log(text="Немогу получить данные по IPR для скважины '{}'!".format(current_well_name), severity="warning")
+    print_log(text="Немогу получить данные по IPR для скважины '{}'!".format(well_name), severity="warning")

@@ -52,12 +52,29 @@ def data_reader(column_name: str, units: str, df: pd.DataFrame, well_name: str):
             df_out = (np.array(df_out, dtype="float") - 32)/1.8 # Конвертируем F в C
         if units == "psig":
             df_out = np.array(df_out, dtype="float") * 0.0689475728 # Конвертируем psig в bar
+            # in_array, min, max
+            # Значения меньше 1,01 заменяем на 1,01
+            df_out = np.clip(df_out, 1.01325, None)
+
+            # Заменяем значения больше 1e20 на 0
+            #if not hasattr(df_out, "__len__"): # число или массив
+            if df_out.size == 1:
+                if df_out > 1e20:
+                    df_out = 0.0
+            else:
+                df_out[df_out > 1e20] = 0
         if units == "%":
             df_out = np.array(df_out, dtype="float") * 0.01 # Конвертируем % в д.е.
         if units == "STB/day":
             df_out = np.array(df_out, dtype="float") * 0.158987  # Конвертируем STB/day в sm3/day.
         if units == "scf/STB":
             df_out = np.array(df_out, dtype="float") * 0.1781076  # Конвертируем scf/STB в sm3/sm3.
+            # Заменяем значения больше 1e20 на 0
+            if df_out.size == 1: # число или массив
+                if df_out > 1e20:
+                    df_out = 0.0
+            else:
+                df_out[df_out > 1e20] = 0
         if units == "date":
             df_out = np.array(pd.to_datetime(df_out, format="%d/%m/%Y"))   # Конвертируем строки в даты.
         if units == "btu":
