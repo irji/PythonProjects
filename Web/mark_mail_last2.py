@@ -1,110 +1,85 @@
-import requests
-from requests.auth import HTTPBasicAuth
-import xml.etree.ElementTree as ET
+import imaplib
+import email
+from email.utils import parsedate_to_datetime
 from datetime import datetime, timedelta
 
 # Конфигурация
-ZIMBRA_API_URL = 'https://mail.rfdyn.ru/service/soap'
-USERNAME = 'georgii.kostin'
-PASSWORD = 'GEBXMOKHWJVIVUKZ'
-TARGET_SENDERS = ["polina.tsvetkova"]  # Список адресатов
-DAYS_BACK = 7  # Период в днях
+IMAP_SERVER = 'imap.your-zimbra-server.com'
+USERNAME = 'your_username'
+PASSWORD = 'your_password'
+TARGET_SENDERS = ['target1@example.com', 'target2@example.com']
+DAYS_BACK = 7
+TAG = 'TargetSenderLast'
 
-# Получение токена авторизации
-def get_auth_token():
-    body = f"""
-    <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-      <soap:Body>
-        <AuthRequest xmlns="urn:zimbraAccount">
-          <account by="name">{USERNAME}</account>
-          <password>{PASSWORD}</password>
-        </AuthRequest>
-      </soap:Body>
-    </soap:Envelope>
-    """
-    headers = {'Content-Type': 'application/soap+xml'}
-    response = requests.post(ZIMBRA_API_URL, data=body, headers=headers)
-    root = ET.fromstring(response.content)
-    token = root.find('.//{urn:zimbraAccount}authToken').text
-    return token
+# Подключение к IMAP и выбор папки
 
-# Получение списка всех тредов
+def connect_to_imap():
+    mail = imaplib.IMAP4_SSL(IMAP_SERVER)
+    mail.login(USERNAME, PASSWORD)
+    mail.select('INBOX')
+    return mail
 
-def get_threads(auth_token):
-    since = int((datetime.now() - timedelta(days=DAYS_BACK)).timestamp() * 1000)
-    headers = {'Content-Type': 'application/soap+xml', 'Authorization': f'ZM_AUTH_TOKEN {auth_token}'}
-    body = f"""
-    <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-      <soap:Body>
-        <SearchRequest xmlns="urn:zimbraMail" types="conversation" limit="1000">
-          <query>in:inbox after:{since}</query>
-        </SearchRequest>
-      </soap:Body>
-    </soap:Envelope>
-    """
-    response = requests.post(ZIMBRA_API_URL, data=body, headers=headers)
-    root = ET.fromstring(response.content)
-    return root.findall('.//{urn:zimbraMail}c')
+# Поиск цепочек писем (тредов) не старше N дней
 
-# Получение сообщений внутри треда
+def search_recent_threads(mail):
+    date_since = (datetime.now() - timedelta(days=DAYS_BACK)).strftime('%d-%b-%Y')
+    result, data = mail.search(None, f'(SINCE {date_since})')
+    if result != 'OK':
+        print('Ошибка поиска писем')
+        return []
+    return data[0].split()
 
-def get_messages_in_thread(auth_token, thread_id):
-    headers = {'Content-Type': 'application/soap+xml', 'Authorization': f'ZM_AUTH_TOKEN {auth_token}'}
-    body = f"""
-    <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-      <soap:Body>
-        <GetConversationRequest xmlns="urn:zimbraMail" id="{thread_id}" />
-      </soap:Body>
-    </soap:Envelope>
-    """
-    response = requests.post(ZIMBRA_API_URL, data=body, headers=headers)
-    root = ET.fromstring(response.content)
-    return root.findall('.//{urn:zimbraMail}m')
+# Получение информации о письме
 
-# Пометка треда (например, тегом)
+def fetch_email(mail, msg_id):
+    result, data = mail.fetch(msg_id, '(RFC822)')
+    if result != 'OK':
+        return None
+    msg = email.message_from_bytes(data[0][1])
+    return msg
 
-def tag_thread(auth_token, thread_id, tag_name='TargetSenderLast'):
-    headers = {'Content-Type': 'application/soap+xml', 'Authorization': f'ZM_AUTH_TOKEN {auth_token}'}
-    # Создаём тег (можно один раз вне цикла)
-    body_create_tag = f"""
-    <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-      <soap:Body>
-        <CreateTagRequest xmlns="urn:zimbraMail">
-          <tag name="{tag_name}" color="1"/>
-        </CreateTagRequest>
-      </soap:Body>
-    </soap:Envelope>
-    """
-    requests.post(ZIMBRA_API_URL, data=body_create_tag, headers=headers)
+# Группировка по тредам с использованием заголовка "Message-ID" и "In-Reply-To"
 
-    # Назначаем тег треду
-    body_tag = f"""
-    <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-      <soap:Body>
-        <ItemActionRequest xmlns="urn:zimbraMail">
-          <action id="{thread_id}" op="tag" tag="{tag_name}"/>
-        </ItemActionRequest>
-      </soap:Body>
-    </soap:Envelope>
-    """
-    requests.post(ZIMBRA_API_URL, data=body_tag, headers=headers)
+def build_threads(mail, msg_ids):
+    threads = {}
+    msg_map = {}
+
+    for msg_id in msg_ids:
+        msg = fetch_email(mail, msg_id)
+        if not msg:
+            continue
+        message_id = msg.get('Message-ID')
+        in_reply_to = msg.get('In-Reply-To')
+        msg_map[message_id] = (msg_id, msg)
+
+        thread_key = in_reply_to if in_reply_to else message_id
+        if thread_key not in threads:
+            threads[thread_key] = []
+        threads[thread_key].append((msg_id, msg))
+
+    return threads
+
+# Определение, от нужного ли отправителя последнее письмо в треде
+
+def process_threads(mail, threads):
+    for thread_key, msgs in threads.items():
+        msgs_sorted = sorted(msgs, key=lambda m: parsedate_to_datetime(m[1]['Date']))
+        last_msg = msgs_sorted[-1][1]
+        sender = email.utils.parseaddr(last_msg.get('From'))[1]
+
+        if sender in TARGET_SENDERS:
+            print(f"Thread with last sender {sender} - tagged ({TAG})")
+            # Здесь можно реализовать добавление тега или пометку письма флагом, если сервер поддерживает
+            # Например: mail.store(msgs_sorted[-1][0], '+FLAGS', '\Flagged')
 
 # Основная логика
 
 def main():
-    token = get_auth_token()
-    threads = get_threads(token)
-
-    for thread in threads:
-        thread_id = thread.attrib['id']
-        messages = get_messages_in_thread(token, thread_id)
-        if not messages:
-            continue
-        last_msg = max(messages, key=lambda m: int(m.attrib['d']))
-        msg_xml = ET.tostring(last_msg).decode()
-        if any(sender in msg_xml for sender in TARGET_SENDERS):
-            tag_thread(token, thread_id)
-            print(f"Thread {thread_id} tagged.")
+    mail = connect_to_imap()
+    msg_ids = search_recent_threads(mail)
+    threads = build_threads(mail, msg_ids)
+    process_threads(mail, threads)
+    mail.logout()
 
 if __name__ == '__main__':
     main()

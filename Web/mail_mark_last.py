@@ -25,6 +25,7 @@ print(since_dt)
 with MailBox(IMAP_SERVER).login(EMAIL, PASSWORD) as mailbox:
     # Получаем все треды (группировка по заголовку 'Thread-Topic' или 'References')
     threads = {}
+    msg_map = {}
 
     for f in mailbox.folder.list():
         # проходимся по всем папкам в ящике
@@ -51,48 +52,59 @@ with MailBox(IMAP_SERVER).login(EMAIL, PASSWORD) as mailbox:
                 thread_reference = msg.headers.get('references')
 
                 thread_id = msg.headers.get('thread-index')
-                threads.setdefault(thread_id, []).append(msg)
+                #threads.setdefault(thread_id, []).append(msg)
 
-                if thread_id != None:
-                    #print("{}  |  {}  |  {}  |  {}  |  {}".format(msg.subject, msg.date, thread_id, msg.headers.get('message-id'), thread_reference))
-                    print("{}  |  {}  |  {}  |  {}  |  {}".format(msg.subject, msg.date, thread_id,
-                                                                  msg.headers.get('message-id'), thread_in_reply_to))
-
-            # # Проверяем каждый тред
-            # for thread_id, messages in threads.items():
-            #     # Сортируем письма по дате (последнее = самое новое)
-            #     if len(messages) > 1:
-            #         last_msg2 = sorted(messages, key=lambda x: x.date, reverse=True)
-            #
-            #         last_msg = last_msg2[1]
-            #
-            #         for sender in TARGET_SENDER_LIST:
-            #         # Если последнее письмо от нужного отправителя
-            #             if str.__contains__(last_msg.from_, sender) == True:
-            #                 print(f"В цепочке '{thread_id}' последнее письмо от {sender}")
-            #                 # Добавляем метку (если поддерживается IMAP)
-            #                 mailbox.flag(last_msg.uid, TAG_NAME, True)
+                #if thread_id != None:
+                #    #print("{}  |  {}  |  {}  |  {}  |  {}".format(msg.subject, msg.date, thread_id, msg.headers.get('message-id'), thread_reference))
+                #    print("{}  |  {}  |  {}  |  {}  |  {}".format(msg.subject, msg.date, thread_id,
+                #                                                  msg.headers.get('message-id'), thread_in_reply_to))
 
 
+                message_id = msg.headers.get('message-id')
+                in_reply_to = msg.headers.get('in-reply-to')
 
-# Группировка по тредам с использованием заголовка "Message-ID" и "In-Reply-To"
+                msg_map[message_id] = (message_id, msg)
 
-def build_threads(mail, msg_ids):
-    threads = {}
-    msg_map = {}
+                thread_key = in_reply_to if in_reply_to else message_id
+                if thread_key not in threads:
+                     threads[thread_key] = []
+                threads[thread_key].append((message_id, msg))
 
-    for msg_id in msg_ids:
-        msg = fetch_email(mail, msg_id)
-        if not msg:
-            continue
-        message_id = msg.get('Message-ID')
-        in_reply_to = msg.get('In-Reply-To')
-        msg_map[message_id] = (msg_id, msg)
+            # Проверяем каждый тред
+            for thread_id, messages in threads.items():
+                # Сортируем письма по дате (последнее = самое новое)
+                if len(messages) > 1:
+                    last_msg2 = sorted(messages, key=lambda x: x.date, reverse=True)
 
-        thread_key = in_reply_to if in_reply_to else message_id
-        if thread_key not in threads:
-            threads[thread_key] = []
-        threads[thread_key].append((msg_id, msg))
+                    last_msg = last_msg2[1]
 
-    return threads
+                    for sender in TARGET_SENDER_LIST:
+                    # Если последнее письмо от нужного отправителя
+                        if str.__contains__(last_msg.from_, sender) == True:
+                            print(f"В цепочке '{thread_id}' последнее письмо от {sender}")
+                            # Добавляем метку (если поддерживается IMAP)
+                            mailbox.flag(last_msg.uid, TAG_NAME, True)
+
+
+
+# # Группировка по тредам с использованием заголовка "Message-ID" и "In-Reply-To"
+#
+# def build_threads(mail, msg_ids):
+#     threads = {}
+#     msg_map = {}
+#
+#     for msg_id in msg_ids:
+#         msg = fetch_email(mail, msg_id)
+#         if not msg:
+#             continue
+#         message_id = msg.get('Message-ID')
+#         in_reply_to = msg.get('In-Reply-To')
+#         msg_map[message_id] = (msg_id, msg)
+#
+#         thread_key = in_reply_to if in_reply_to else message_id
+#         if thread_key not in threads:
+#             threads[thread_key] = []
+#         threads[thread_key].append((msg_id, msg))
+#
+#     return threads
 
