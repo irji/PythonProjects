@@ -2,6 +2,18 @@ from synology_drive_api.drive import SynologyDrive
 from openpyxl import load_workbook
 import pandas as pd
 
+
+def aggregate_comments(input_dataframe):
+    test = input_dataframe.groupby(['Тема'])
+
+    for gr in test:
+        print(gr)
+
+    return test
+
+
+
+
 user_name = "georgii.kostin"
 employee_name = "Костин Георгий"
 user_password = "5MGc/8cac"
@@ -37,9 +49,13 @@ no_duplicates = vertical_concat.drop_duplicates(subset="Тема")
 
 #test=vertical_concat.groupby(vertical_concat['Тема']).aggregate({"Комментарии": ' '.join })
 
-test = vertical_concat.groupby(['Тема'])['Комментарии'].aggregate(lambda x : ' '.join(str(x)))
+#test = vertical_concat.groupby(['Тема'])['Комментарии'].aggregate(lambda x : ' '.join(str(x)))
+
+test = aggregate_comments(vertical_concat)
 
 print(vertical_concat)
+
+
 
 
 #if __name__ == '__main__':
