@@ -17,7 +17,7 @@ TARGET_SENDER_LIST = {"konstantin.vorobev",
 TAG_NAME = "LastInThread"
 
 dt_now = datetime.datetime.now()
-since_dt = dt_now + datetime.timedelta(days=-7)
+since_dt = dt_now + datetime.timedelta(days=-9)
 
 print(since_dt)
 
@@ -48,10 +48,12 @@ with MailBox(IMAP_SERVER).login(EMAIL, PASSWORD) as mailbox:
 #                .1748847361114.JavaMail.zimbra @ rfdyn.com > < AUXP273MB0911AF8BD732CD7D4E3A13A6B562A @ AUXP273MB0911.AREP273.PROD.OUTLOOK.COM > < 1608023397.54051206
 #                .1748850774911.JavaMail.zimbra @ rfdyn.com >
 
+                message_id = msg.headers.get('message-id')
                 thread_in_reply_to = msg.headers.get('in-reply-to')
                 thread_reference = msg.headers.get('references')
-
                 thread_id = msg.headers.get('thread-index')
+
+                #thread_key = thread_in_reply_to if thread_in_reply_to else message_id
                 #threads.setdefault(thread_id, []).append(msg)
 
                 #if thread_id != None:
@@ -59,31 +61,35 @@ with MailBox(IMAP_SERVER).login(EMAIL, PASSWORD) as mailbox:
                 #    print("{}  |  {}  |  {}  |  {}  |  {}".format(msg.subject, msg.date, thread_id,
                 #                                                  msg.headers.get('message-id'), thread_in_reply_to))
 
+                #for msg in thread_reference.split():
 
-                message_id = msg.headers.get('message-id')
-                in_reply_to = msg.headers.get('in-reply-to')
 
-                msg_map[message_id] = (message_id, msg)
 
-                thread_key = in_reply_to if in_reply_to else message_id
-                if thread_key not in threads:
-                     threads[thread_key] = []
-                threads[thread_key].append((message_id, msg))
+                #if thread_key not in threads:
+                #     threads[thread_key] = []
+                #     threads.setdefault(thread_key, []).append(msg)
+                #else:
+                #    threads[message_id] = threads[thread_key]
+                #    del threads[thread_key]
+                #    threads.setdefault(message_id, []).append(msg)
 
-            # Проверяем каждый тред
-            for thread_id, messages in threads.items():
-                # Сортируем письма по дате (последнее = самое новое)
-                if len(messages) > 1:
-                    last_msg2 = sorted(messages, key=lambda x: x.date, reverse=True)
+                #threads[thread_key].append((message_id, msg))
 
-                    last_msg = last_msg2[1]
-
-                    for sender in TARGET_SENDER_LIST:
-                    # Если последнее письмо от нужного отправителя
-                        if str.__contains__(last_msg.from_, sender) == True:
-                            print(f"В цепочке '{thread_id}' последнее письмо от {sender}")
-                            # Добавляем метку (если поддерживается IMAP)
-                            mailbox.flag(last_msg.uid, TAG_NAME, True)
+            print("ffff")
+            # # Проверяем каждый тред
+            # for thread_id, messages in threads.items():
+            #     # Сортируем письма по дате (последнее = самое новое)
+            #     if len(messages) > 1:
+            #         last_msg2 = sorted(messages, key=lambda x: x.date, reverse=True)
+            #
+            #         last_msg = last_msg2[1]
+            #
+            #         for sender in TARGET_SENDER_LIST:
+            #         # Если последнее письмо от нужного отправителя
+            #             if str.__contains__(last_msg.from_, sender) == True:
+            #                 print(f"В цепочке '{thread_id}' последнее письмо от {sender}")
+            #                 # Добавляем метку (если поддерживается IMAP)
+            #                 mailbox.flag(last_msg.uid, TAG_NAME, True)
 
 
 
