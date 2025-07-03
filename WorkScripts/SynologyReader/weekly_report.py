@@ -2,61 +2,90 @@ from synology_drive_api.drive import SynologyDrive
 from openpyxl import load_workbook
 import pandas as pd
 
-
-def aggregate_comments(input_dataframe):
-    test = input_dataframe.groupby(['Тема'])
-
-    for gr in test:
-        print(gr)
-
-    return test
-
-
-
+exclude_headers = {"Заполнение отчета",
+                   "Переписка в почте, сообщения в редмайне, рокетчате, звонки в зуме. Обсуждения с коллегами рабочих вопросов.",
+                   "Ежедневное собрание группы",
+                   "Ежедневное собрание группы + подгруппы",
+                   "Интерфейс",
+                   "Еженедельная лекция",
+                   "Корпоратив"}
 
 user_name = "georgii.kostin"
 employee_name = "Костин Георгий"
 user_password = "5MGc/8cac"
 server_path = "synoffice.local.rfdyn.ru"
-filtered_tabl = None
-vertical_concat = None
 
-with SynologyDrive(user_name, user_password, server_path, dsm_version="7") as synology_drive:
+def aggregate_comments(input_dataframe):
+    input_dataframe = input_dataframe.reset_index(drop=True).fillna("")
 
-    folders = synology_drive.list_folder("/team-folders/Reports/SUPPORT")["data"]["items"]
+    # делаем группировку по колонке с темой, чтобы одинаковые задачи собрать
+    grouped_dataframe = input_dataframe.groupby(['Тема'])
+    result_dataframe = None
 
-    for item in folders:
-        if item["name"] != "Archive" and item["name"] != "Week Шаблон":
-            #print(item["name"])
-            path = "/team-folders/Reports/SUPPORT/" + item["name"] + "/2. Report Support Вторник.osheet"
+    for header, df in grouped_dataframe:
+        new_comment = ""
+        new_id = None
+        new_header = str(header[0]).rstrip()
 
-            bio = synology_drive.download_synology_office_file(path)
-            tabl = pd.read_excel(bio, sheet_name=None, na_values="nan")["Support"]
+        # проверм что темы нет в списке исключений и объединяем все комментарии
+        if new_header not in exclude_headers:
+            for row in df.iterrows():
+                comment = str(row[1]["Комментарии"])
+                new_id = row[1]["#"]
+                #new_header = row[1]["Тема"]
 
-            # Фильтруем dataframe только для себя + удаляем строки с пустым значением в колонке 'Тема'
-            filtered_tabl = tabl[tabl["Сотрудник"] == employee_name].dropna(subset=["Тема"])
-            #filtered_tabl = tabl["Support"]
-            vertical_concat = pd.concat([vertical_concat, filtered_tabl], axis=0)
+                if comment not in new_comment:
+                    new_comment = new_comment + comment + "; "
 
+            data = {"#":[new_id], "Тема":[new_header], "Комментарии":[new_comment]}
 
-vertical_concat.sort_values(by="Тема", inplace=True)
+            result_dataframe = pd.concat([result_dataframe, pd.DataFrame(data)], axis=0)
 
-no_duplicates = vertical_concat.drop_duplicates(subset="Тема")
+    return result_dataframe
 
-#test = vertical_concat.groupby("Тема")["Комментарии"].apply(' '.join)
+def create_path_list(folder_name1, folder_name2):
+    paths = []
 
-#test = vertical_concat
+    paths.append("/team-folders/Reports/SUPPORT/" + folder_name1 + "/3. Report Support Среда.osheet")
+    paths.append("/team-folders/Reports/SUPPORT/" + folder_name1 + "/4. Report Support Четверг.osheet")
+    paths.append("/team-folders/Reports/SUPPORT/" + folder_name1 + "/5. Report Support Пятница.osheet")
 
-#test=vertical_concat.groupby(vertical_concat['Тема']).aggregate({"Комментарии": ' '.join })
+    paths.append("/team-folders/Reports/SUPPORT/" + folder_name2 + "/1. Report Support Понедельник.osheet")
+    paths.append("/team-folders/Reports/SUPPORT/" + folder_name2 + "/2. Report Support Вторник.osheet")
 
-#test = vertical_concat.groupby(['Тема'])['Комментарии'].aggregate(lambda x : ' '.join(str(x)))
+    return  paths
 
-test = aggregate_comments(vertical_concat)
+def get_task_list_for_report():
+    vertical_concat = None
 
-print(vertical_concat)
+    with SynologyDrive(user_name, user_password, server_path, dsm_version="7") as synology_drive:
+        folders = synology_drive.list_folder("/team-folders/Reports/SUPPORT")["data"]["items"]
 
+        path_list = create_path_list(folders[1]["name"], folders[2]["name"])
 
+        for path in path_list:
+            #if item["name"] != "Archive" and item["name"] != "Week Шаблон":
+                #print(item["name"])
+                #path = "/team-folders/Reports/SUPPORT/" + item["name"] + "/3. Report Support Среда.osheet"
 
+                report_file = synology_drive.download_synology_office_file(path)
+                tabl = pd.read_excel(report_file, sheet_name=None, na_values="nan")["Support"]
 
-#if __name__ == '__main__':
-#    download_reports()
+                # Фильтруем dataframe только для себя + удаляем строки с пустым значением в колонке 'Тема'
+                filtered_tabl = tabl[tabl["Сотрудник"] == employee_name].dropna(subset=["Тема"])
+                vertical_concat = pd.concat([vertical_concat, filtered_tabl], axis=0)
+
+    vertical_concat.sort_values(by="Тема", inplace=True)
+    task_list = aggregate_comments(vertical_concat)
+
+    return task_list
+
+def fill_xls_report(task_list):
+    print(task_list)
+
+#print(task_list)
+
+if __name__ == '__main__':
+    task_list = get_task_list_for_report()
+
+    fill_xls_report(task_list)
