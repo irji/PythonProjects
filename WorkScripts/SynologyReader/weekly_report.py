@@ -9,6 +9,8 @@ from copy import copy
 import getpass
 import keyring
 
+from RandomTest import new_month
+
 exclude_headers = {"Заполнение отчета",
                    "Переписка в почте, сообщения в редмайне, рокетчате, звонки в зуме. Обсуждения с коллегами рабочих вопросов.",
                    "Ежедневное собрание группы",
@@ -100,12 +102,10 @@ def get_task_list_for_report():
 
 def fill_xls_report(task_list):
     date_string = ""
+    new_month_id = "0" + str(datetime.datetime.today().month) if datetime.datetime.today().month < 10 else str(datetime.datetime.today().month)
+    new_day_id = "0" + str(datetime.datetime.today().day) if datetime.datetime.today().day < 10 else str(datetime.datetime.today().day)
 
-    if datetime.datetime.today().month < 10:
-        date_string = str(datetime.datetime.today().year) + "0" + str(datetime.datetime.today().month) + str(datetime.datetime.today().day)
-    else:
-        date_string = str(datetime.datetime.today().year) + str(datetime.datetime.today().month) + str(datetime.datetime.today().day)
-
+    date_string = str(datetime.datetime.today().year) + new_month_id + new_day_id
     new_file_name = template_name.replace("template", date_string)
     #shutil.copy(template_name, new_file_name)
 
