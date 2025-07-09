@@ -1,6 +1,13 @@
+import openpyxl.styles.borders
 from synology_drive_api.drive import SynologyDrive
 from openpyxl import load_workbook
 import pandas as pd
+import datetime
+import shutil
+from copy import copy
+
+import getpass
+import keyring
 
 exclude_headers = {"Заполнение отчета",
                    "Переписка в почте, сообщения в редмайне, рокетчате, звонки в зуме. Обсуждения с коллегами рабочих вопросов.",
@@ -14,6 +21,14 @@ user_name = "georgii.kostin"
 employee_name = "Костин Георгий"
 user_password = "5MGc/8cac"
 server_path = "synoffice.local.rfdyn.ru"
+template_name = "Kostin_Georgii_template.xlsx"
+
+def get_monday (date):
+  return date  - datetime.timedelta(days=date.weekday() % 7)
+
+def get_friday (date):
+  return get_monday (date) + datetime.timedelta (days = 4)
+
 
 def aggregate_comments(input_dataframe):
     input_dataframe = input_dataframe.reset_index(drop=True).fillna("")
@@ -37,6 +52,7 @@ def aggregate_comments(input_dataframe):
                 if comment not in new_comment:
                     new_comment = new_comment + comment + "; "
 
+            new_comment = new_comment.rstrip().removesuffix(";")
             data = {"#":[new_id], "Тема":[new_header], "Комментарии":[new_comment]}
 
             result_dataframe = pd.concat([result_dataframe, pd.DataFrame(data)], axis=0)
@@ -77,11 +93,33 @@ def get_task_list_for_report():
 
     vertical_concat.sort_values(by="Тема", inplace=True)
     task_list = aggregate_comments(vertical_concat)
+    idx = pd.Index(range(0, len(task_list.index), 1))
+    task_list = task_list.set_index(idx)
 
     return task_list
 
 def fill_xls_report(task_list):
-    print(task_list)
+    date_string = ""
+
+    if datetime.datetime.today().month < 10:
+        date_string = str(datetime.datetime.today().year) + "0" + str(datetime.datetime.today().month) + str(datetime.datetime.today().day)
+    else:
+        date_string = str(datetime.datetime.today().year) + str(datetime.datetime.today().month) + str(datetime.datetime.today().day)
+
+    new_file_name = template_name.replace("template", date_string)
+    #shutil.copy(template_name, new_file_name)
+
+    wb = load_workbook(filename = template_name)
+    sheet_ranges = wb['Tasks']
+
+    for i,task in task_list.iterrows():
+        sheet_ranges.cell(row=i + 3, column=1).value = task["#"]
+        sheet_ranges.cell(row=i + 3, column=4).value = task["Тема"]
+        sheet_ranges.cell(row=i + 3, column=5).value = task["Комментарии"]
+
+    wb.save(new_file_name)
+
+    #print(task_list)
 
 #print(task_list)
 
