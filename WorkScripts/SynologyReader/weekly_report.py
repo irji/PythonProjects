@@ -26,7 +26,9 @@ def get_friday (date):
 
 
 def aggregate_comments(input_dataframe):
-    input_dataframe = input_dataframe.reset_index(drop=True).fillna("")
+    #input_dataframe = input_dataframe.reset_index(drop=True).fillna("")
+    #`pd.set_option('future.no_silent_downcasting', True)`
+    input_dataframe = input_dataframe.infer_objects(copy=False).fillna("")
 
     # делаем группировку по колонке с темой, чтобы одинаковые задачи собрать
     grouped_dataframe = input_dataframe.groupby(['Тема'])
@@ -184,8 +186,8 @@ def fill_quarter_xls_report(task_list):
     wb.save("Report.xlsx")
 
 if __name__ == '__main__':
-    #task_list = get_task_list_for_weekly_report()
-    #fill_xls_report(task_list)
+    task_list = get_task_list_for_weekly_report()
+    fill_weekly_xls_report(task_list)
 
-    task_list = get_task_list_for_quarter_report(datetime.date(2025, 5, 28))
-    fill_quarter_xls_report(task_list)
+    #task_list = get_task_list_for_quarter_report(datetime.date(2025, 5, 28))
+    #fill_quarter_xls_report(task_list)
