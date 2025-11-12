@@ -1,3 +1,5 @@
+from dateutil.utils import today
+from pandas.tseries.holiday import previous_workday
 from synology_drive_api.drive import SynologyDrive
 from openpyxl import load_workbook, Workbook
 import pandas as pd
@@ -107,11 +109,23 @@ def create_archive_path_list(begin_date :datetime.date):
 
 def get_task_list_for_weekly_report():
     vertical_concat = None
+    folders_list = []
+    previous_week = ""
+    this_week = ""
+
+    week_begin = get_monday(datetime.datetime.now()).strftime('%Y%m%d')
 
     with SynologyDrive(user_name, user_password, server_path, dsm_version="7") as synology_drive:
         folders = synology_drive.list_folder("/team-folders/Reports/SUPPORT")["data"]["items"]
 
-        path_list = create_path_list(folders[1]["name"], folders[2]["name"])
+        for fl in folders:
+            if fl["name"] != "Archive" and fl["name"] != "Week Шаблон":
+                if week_begin in fl["name"]:
+                    this_week = fl["name"]
+                else:
+                    previous_week = fl["name"]
+
+        path_list = create_path_list(previous_week, this_week)
 
         for path in path_list:
             #if item["name"] != "Archive" and item["name"] != "Week Шаблон":
@@ -141,6 +155,8 @@ def get_task_list_for_quarter_report(begin_date :datetime.date):
         for path in paths:
                 report_file = synology_drive.download_synology_office_file(path)
                 tabl = pd.read_excel(report_file, sheet_name=None, na_values="nan")["Support"]
+
+                print(path)
 
                 # Фильтруем dataframe только для себя + удаляем строки с пустым значением в колонке 'Тема'
                 filtered_tabl = tabl[tabl["Сотрудник"] == employee_name].dropna(subset=["Тема"])
