@@ -1,0 +1,61 @@
+import pathlib
+
+#================================ USER SETTINGS ================================
+user_names= {
+    "georgii.kostin",
+    "konstantin.vorobev",
+    "polina.tsvetkova",
+    "german.nepotasov",
+    "dmitrii.bevzenko",
+    "olga.fedyaeva",
+    "dmitry.kliymenko",
+    "pavel.koryuzlov",
+    "andrey.spiridonov",
+    "aleksandr.timoshenko",
+    "aigul.khatmullina",
+    "ahmed.alkebsi"
+}
+#================================ USER SETTINGS ================================
+
+#================================ FILES SETTINGS ================================
+files_ext = {"dat", "data", "afi", "snp", "sdata"}
+#================================ FILES SETTINGS ================================
+
+
+def check_folder():
+    for user in user_names:
+        input_path = pathlib.Path("N:\\" + user + "\\NEW_MODELS")
+
+        with open("report.txt", "a+", encoding="utf-8") as file:
+            print("Проверяю папку пользователя {}.".format(user))
+            file.write("Проверяю папку пользователя {}.\n".format(user))
+
+            for f_ext in files_ext:
+                for item in input_path.rglob("*." + f_ext):
+                    if item.is_file():
+                        if len(item.parts) != 8: #проверяем что путь до файла модели состоит строго из 8 частей
+                            # пример того что приходит в item.parts ('N:\\', 'ahmed.alkebsi', 'NEW_MODELS', 'models.E100', '2026-1-tNav', 'JOB_Tomori', '#134938', 'HM_FINAL_21_SEPT24_1_FixedPVT_DPCDT_OneEquil_HM_FC.data')
+
+                            if len(item.parts) < 8: #если путь состоит менее чем из 8 частей, то скорее всего прощен уровень вложенности
+                                print("Пропущено одна или несколько вложенных папок. Нужно исправить путь размещения модели. {}".format(item))
+                                file.write("Пропущено одна или несколько вложенных папок. Нужно исправить путь размещения модели. {}\n".format(item))
+                            else:
+                                #если путь состоит из более 8 частей, то есть "лишние" папки содержащие файлы из списка files_ext
+                                if not item.parts.__contains__("DATA.ORI"): #игнорируем папку DATA.ORI
+                                    if item.parts.__contains__("RESULTS"):
+                                        print("Возможно папку RUSULTS нужно удалить. Она нужна для рестарта? {}".format(item))
+                                        file.write("Возможно папку RUSULTS нужно удалить. Она нужна для рестарта? {}\n".format(item))
+                        else:
+                            if not item.parts[4].__contains__("tNav") and f_ext == "data": # проверям что папка с номером не содержит tNav в названии и файл с расширением data
+                                if not item.parts[-1].split(".")[1].isupper():
+                                    print("Расширение должно быть указано заглавными буквами. {}".format(item))
+                                    file.write("Расширение должно быть указано заглавными буквами. {}\n".format(item))
+
+                        for element in item.parts:
+                            if element.__contains__(" ") and f_ext != "sdata":
+                                print("Путь и название файла не должен содержать пробелы! {}".format(item))
+                                file.write("Путь и название файла не должен содержать пробелы! {}\n".format(item))
+
+
+if __name__ == '__main__':
+    check_folder()

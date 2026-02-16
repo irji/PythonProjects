@@ -205,5 +205,5 @@ if __name__ == '__main__':
     task_list = get_task_list_for_weekly_report()
     fill_weekly_xls_report(task_list)
 
-    #task_list = get_task_list_for_quarter_report(datetime.date(2025, 5, 28))
+    #task_list = get_task_list_for_quarter_report(datetime.date(2025, 9, 5))
     #fill_quarter_xls_report(task_list)
