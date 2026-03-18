@@ -156,11 +156,16 @@ def get_task_list_for_quarter_report(begin_date :datetime.date):
                 report_file = synology_drive.download_synology_office_file(path)
                 tabl = pd.read_excel(report_file, sheet_name=None, na_values="nan")["Support"]
 
-                print(path)
-
                 # Фильтруем dataframe только для себя + удаляем строки с пустым значением в колонке 'Тема'
                 filtered_tabl = tabl[tabl["Сотрудник"] == employee_name].dropna(subset=["Тема"])
+                # if not filtered_tabl.empty:
+                #     print(path)
+                #     vertical_concat = pd.concat([vertical_concat, filtered_tabl], axis=0)
+                # else:
+                #     print(path + '   - DataFrame is empty!')
+
                 vertical_concat = pd.concat([vertical_concat, filtered_tabl], axis=0)
+                print(path)
 
     vertical_concat.sort_values(by="Тема", inplace=True)
     task_list = aggregate_comments(vertical_concat)
@@ -205,5 +210,5 @@ if __name__ == '__main__':
     task_list = get_task_list_for_weekly_report()
     fill_weekly_xls_report(task_list)
 
-    #task_list = get_task_list_for_quarter_report(datetime.date(2025, 9, 5))
-    #fill_quarter_xls_report(task_list)
+    # task_list = get_task_list_for_quarter_report(datetime.date(2025, 12, 4))
+    # fill_quarter_xls_report(task_list)
