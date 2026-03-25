@@ -28,9 +28,8 @@ def get_friday (date):
 
 
 def aggregate_comments(input_dataframe):
-    #input_dataframe = input_dataframe.reset_index(drop=True).fillna("")
-    #`pd.set_option('future.no_silent_downcasting', True)`
-    input_dataframe = input_dataframe.infer_objects(copy=False).fillna("")
+    #input_dataframe = input_dataframe.infer_objects(copy=False).fillna("")
+    input_dataframe = input_dataframe.fillna("")
 
     # делаем группировку по колонке с темой, чтобы одинаковые задачи собрать
     grouped_dataframe = input_dataframe.groupby(['Тема'])

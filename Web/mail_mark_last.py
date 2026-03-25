@@ -1,23 +1,29 @@
-from imap_tools import MailBox, A
+from imap_tools import MailBox, A, SortCriteria
 import datetime
+
+import imaplib
+import email
+from email.header import decode_header
+import webbrowser
+import os
 
 # Настройки
 EMAIL = "georgii.kostin@rfdyn.com"
-PASSWORD = "GEBXMOKHWJVIVUKZ"
+PASSWORD = "IGPHHTVIFARJNCBV"
 IMAP_SERVER = "mail.rfdyn.ru"  # Например: imap.gmail.com
-TARGET_SENDER_LIST = {"konstantin.vorobev",
-                      "polina.tsvetkova",
-                      "german.nepotasov",
-                      "dmitrii.bevzenko",
-                      "olga.fedyaeva",
-                      "dmitry.kliymenko",
-                      "pavel.koryuzlov",
-                      "andrey.spiridonov",
-                      "aleksandr.timoshenko"}
+# TARGET_SENDER_LIST = {"konstantin.vorobev",
+#                       "polina.tsvetkova",
+#                       "german.nepotasov",
+#                       "dmitrii.bevzenko",
+#                       "olga.fedyaeva",
+#                       "dmitry.kliymenko",
+#                       "pavel.koryuzlov",
+#                       "andrey.spiridonov",
+#                       "aleksandr.timoshenko"}
 TAG_NAME = "LastInThread"
 
 dt_now = datetime.datetime.now()
-since_dt = dt_now + datetime.timedelta(days=-9)
+since_dt = dt_now + datetime.timedelta(days=-1)
 
 print(since_dt)
 
@@ -27,13 +33,17 @@ with MailBox(IMAP_SERVER).login(EMAIL, PASSWORD) as mailbox:
     threads = {}
     msg_map = {}
 
-    for f in mailbox.folder.list():
+    for f in mailbox.folder.list().fetch(sort=SortCriteria.ARRIVAL_DT_DESC):
         # проходимся по всем папкам в ящике
         if str.__contains__(f.name, "INBOX"):
             mailbox.folder.set(f.name)
 
             # находим сообщения/цепочки начатые созданные за последнюю неделю
-            for msg in mailbox.fetch(A(date_gte=since_dt.date())):
+            messages = mailbox.fetch(A(date_gte=since_dt.date()))
+
+            print(str(messages.__sizeof__()) + "  " + f.name)
+
+            for msg in messages:
                 #thread_id = msg.thread_id  # Или msg.references или msg.subject
                 #thread_id = msg.headers.get('thread-index')
 
@@ -75,7 +85,13 @@ with MailBox(IMAP_SERVER).login(EMAIL, PASSWORD) as mailbox:
 
                 #threads[thread_key].append((message_id, msg))
 
-            print("ffff")
+                #print(len(thread_reference))
+
+                if thread_reference!= None:
+                    #print("ffff")
+                    print("{}  {}".format(len(thread_reference), msg.subject))
+                else:
+                    print("0  {}".format(msg.subject))
             # # Проверяем каждый тред
             # for thread_id, messages in threads.items():
             #     # Сортируем письма по дате (последнее = самое новое)
@@ -92,6 +108,7 @@ with MailBox(IMAP_SERVER).login(EMAIL, PASSWORD) as mailbox:
             #                 mailbox.flag(last_msg.uid, TAG_NAME, True)
 
 
+mailbox.logout()
 
 # # Группировка по тредам с использованием заголовка "Message-ID" и "In-Reply-To"
 #
