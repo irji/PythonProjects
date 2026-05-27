@@ -4,6 +4,7 @@ from synology_drive_api.drive import SynologyDrive
 from openpyxl import load_workbook, Workbook
 import pandas as pd
 import datetime
+import os
 
 exclude_headers = {"Заполнение отчета",
                    "Переписка в почте, сообщения в редмайне, рокетчате, звонки в зуме. Обсуждения с коллегами рабочих вопросов.",
@@ -18,6 +19,8 @@ employee_name = "Костин Георгий"
 user_password = "5MGc/8cac"
 server_path = "synoffice.local.rfdyn.ru"
 template_name = "Kostin_Georgii_template.xlsx"
+
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 def get_monday (date):
   return date  - datetime.timedelta(days=date.weekday() % 7)
@@ -181,10 +184,11 @@ def fill_weekly_xls_report(task_list):
     new_day_id = "0" + str(datetime.datetime.today().day) if datetime.datetime.today().day < 10 else str(datetime.datetime.today().day)
 
     date_string = str(datetime.datetime.today().year) + new_month_id + new_day_id
+    file_path = os.path.join(__location__, template_name)
     new_file_name = template_name.replace("template", date_string)
     #shutil.copy(template_name, new_file_name)
 
-    wb = load_workbook(filename = template_name)
+    wb = load_workbook(filename = file_path)
     sheet_ranges = wb['Tasks']
 
     for i,task in task_list.iterrows():
@@ -192,7 +196,7 @@ def fill_weekly_xls_report(task_list):
         sheet_ranges.cell(row=i + 3, column=4).value = task["Тема"]
         sheet_ranges.cell(row=i + 3, column=5).value = task["Комментарии"]
 
-    wb.save(new_file_name)
+    wb.save(os.path.join(__location__, new_file_name))
 
 def fill_quarter_xls_report(task_list):
     wb = Workbook()
