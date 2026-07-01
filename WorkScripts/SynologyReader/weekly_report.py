@@ -207,11 +207,12 @@ def fill_quarter_xls_report(task_list):
         sheet_ranges.cell(row=i+1, column=2).value = task["Тема"]
         sheet_ranges.cell(row=i+1, column=3).value = task["Комментарии"]
 
-    wb.save("Report.xlsx")
+    #wb.save("Report.xlsx")
+    wb.save(os.path.join(__location__, "Report.xlsx"))
 
 if __name__ == '__main__':
     task_list = get_task_list_for_weekly_report()
     fill_weekly_xls_report(task_list)
 
-    # task_list = get_task_list_for_quarter_report(datetime.date(2025, 12, 4))
+    # task_list = get_task_list_for_quarter_report(datetime.date(2026, 3, 18))
     # fill_quarter_xls_report(task_list)
