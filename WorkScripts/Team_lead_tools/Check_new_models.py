@@ -25,8 +25,12 @@ report_file_name = "report.txt"
 
 
 def check_folder():
-    if os.path.isfile(report_file_name): #удаляем старый файл отчета
-        os.remove(report_file_name)
+
+    __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
+
+    if os.path.isfile(os.path.join(__location__, report_file_name)): #удаляем старый файл отчета
+        os.remove(os.path.join(__location__, report_file_name))
 
     for user in user_names:
         #input_path = pathlib.Path("N:\\{}\\NEW_MODELS".format(user))
