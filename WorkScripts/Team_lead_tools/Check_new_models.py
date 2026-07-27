@@ -19,7 +19,7 @@ user_names= [
 #================================ USER SETTINGS ================================
 
 #================================ FILES SETTINGS ================================
-files_ext = ["dat", "data", "afi", "snp", "sdata", "py"]
+files_ext = ["dat", "data", "afi", "snp", "sdata", "py", "fcs"]
 report_file_name = "report.txt"
 #================================ FILES SETTINGS ================================
 
@@ -31,28 +31,20 @@ def check_folder():
     for user in user_names:
         #input_path = pathlib.Path("N:\\{}\\NEW_MODELS".format(user))
         input_paths = [pathlib.Path("N:\\{}\\UPDATE_MODELS".format(user)), pathlib.Path("N:\\{}\\NEW_MODELS".format(user))]
-        files_count = 0
+        #files_count = 0
 
         for input_path in input_paths:
             #print("Проверяю папку {}.".format(input_path))
             with open(report_file_name, "a+", encoding="utf-8") as file:
                 print("Проверяю папку пользователя {}.".format(user))
+                files_count = 0
                 file.write("Проверяю папку пользователя {}.\n".format(user))
 
                 for f_ext in files_ext:
                     for item in input_path.rglob("*." + f_ext):
                         is_md_project = False
                         if item.is_file():
-                            # for element in item.parts:
-                            #     if element.__contains__(" ") and f_ext != "sdata" and f_ext != "py":
-                            #         print("Путь и название файла не должен содержать пробелы! {}".format(item))
-                            #         file.write("Путь и название файла не должен содержать пробелы! {}\n".format(item))
-                            #
-                            #     if element.__contains__(".snf") and f_ext != "sdata" and f_ext != "py":
-                            #         print("Рекомендуется почистить проект ДМ/ДГ от ранее выгруженных моделей. {}".format(item))
-                            #         file.write("Рекомендуется почистить проект ДМ/ДГ от ранее выгруженных моделей.  {}\n".format(item))
-                            #         is_md_project = True
-
+                            
                             if str(item).__contains__(" ") and f_ext != "sdata" and f_ext != "py":
                                 print("Путь и название файла не должен содержать пробелы! {}".format(item))
                                 file.write("Путь и название файла не должен содержать пробелы! {}\n".format(item))
@@ -85,9 +77,10 @@ def check_folder():
                                     print("Необходимо проверить пишет ли что-нибудь python скрипт на диск и в какую папку. {}".format(item))
                                     file.write("Необходимо проверить пишет ли что-нибулдь python скрипт на диск и в какую папку. {}\n".format(item))
 
-                            if f_ext == "dat" or f_ext == "data" or f_ext == "snp" or f_ext == "afi":
-                                files_count+=1
-                                #print(item)
+                            if not str(item).__contains__("nexus") and not str(item).__contains__("NEXUS"):
+                                if f_ext == "dat" or f_ext == "data" or f_ext == "snp" or f_ext == "afi" or f_ext == "fcs":
+                                    files_count+=1
+                                    print(item)
 
                 print("Папка пользователя {}/{} содержит \"{}\" файлов \"data\\dat\\snp\\afi\".".format(input_path.name, user, files_count))
                 file.write("Папка пользователя {} содержит \"{}\" файлов \"data\\dat\\snp\\afi\".\n".format(user, files_count))
