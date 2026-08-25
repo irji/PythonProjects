@@ -21,6 +21,7 @@ user_names= [
 #================================ FILES SETTINGS ================================
 files_ext = ["dat", "data", "afi", "snp", "sdata", "py", "fcs"]
 report_file_name = "report.txt"
+important_files = ["E1_SUMMARY_TNAV.INC", "E3_SUMMARY_TNAV.INC", "IX_SUMMARY_BO.ixf", "IX_SUMMARY_COMP.ixf"]
 #================================ FILES SETTINGS ================================
 
 
@@ -43,6 +44,7 @@ def check_folder():
                 print("Проверяю папку пользователя {}.".format(user))
                 files_count = 0
                 file.write("Проверяю папку пользователя {}.\n".format(user))
+                summary_exist = False
 
                 for f_ext in files_ext:
                     for item in input_path.rglob("*." + f_ext):
@@ -86,8 +88,8 @@ def check_folder():
                                     files_count+=1
                                     print(item)
 
-                print("Папка пользователя {}/{} содержит \"{}\" файлов \"data\\dat\\snp\\afi\".".format(input_path.name, user, files_count))
-                file.write("Папка пользователя {} содержит \"{}\" файлов \"data\\dat\\snp\\afi\".\n".format(user, files_count))
+                print("Папка пользователя {}/{} содержит \"{}\" файлов \"data\\dat\\snp\\afi\\fcs\".".format(input_path.name, user, files_count))
+                file.write("Папка пользователя {} содержит \"{}\" файлов \"data\\dat\\snp\\afi\\fcs\".\n".format(user, files_count))
 
         print(" ")
 
