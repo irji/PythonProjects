@@ -1,6 +1,7 @@
 from redminelib import Redmine
 import datetime
 from time import sleep
+import os
 
 user_list = {114: ["Костин Георгий", 0],
 176: ["Воробьев Константин", 0],
@@ -15,10 +16,16 @@ user_list = {114: ["Костин Георгий", 0],
 602: ["Хатмуллина Айгуль", 0],
 613: ["Аль-Кебси Ахмед Али Мохаммед Абдулла", 0]}
 
-redmine = Redmine('https://redmine.rfdyn.ru', key="401a6b058962fbd1063c570fb0a1f99361c7e9b3")
+redmine = Redmine('https://redmine.rfdyn.ru', key="401a6b058962fbd1063c570fb0a1f99361c7e9b3", requests={'verify': False})
 
-start_date = datetime.date(2026, 7, 1) #26.06.2026
-end_date = datetime.date(2026, 7, 20)
+start_date = datetime.date(2026, 5, 1) #26.06.2026
+end_date = datetime.date(2026, 5, 15)
+report_file_name = "report.txt"
+
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
+if os.path.isfile(os.path.join(__location__, report_file_name)): #удаляем старый файл отчета
+    os.remove(os.path.join(__location__, report_file_name))
 
 #issues = redmine.issue.filter(query_id='3245')
 #issues = redmine.query.get(3245)
@@ -39,35 +46,39 @@ all_issues = redmine.issue.filter(
 
 print(f"Найдено закрытых тикетов: {len(all_issues)}\n")
 
+with open(os.path.join(__location__, report_file_name), "a+", encoding="utf-8") as file:
 # === По журналу изменений (точный способ — кто реально закрыл) ===
-for issue in all_issues:
+    for issue in all_issues:
 
-    sleep(1)
+        sleep(1)
 
-    # Получаем детальную информацию о тикете с журналом
-    detailed_issue = redmine.issue.get(issue.id, include='journals')
-    is_closed = False
-    
-    # Ищем запись в журнале о смене статуса на "Закрыт"
-    for journal in getattr(detailed_issue, 'journals', []):
-        if is_closed == False:
-            for detail in getattr(journal, 'details', []):
-                if (detail.get('name') == 'status_id' and str(detail.get('new_value')) == '5'): # ID статуса "Закрыт"
-                    if journal.user.id in user_list:
-                        print("{}:{}".format(issue.id, journal.user.name))
-                        user_list[journal.user.id][1] = int(user_list[journal.user.id][1]) + 1
-                        is_closed = True
-                        break
+        # Получаем детальную информацию о тикете с журналом
+        detailed_issue = redmine.issue.get(issue.id, include='journals')
+        is_closed = False
+        
+        # Ищем запись в журнале о смене статуса на "Закрыт"
+        for journal in getattr(detailed_issue, 'journals', []):
+            if is_closed == False:
+                for detail in getattr(journal, 'details', []):
+                    if (detail.get('name') == 'status_id' and str(detail.get('new_value')) == '5'): # ID статуса "Закрыт"
+                        if journal.user.id in user_list:
+                            # пишем номер тикета и кто закрыл в лог
+                            print("{}:{}".format(issue.id, journal.user.name))
+                            user_list[journal.user.id][1] = int(user_list[journal.user.id][1]) + 1
+                            is_closed = True
+
+                            file.write("{}:{}\n".format(issue.id, journal.user.name))
+                            break
+                        else:
+                            is_closed = True
+                            break
                     else:
-                        is_closed = True
-                        break
-                else:
-                    if is_closed == True:
-                        break
-                    else:
-                        continue
-        else:
-            break
+                        if is_closed == True:
+                            break
+                        else:
+                            continue
+            else:
+                break
 
 for value in user_list.values():
     print("{}:{}".format(value[0], value[1]))
