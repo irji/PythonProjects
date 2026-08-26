@@ -52,7 +52,7 @@ def check_folder():
                                 in1_summary = len(list(item.parent.rglob("IX_SUMMARY_BO.ixf")))
                                 in3_summary = len(list(item.parent.rglob("IX_SUMMARY_COMP.ixf")))
 
-                                if e1_summary == 0 and e3_summary == 0 and in1_summary == 0 and in3_summary == 0:
+                                if e1_summary == 0 or e3_summary == 0 or in1_summary == 0 or in3_summary == 0:
                                     print("У модели не подключен корректный summary файл. {}".format(item.parent))
                                 
                             if str(item).__contains__(" ") and f_ext != "sdata" and f_ext != "py":
@@ -91,12 +91,12 @@ def check_folder():
                                 if f_ext == "dat" or f_ext == "data" or f_ext == "snp" or f_ext == "afi" or f_ext == "fcs":
                                     files_count+=1
                                     print(item) # Печатааем имя файла 
-                                    file.write("{}\n".format(item))
+                                    #file.write("{}\n".format(item))
                             else:
                                 if f_ext == "fcs":
                                     files_count+=1
                                     print(item) # Печатааем имя файла 
-                                    file.write("{}\n".format(item))
+                                    #file.write("{}\n".format(item))
 
 
                 print("Папка пользователя {}/{} содержит \"{}\" файлов \"data\\dat\\snp\\afi\\fcs\".".format(input_path.name, user, files_count))
