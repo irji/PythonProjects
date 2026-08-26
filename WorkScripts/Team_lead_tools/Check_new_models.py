@@ -20,8 +20,7 @@ user_names= [
 
 #================================ FILES SETTINGS ================================
 files_ext = ["dat", "data", "afi", "snp", "sdata", "py", "fcs"]
-report_file_name = "report.txt"
-important_files = ["E1_SUMMARY_TNAV.INC", "E3_SUMMARY_TNAV.INC", "IX_SUMMARY_BO.ixf", "IX_SUMMARY_COMP.ixf"]
+report_file_name = "models_check_report.txt"
 #================================ FILES SETTINGS ================================
 
 
@@ -29,28 +28,33 @@ def check_folder():
 
     __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-
     if os.path.isfile(os.path.join(__location__, report_file_name)): #удаляем старый файл отчета
         os.remove(os.path.join(__location__, report_file_name))
 
     for user in user_names:
-        #input_path = pathlib.Path("N:\\{}\\NEW_MODELS".format(user))
         input_paths = [pathlib.Path("N:\\{}\\UPDATE_MODELS".format(user)), pathlib.Path("N:\\{}\\NEW_MODELS".format(user))]
-        #files_count = 0
 
         for input_path in input_paths:
-            #print("Проверяю папку {}.".format(input_path))
-            with open(report_file_name, "a+", encoding="utf-8") as file:
+            with open(os.path.join(__location__, report_file_name), "a+", encoding="utf-8") as file:
                 print("Проверяю папку пользователя {}.".format(user))
                 files_count = 0
                 file.write("Проверяю папку пользователя {}.\n".format(user))
-                summary_exist = False
-
+                
                 for f_ext in files_ext:
                     for item in input_path.rglob("*." + f_ext):
                         is_md_project = False
+
                         if item.is_file():
-                            
+
+                            if str(item).__contains__("models.E100") or str(item).__contains__("models.E300") or str(item).__contains__("models.IN"):
+                                e1_summary = len(list(item.parent.rglob("E1_SUMMARY_TNAV.INC")))
+                                e3_summary = len(list(item.parent.rglob("E3_SUMMARY_TNAV.INC")))
+                                in1_summary = len(list(item.parent.rglob("IX_SUMMARY_BO.ixf")))
+                                in3_summary = len(list(item.parent.rglob("IX_SUMMARY_COMP.ixf")))
+
+                                if e1_summary == 0 and e3_summary == 0 and in1_summary == 0 and in3_summary == 0:
+                                    print("У модели не подключен корректный summary файл. {}".format(item.parent))
+                                
                             if str(item).__contains__(" ") and f_ext != "sdata" and f_ext != "py":
                                 print("Путь и название файла не должен содержать пробелы! {}".format(item))
                                 file.write("Путь и название файла не должен содержать пробелы! {}\n".format(item))
@@ -73,20 +77,25 @@ def check_folder():
                                             print("Возможно папку RUSULTS нужно удалить. Она нужна для рестарта? {}".format(item))
                                             file.write("Возможно папку RUSULTS нужно удалить. Она нужна для рестарта? {}\n".format(item))
 
-                            if not item.parts[4].__contains__("tNav") and f_ext == "data": # проверям что папка с номером не содержит tNav в названии и файл с расширением data
+                            if not item.parts[4].endswith("tNav") and f_ext == "data": # проверям что папка с номером не содержит tNav в названии и файл с расширением data
                                 if item.parts[-1].split(".")[1].islower() and is_md_project == False:
                                     print("Расширение должно быть указано заглавными буквами. {}".format(item))
                                     file.write("Расширение должно быть указано заглавными буквами. {}\n".format(item))
 
-                            if item.parts[-1].__contains__("py"): # проверям что в модели нет python скриптов
+                            if item.parts[-1].endswith("py"): # проверям что в модели нет python скриптов
                                 if not item.parts.__contains__("USER"):
                                     print("Необходимо проверить пишет ли что-нибудь python скрипт на диск и в какую папку. {}".format(item))
                                     file.write("Необходимо проверить пишет ли что-нибулдь python скрипт на диск и в какую папку. {}\n".format(item))
 
-                            if not str(item).__contains__("nexus") and not str(item).__contains__("NEXUS"):
+                            if not str(item).__contains__("models.NEXUS"):
                                 if f_ext == "dat" or f_ext == "data" or f_ext == "snp" or f_ext == "afi" or f_ext == "fcs":
                                     files_count+=1
-                                    print(item)
+                                    #print(item) # Печатааем имя файла 
+                            else:
+                                if f_ext == "fcs":
+                                    files_count+=1
+                                    #print(item) # Печатааем имя файла 
+
 
                 print("Папка пользователя {}/{} содержит \"{}\" файлов \"data\\dat\\snp\\afi\\fcs\".".format(input_path.name, user, files_count))
                 file.write("Папка пользователя {} содержит \"{}\" файлов \"data\\dat\\snp\\afi\\fcs\".\n".format(user, files_count))
