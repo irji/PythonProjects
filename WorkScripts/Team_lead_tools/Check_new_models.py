@@ -90,13 +90,13 @@ def check_folder():
                             if not str(item).__contains__("models.NEXUS") and not str(item).__contains__("nexus"):
                                 if f_ext == "dat" or f_ext == "data" or f_ext == "snp" or f_ext == "afi" or f_ext == "fcs":
                                     files_count+=1
-                                    print(item) # Печатааем имя файла 
-                                    #file.write("{}\n".format(item))
+                                    #print(item) # Печатааем имя файла 
+                                    file.write("{}\n".format(item))
                             else:
                                 if f_ext == "fcs":
                                     files_count+=1
-                                    print(item) # Печатааем имя файла 
-                                    #file.write("{}\n".format(item))
+                                    #print(item) # Печатааем имя файла 
+                                    file.write("{}\n".format(item))
 
 
                 print("Папка пользователя {}/{} содержит \"{}\" файлов \"data\\dat\\snp\\afi\\fcs\".".format(input_path.name, user, files_count))
