@@ -1,134 +1,138 @@
-import pandas as pd
 import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.cluster import KMeans
-from collections import Counter
+import pandas as pd
+from sentence_transformers import SentenceTransformer
+from sklearn.cluster import MiniBatchKMeans
+from sklearn.metrics import silhouette_score
 import matplotlib.pyplot as plt
+from collections import Counter
+import re
 
-# 1. Загрузка данных из CSV файла (замените 'tickets.csv' на реальное имя файла)
-try:
-    df = pd.read_csv('D:\\Task_priority_GUI_MD_SIM_26.4.csv', encoding='utf-8')
-except Exception as e:
-    # Если файл не найден, создаем пример с данными из цитат
-    print("Файл не найден. Используем примерные данные для демонстрации.")
+def extract_keywords(tasks, n_keywords=5):
+    """Извлеките ключевые слова из набора задач"""
+    all_words = []
     
-    data = [
-        ["", "", "", "150633", "MD. При импорте проекта c кл. словом SLAVES, слейв-проекты в MD называются именем подключаемых data-файлов, а не согласно первому параметру в кл. слове SLAVES", "3", "", "Новая", "Ризванов Альберт", "Воробьев Алексей", "", "Model Designer", "", "GUI", "", "Да", "Тикет", "150633"],
-        ["", "", "", "148027", "ДМ. Block Info - не обновляется параметр(свойство для оси) в режиме кроссплота пока не сдвинешь слайдер временных шагов", "4", "", "Новая", "Ха Алексей", "Воронкин Дмитрий", "", "Model Designer", "", "GUI", "", "Да", "Тикет", "148027"],
-        ["", "", "", "150444", "MD: трап при удалении строчек из таблицы добычи скважин", "3", "", "Новая", "Садовников Роман", "Воронкин Дмитрий", "", "Model Designer", "", "GUI", "", "Да", "Тикет", "150444"],
-        ["", "", "", "41898", "Удаление кода больше не нужного в новых компиляторах", "2", "", "Отложена", "Семушин Сергей", "Телишев Алексей", "", "Model Designer", "", "GUI", "", "Да", "Тикет", "41898"],
-        ["", "", "", "41894", "Попробовать убрать зависимость модуля sim_objects от модулей gt", "2", "", "Отложена", "Семушин Сергей", "Глазкова Екатерина", "", "Model Designer", "", "GUI", "", "Да", "Тикет", "41894"],
-        ["", "", "", "41666", "Генерить на лету словарь переменных в воркфлоу для передачи в расчеты", "3", "", "Новая", "Калинин Никита", "Калинин Никита", "", "Model Designer", "", "GUI", "", "Да", "Тикет", "41666"],
-        ["", "", "", "41322", "Описать на devdocs кратко использование span", "2", "", "Новая", "Семушин Сергей", "Глазкова Екатерина", "", "Model Designer", "", "GUI", "", "Да", "Тикет", "41322"],
-        ["", "", "", "76483", "Не записывается TNAVCTRL с флагом формата E3", "4", "", "Новая", "Калинин Олег", "Васильев Дмитрий", "", "Model Designer", "", "GUI", "", "Да", "Тикет", "76483"],
-        ["", "", "", "59194", "Некорректно отображается имя результата в названии графика в настройках шаблона графиков", "3", "", "Новая", "Парфенова Анастасия", "Воронкин Дмитрий", "", "Model Designer", "", "GUI", "", "Да", "Тикет", "59194"],
-        ["", "", "", "56986", "попадание в дебаг паузу при вставке таблицы из LibreOffice в таблицу ГРП", "3", "", "Новая", "Петров Никита", "Воробьев Алексей", "", "Model Designer", "", "GUI", "", "Да", "Тикет", "56986"],
-        ["", "", "", "56822", "Написать тест для  #56723 (результаты в ND при расчете модели в очереди)", "2", "", "Новая", "Семушин Сергей", "Березин Александр", "", "Model Designer", "", "GUI", "", "Да", "Тикет", "56822"]
-    ]
+    for task in tasks:
+        # Очистите текст
+        words = re.findall(r'\w+', task.lower())
+        # Отфильтруйте стоп-слова
+        stop_words = {'и', 'или', 'в', 'на', 'для', 'по', 'с', 'из', 'к', 'как', 
+                      'что', 'это', 'всё', 'все', 'так', 'вам', 'вас', 'уже', 'но'}
+        words = [w for w in words if w not in stop_words and len(w) > 2]
+        all_words.extend(words)
     
-    columns = ["col1", "col2", "col3", "col4", "description", "col6", "col7", "col8", "col9", "col10", "col11", "col12", "col13", "col14", "col15", "col16", "col17", "col18"]
-    df = pd.DataFrame(data, columns=columns)
+    # Найдите самые частые слова
+    most_common = Counter(all_words).most_common(n_keywords)
+    return [word for word, _ in most_common]
 
-# 2. Определение колонки с темами обращений
-# Ищем колонку с описанием/темой
-theme_columns = [col for col in df.columns if 'desc' in col.lower() or 'theme' in col.lower() or 'title' in col.lower() or 'name' in col.lower()]
-if theme_columns:
-    theme_col = theme_columns[0]
-else:
-    # Если нет явных колонок темы, используем последнюю колонку (предположительно описание)
-    theme_col = df.columns[-1]
+# 1. ЗАГРУЗИТЕ ЗАДАЧИ
+tasks_df = pd.read_csv('D:\\Tasks\\Task_priority_GUI_MD_SIM_26.4_full.csv', sep=";")  # или другой источник
+tasks = tasks_df['тема'].tolist()
+print(f"✓ Загружено {len(tasks)} задач")
 
-df['theme'] = df[theme_col]
+# Сохраните все исходные колонки
+original_df = tasks_df.copy()
 
-# Удаление строк с пустыми темами
-df = df[df['theme'].notna() & (df['theme'] != '')]
-print(f"Количество строк после фильтрации: {len(df)}")
+# Предположим, что текст задачи во второй колонке 
+# (первая - номер, вторая - описание)
+# Если названия колонок другие, измените здесь:
+task_id_column = tasks_df.columns[0]  # Первая колонка (номер задачи)
+task_text_column = tasks_df.columns[1]  # Вторая колонка (текст задачи)
 
-# 3. TF-IDF векторизация
-vectorizer = TfidfVectorizer(
-    max_features=1000,
-    stop_words='russian',
-    ngram_range=(1, 2)
+print(f"ID колонка: '{task_id_column}'")
+print(f"Текст колонка: '{task_text_column}'")
+
+tasks = tasks_df[task_text_column].tolist()
+
+# 2. СОЗДАЙТЕ EMBEDDINGS
+print("\n► Создание embeddings...")
+# Быстрая, лёгкая (рекомендуется)
+#model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+
+# Более мощная, но медленнее
+model = SentenceTransformer('paraphrase-multilingual-mpnet-base-v2')
+
+#model.to('cuda')  # Если есть GPU
+
+embeddings = model.encode(
+    tasks,
+    batch_size=128,
+    show_progress_bar=True,
+    convert_to_numpy=True
 )
+print(f"✓ Embeddings созданы: форма {embeddings.shape}")
 
-X = vectorizer.fit_transform(df['theme'])
+# 3. НАЙДИТЕ ОПТИМУМ В ДИАПАЗОНЕ 10-20
+print("\n► Поиск оптимального количества кластеров (10-20)...")
 
-# 4. Кластеризация KMeans для получения 15 категорий
-num_clusters = 15
-kmeans = KMeans(n_clusters=num_clusters, random_state=42, n_init=10)
-clusters = kmeans.fit_predict(X)
+silhouette_scores = {}
 
-# Создание четких, непересекающихся категорий (на русском языке)
-categories = [
-    "Ошибки в интерфейсе",
-    "Работа с проектами и данными",
-    "Визуализация и графики",
-    "Системные ошибки",
-    "Коллективная работа",
-    "Управление моделями",
-    "Интеграция и связи",
-    "Создание фильтров",
-    "Ошибки в логах",
-    "Тестирование и пакеты",
-    "Сводные тикеты",
-    "Проблемы с единицами измерения",
-    "Работа с пользователями",
-    "Инструменты разработки",
-    "Другое / Прочее"
+for n_clusters in range(10, 21):
+    kmeans = MiniBatchKMeans(
+        n_clusters=n_clusters,
+        random_state=42,
+        batch_size=256,
+        n_init=10
+    )
+    labels = kmeans.fit_predict(embeddings)
+    silhouette = silhouette_score(embeddings, labels)
+    silhouette_scores[n_clusters] = silhouette
+    
+    print(f"  n_clusters={n_clusters}: silhouette={silhouette:.4f}")
 
+optimal_clusters = max(silhouette_scores, key=silhouette_scores.get)
+print(f"\n✓ Оптимально: {optimal_clusters} кластеров")
 
+# 4. ФИНАЛЬНАЯ КЛАСТЕРИЗАЦИЯ
+print(f"\n► Финальная кластеризация с {optimal_clusters} кластерами...")
 
-    Ошибки в интерфейсе (GUI)	5	26.3%
-Некорректное отображение данных	3	15.8%
-Проблемы с импортом/экспортом моделей	1	5.3%
-Технические ошибки / Баги	2	10.5%
-Работа с графиками и данными (PLT/RFT)	1	5.3%
-Ошибки при работе с перфорациями	1	5.3%
-Проблемы с отображением вкладок и элементов	1	5.3%
-Работа с проектами и файлами	2	10.5%
-Взаимодействие с системой (User Projects)	2	10.5%
-Ошибки при смене шага / настройках	1	5.3%
-Работа с единицами измерения	1	5.3%
-Проблемы с памятью и производительностью	1	5.3%
-Отладка / Логирование	1	5.3%
-]
+kmeans_final = MiniBatchKMeans(
+    n_clusters=optimal_clusters,
+    random_state=42,
+    batch_size=256,
+    n_init=20
+)
+cluster_labels = kmeans_final.fit_predict(embeddings)
+print("✓ Кластеризация завершена")
 
-# Присвоение категорий
-df['category'] = [categories[cluster] for cluster in clusters]
-
-# 5. Сводная таблица
-category_counts = df['category'].value_counts()
-category_stats = pd.DataFrame({
-    'Категория': category_counts.index,
-    'Количество тикетов': category_counts.values,
-    'Доля в % от общего объема': round((category_counts / len(df)) * 100, 2)
+# 5. СОЗДАЙТЕ РЕЗУЛЬТИРУЮЩИЙ ДАТАФРЕЙМ С ИСХОДНЫМИ ДАННЫМИ
+results_df = pd.DataFrame({
+    task_id_column: original_df[task_id_column],  # Номер задачи
+    task_text_column: original_df[task_text_column],  # Исходный текст задачи
+    'cluster': cluster_labels  # Номер кластера
 })
 
-print("\nСводная таблица:")
-print(category_stats.to_string(index=False))
+# Сортируйте по номеру кластера для удобства
+results_df = results_df.sort_values('cluster')
 
-# 6. Визуализация
-plt.figure(figsize=(12, 6))
-bars = plt.bar(range(len(category_counts)), category_counts.values, color='skyblue')
-plt.xlabel('Категории')
-plt.ylabel('Количество тикетов')
-plt.title('Распределение тикетов по категориям')
-plt.xticks(range(len(category_counts)), category_counts.index, rotation=45, ha='right')
+# Сохраните результаты
+results_df.to_csv('D:\\Tasks\\clustered_tasks.csv', index=False)
+print("✓ Результаты сохранены: clustered_tasks.csv")
 
-# Добавление значений над столбцами
-for i, (bar, count) in enumerate(zip(bars, category_counts.values)):
-    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1,
-             str(count), ha='center', va='bottom')
+# 6. СТАТИСТИКА
+print("\n" + "="*60)
+print("СТАТИСТИКА КЛАСТЕРОВ")
+print("="*60)
 
-plt.tight_layout()
-plt.show()
+cluster_stats = results_df['cluster'].value_counts().sort_index()
+for cluster_id, count in cluster_stats.items():
+    print(f"Кластер {cluster_id}: {count} задач")
 
-# 7. Сохранение результата
-df.to_excel('categorized_tickets.xlsx', index=False)
-print("\nФайл сохранен как categorized_tickets.xlsx")
+print(f"\nВсего: {len(results_df)} задач")
 
-# Вывод примеров категорий
-print("\nПримеры распределения по категориям:")
-for cat in categories[:5]:  # Показываем первые 5 категорий
-    count = category_counts.get(cat, 0)
-    print(f"- {cat}: {count} тикетов")
+
+
+
+
+cluster_names = {}
+for cluster_id in range(optimal_clusters):
+    cluster_tasks = results_df[results_df['cluster'] == cluster_id]['тема'].tolist()
+    
+    keywords = extract_keywords(cluster_tasks, n_keywords=3)
+    cluster_names[cluster_id] = ", ".join(keywords)
+    
+    print(f"Кластер {cluster_id}: {cluster_names[cluster_id]}")
+
+# Добавьте имена в итоговый датафрейм
+results_df['cluster_name'] = results_df['cluster'].map(cluster_names)
+results_df.to_csv('D:\\Tasks\\clustered_tasks_with_names.csv', index=False)
+
